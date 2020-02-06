@@ -1,0 +1,76 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg id="browser-canvas" xmlns="http://www.w3.org/2000/svg" width="2200" height="1185"
+     style="top: 0px; left: 0px; position: absolute;">
+    <g id="track:Ensembl_Gene_Models">
+        <g id="trackheader:Ensembl_Gene_Models" transform="matrix(1,0,0,1,0,30)">
+            <text font-size="14px" font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                Ensembl Gene Models release 91
+            </text>
+        </g>
+        <g id="trackbody:Ensembl_Gene_Models" transform="matrix(550.000,0,0,1,0,35)">
+            <g id="Ensembl_Gene_Models:12188828-12188832">
+                <g id="Ensembl_Gene_Models:ENSG00000028137">
+                    <a id="Ensembl_Gene_Models:ENST00000376259" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="-21825" y="0" transform="scale(1,550.000)" font-size="0px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TNFRSF1B-201
+                        </text>
+                        <polyline
+                                points="-21825,11 -21825,9 -21660,9 -21660,11 -32,11 -32,9 66,9 66,11 2129,11 2129,9 2256,9 2256,11 2946,11 2946,9 3094,9 3094,11 3603,11 3603,9 3695,9 3695,11 4035,11 4035,9 4269,9 4269,11 5127,11 5127,9 5203,9 5203,11 5756,11 5756,9 5789,9 5789,11 13139,11 13139,9 13342,9 13342,11 17912,11 17912,9 20399,9 20399,11 20399,13 20399,15 17912,15 17912,13 13342,13 13342,15 13139,15 13139,13 5789,13 5789,15 5756,15 5756,13 5203,13 5203,15 5127,15 5127,13 4269,13 4269,15 4035,15 4035,13 3695,13 3695,15 3603,15 3603,13 3094,13 3094,15 2946,15 2946,13 2256,13 2256,15 2129,15 2129,13 66,13 66,15 -32,15 -32,13 -21660,13 -21660,15 -21825,15 -21825,13 -21825,11"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000492361" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="-21825" y="0" transform="scale(1,550.000)" font-size="0px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TNFRSF1B-203
+                        </text>
+                        <polyline
+                                points="-21825,28 -21825,26 -21660,26 -21660,28 2129,28 2129,26 2256,26 2256,28 2946,28 2946,26 3094,26 3094,28 3603,28 3603,26 3695,26 3695,28 4035,28 4035,26 4269,26 4269,28 5127,28 5127,26 5203,26 5203,28 5756,28 5756,26 5789,26 5789,28 13139,28 13139,26 13342,26 13342,28 17912,28 17912,26 20399,26 20399,28 20399,30 20399,32 17912,32 17912,30 13342,30 13342,32 13139,32 13139,30 5789,30 5789,32 5756,32 5756,30 5203,30 5203,32 5127,32 5127,30 4269,30 4269,32 4035,32 4035,30 3695,30 3695,32 3603,32 3603,30 3094,30 3094,32 2946,32 2946,30 2256,30 2256,32 2129,32 2129,30 -21660,30 -21660,32 -21825,32 -21825,30 -21825,28"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000536782" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="-21825" y="0" transform="scale(1,550.000)" font-size="0px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TNFRSF1B-204
+                        </text>
+                        <polyline
+                                points="-21825,45 -21825,43 -21660,43 -21660,45 -32,45 -32,43 66,43 66,45 2129,45 2129,43 2256,43 2256,45 2946,45 2946,43 3094,43 3094,45 3520,45 3520,43 3529,43 3529,45 3529,47 3529,49 3520,49 3520,47 3094,47 3094,49 2946,49 2946,47 2256,47 2256,49 2129,49 2129,47 66,47 66,49 -32,49 -32,47 -21660,47 -21660,49 -21825,49 -21825,47 -21825,45"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000489921" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="3010" y="0" transform="scale(1,550.000)" font-size="0px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TNFRSF1B-202
+                        </text>
+                        <polyline
+                                points="3010,62 3010,60 3094,60 3094,62 3520,62 3520,60 3695,60 3695,62 4035,62 4035,60 4179,60 4179,62 4179,64 4179,66 4035,66 4035,64 3695,64 3695,66 3520,66 3520,64 3094,64 3094,66 3010,66 3010,64 3010,62"
+                                fill="red"></polyline>
+                    </a>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g id="track:Test_BedGraph">
+        <g id="trackheader:Test_BedGraph" transform="matrix(1,0,0,1,0,136)">
+            <text font-size="14px" font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                Test BedGraph
+            </text>
+        </g>
+        <g id="trackbody:Test_BedGraph" transform="matrix(550.000,0,0,1,0,141)">
+            <g id="Test_BedGraph:12188828-12188832">
+                <a xmlns:xlink="http://www.w3.org/1999/xlink"
+                   xlink:href="/data?trackName=Test_BedGraph&amp;amp;c=chr1&amp;amp;s=12188828&amp;amp;e=12188832">
+                    <path d="M -2 99 L -2 1 L -1 1 L 0 99 L 0 0 L 3 99 L 3 0 L  1 99"
+                              fill="none" stroke-linejoin="round" stroke="red" stroke-width="3"></path>
+                </a>
+            </g>
+        </g>
+    </g>
+</svg>

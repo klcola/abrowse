@@ -1,0 +1,978 @@
+{
+  "gene_id": "ENSG00000175262",
+  "seqname": "chr1",
+  "source": "ensembl_havana",
+  "feature": "gene",
+  "start": 10946471,
+  "end": 10982037,
+  "score": 0,
+  "strand": "-",
+  "frame": ".",
+  "attributes": {
+    "gene_name": "C1orf127",
+    "gene_version": "14",
+    "gene_source": "ensembl_havana",
+    "gene_biotype": "protein_coding",
+    "gene_id": "ENSG00000175262"
+  },
+  "location": {
+    "type": "LineString",
+    "coordinates": [
+      [
+        7.9144966985426874,
+        1
+      ],
+      [
+        7.940211560399113,
+        1
+      ]
+    ]
+  },
+  "transcripts": [
+    {
+      "transcript_id": "ENST00000476357",
+      "seqname": "chr1",
+      "source": "havana",
+      "feature": "transcript",
+      "start": 10946471,
+      "end": 10949751,
+      "score": 0,
+      "strand": "-",
+      "frame": ".",
+      "attributes": {
+        "gene_name": "C1orf127",
+        "transcript_id": "ENST00000476357",
+        "transcript_version": "1",
+        "transcript_name": "C1orf127-204",
+        "transcript_source": "havana",
+        "gene_version": "14",
+        "gene_source": "ensembl_havana",
+        "gene_biotype": "protein_coding",
+        "gene_id": "ENSG00000175262",
+        "transcript_biotype": "retained_intron",
+        "transcript_support_level": "2"
+      },
+      "blocks": [
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10947643,
+          "end": 10949751,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10946471,
+          "end": 10946738,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        }
+      ]
+    },
+    {
+      "transcript_id": "ENST00000418570",
+      "seqname": "chr1",
+      "source": "havana",
+      "feature": "transcript",
+      "start": 10946473,
+      "end": 10964201,
+      "score": 0,
+      "strand": "-",
+      "frame": ".",
+      "attributes": {
+        "gene_name": "C1orf127",
+        "transcript_id": "ENST00000418570",
+        "transcript_version": "6",
+        "transcript_name": "C1orf127-202",
+        "transcript_source": "havana",
+        "gene_version": "14",
+        "gene_source": "ensembl_havana",
+        "tag": "mRNA_start_NF",
+        "gene_biotype": "protein_coding",
+        "gene_id": "ENSG00000175262",
+        "transcript_biotype": "protein_coding",
+        "transcript_support_level": "2"
+      },
+      "blocks": [
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10964128,
+          "end": 10964201,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10964128,
+          "end": 10964201,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10958714,
+          "end": 10958752,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10958714,
+          "end": 10958752,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10957585,
+          "end": 10957753,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10957585,
+          "end": 10957753,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10954990,
+          "end": 10955186,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10954990,
+          "end": 10955186,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10954019,
+          "end": 10954142,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10954019,
+          "end": 10954142,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10949624,
+          "end": 10949814,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10949624,
+          "end": 10949814,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10947643,
+          "end": 10948844,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10947666,
+          "end": 10948844,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "stop_codon",
+          "start": 10947663,
+          "end": 10947665,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10946473,
+          "end": 10946741,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "three_prime_utr",
+          "start": 10947643,
+          "end": 10947662,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "three_prime_utr",
+          "start": 10946473,
+          "end": 10946741,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        }
+      ]
+    },
+    {
+      "transcript_id": "ENST00000377004",
+      "seqname": "chr1",
+      "source": "ensembl",
+      "feature": "transcript",
+      "start": 10946473,
+      "end": 10982037,
+      "score": 0,
+      "strand": "-",
+      "frame": ".",
+      "attributes": {
+        "gene_name": "C1orf127",
+        "ccds_id": "CCDS53267",
+        "transcript_version": "8",
+        "transcript_name": "C1orf127-201",
+        "gene_version": "14",
+        "gene_biotype": "protein_coding",
+        "transcript_biotype": "protein_coding",
+        "transcript_id": "ENST00000377004",
+        "transcript_source": "ensembl",
+        "gene_source": "ensembl_havana",
+        "tag": "basic",
+        "gene_id": "ENSG00000175262",
+        "transcript_support_level": "5"
+      },
+      "blocks": [
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10982012,
+          "end": 10982037,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10982012,
+          "end": 10982037,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "start_codon",
+          "start": 10982035,
+          "end": 10982037,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10976156,
+          "end": 10976256,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10976156,
+          "end": 10976256,
+          "score": 0,
+          "strand": "-",
+          "frame": "1"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10969970,
+          "end": 10970089,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10969970,
+          "end": 10970089,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10966358,
+          "end": 10966482,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10966358,
+          "end": 10966482,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10964128,
+          "end": 10964271,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10964128,
+          "end": 10964271,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10958714,
+          "end": 10958752,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10958714,
+          "end": 10958752,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10957616,
+          "end": 10957753,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10957616,
+          "end": 10957753,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10957023,
+          "end": 10957107,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10957023,
+          "end": 10957107,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10954990,
+          "end": 10955186,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10954990,
+          "end": 10955186,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10954019,
+          "end": 10954142,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10954019,
+          "end": 10954142,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10949624,
+          "end": 10949814,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10949624,
+          "end": 10949814,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10947643,
+          "end": 10948844,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "CDS",
+          "start": 10947666,
+          "end": 10948844,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "stop_codon",
+          "start": 10947663,
+          "end": 10947665,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "exon",
+          "start": 10946473,
+          "end": 10946741,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "three_prime_utr",
+          "start": 10947643,
+          "end": 10947662,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "ensembl",
+          "feature": "three_prime_utr",
+          "start": 10946473,
+          "end": 10946741,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        }
+      ]
+    },
+    {
+      "transcript_id": "ENST00000468348",
+      "seqname": "chr1",
+      "source": "havana",
+      "feature": "transcript",
+      "start": 10946475,
+      "end": 10947870,
+      "score": 0,
+      "strand": "-",
+      "frame": ".",
+      "attributes": {
+        "gene_name": "C1orf127",
+        "transcript_id": "ENST00000468348",
+        "transcript_version": "1",
+        "transcript_name": "C1orf127-203",
+        "transcript_source": "havana",
+        "gene_version": "14",
+        "gene_source": "ensembl_havana",
+        "tag": "mRNA_start_NF",
+        "gene_biotype": "protein_coding",
+        "gene_id": "ENSG00000175262",
+        "transcript_biotype": "protein_coding",
+        "transcript_support_level": "2"
+      },
+      "blocks": [
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10947643,
+          "end": 10947870,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10947666,
+          "end": 10947870,
+          "score": 0,
+          "strand": "-",
+          "frame": "1"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "stop_codon",
+          "start": 10947663,
+          "end": 10947665,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10946475,
+          "end": 10946586,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "three_prime_utr",
+          "start": 10947643,
+          "end": 10947662,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "three_prime_utr",
+          "start": 10946475,
+          "end": 10946586,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        }
+      ]
+    },
+    {
+      "transcript_id": "ENST00000520253",
+      "seqname": "chr1",
+      "source": "havana",
+      "feature": "transcript",
+      "start": 10946730,
+      "end": 10976215,
+      "score": 0,
+      "strand": "-",
+      "frame": ".",
+      "attributes": {
+        "gene_name": "C1orf127",
+        "transcript_id": "ENST00000520253",
+        "transcript_version": "1",
+        "transcript_name": "C1orf127-205",
+        "transcript_source": "havana",
+        "gene_version": "14",
+        "gene_source": "ensembl_havana",
+        "tag": "mRNA_start_NF",
+        "gene_biotype": "protein_coding",
+        "gene_id": "ENSG00000175262",
+        "transcript_biotype": "protein_coding",
+        "transcript_support_level": "5"
+      },
+      "blocks": [
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10976156,
+          "end": 10976215,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10976156,
+          "end": 10976215,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10969970,
+          "end": 10970089,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10969970,
+          "end": 10970089,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10966358,
+          "end": 10966482,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10966358,
+          "end": 10966482,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10964128,
+          "end": 10964271,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10964128,
+          "end": 10964271,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10958714,
+          "end": 10958752,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10958714,
+          "end": 10958752,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10957616,
+          "end": 10957753,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10957616,
+          "end": 10957753,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10957023,
+          "end": 10957107,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10957023,
+          "end": 10957107,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10954990,
+          "end": 10955186,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10954990,
+          "end": 10955186,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10954019,
+          "end": 10954142,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10954019,
+          "end": 10954142,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10949702,
+          "end": 10949814,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10949702,
+          "end": 10949814,
+          "score": 0,
+          "strand": "-",
+          "frame": "2"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10947643,
+          "end": 10948844,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "CDS",
+          "start": 10947666,
+          "end": 10948844,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "stop_codon",
+          "start": 10947663,
+          "end": 10947665,
+          "score": 0,
+          "strand": "-",
+          "frame": "0"
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "exon",
+          "start": 10946730,
+          "end": 10946741,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "three_prime_utr",
+          "start": 10947643,
+          "end": 10947662,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        },
+        {
+          "seqname": "chr1",
+          "source": "havana",
+          "feature": "three_prime_utr",
+          "start": 10946730,
+          "end": 10946741,
+          "score": 0,
+          "strand": "-",
+          "frame": "."
+        }
+      ]
+    }
+  ]
+}

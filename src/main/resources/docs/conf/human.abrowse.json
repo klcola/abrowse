@@ -1,0 +1,187 @@
+{
+  "name": "human",
+  "displayName": "Homo sapiens",
+  "chromosomeMap": {
+    "chr1": {
+      "name": "chr1",
+      "length": 248956422,
+      "code": 1
+    },
+    "chr2": {
+      "name": "chr2",
+      "length": 242193529,
+      "code": 2
+    },
+    "chr3": {
+      "name": "chr3",
+      "length": 198295559,
+      "code": 3
+    },
+    "chr4": {
+      "name": "chr4",
+      "length": 190214555,
+      "code": 4
+    },
+    "chr5": {
+      "name": "chr5",
+      "length": 181538259,
+      "code": 5
+    },
+    "chr6": {
+      "name": "chr6",
+      "length": 170805979,
+      "code": 6
+    },
+    "chr7": {
+      "name": "chr7",
+      "length": 159345973,
+      "code": 7
+    },
+    "chr8": {
+      "name": "chr8",
+      "length": 145138636,
+      "code": 8
+    },
+    "chr9": {
+      "name": "chr9",
+      "length": 138394717,
+      "code": 9
+    },
+    "chr10": {
+      "name": "chr10",
+      "length": 133797422,
+      "code": 10
+    },
+    "chr11": {
+      "name": "chr11",
+      "length": 135086622,
+      "code": 11
+    },
+    "chr12": {
+      "name": "chr12",
+      "length": 133275309,
+      "code": 12
+    },
+    "chr13": {
+      "name": "chr13",
+      "length": 114364328,
+      "code": 13
+    },
+    "chr14": {
+      "name": "chr14",
+      "length": 107043718,
+      "code": 14
+    },
+    "chr15": {
+      "name": "chr15",
+      "length": 101991189,
+      "code": 15
+    },
+    "chr16": {
+      "name": "chr16",
+      "length": 90338345,
+      "code": 16
+    },
+    "chr17": {
+      "name": "chr17",
+      "length": 83257441,
+      "code": 17
+    },
+    "chr18": {
+      "name": "chr18",
+      "length": 80373285,
+      "code": 18
+    },
+    "chr19": {
+      "name": "chr19",
+      "length": 58617616,
+      "code": 19
+    },
+    "chr20": {
+      "name": "chr20",
+      "length": 64444167,
+      "code": 20
+    },
+    "chr21": {
+      "name": "chr21",
+      "length": 46709983,
+      "code": 21
+    },
+    "chr22": {
+      "name": "chr22",
+      "length": 50818468,
+      "code": 22
+    },
+    "chrX": {
+      "name": "chrX",
+      "length": 156040895,
+      "code": 23
+    },
+    "chrY": {
+      "name": "chrY",
+      "length": 57227415,
+      "code": 24
+    }
+  },
+
+  "trackGroupMap": {
+    "Gene": {
+      "name": "Gene",
+      "displayName": "Gene",
+      "displayYIndex": 0,
+      "trackMap": {
+        "Ensembl_Gene_Models": {
+          "name": "Ensembl_Gene_Models",
+          "displayName": "Ensembl Gene Models",
+          "description": "Ensembl Release 90 Gene Models from www.ensembl.org",
+          "defaultNormalView": "GeneModelLikeView",
+          "displayYIndex": 0,
+          "views": [
+            {
+              "viewName": "GeneModelLikeView",
+              "entryLink": "http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={id}"
+            },
+            {
+              "viewName": "GeneModelDenseView",
+              "entryLink": "http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={id}"
+            }
+          ]
+        },
+        "gencode_v27_annotation": {
+          "name": "gencode_v27_annotation",
+          "displayName": "Gencode v27 Annotation",
+          "description": "Gencode v27 Annotation",
+          "displayYIndex": 0,
+          "views": [
+            {
+              "viewName": "GeneModelLikeView",
+              "entryLink": "http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={id}"
+            },
+            {
+              "viewName": "GeneModelDenseView",
+              "entryLink": "http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={id}"
+            }
+          ]
+        }
+      }
+    },
+    "rnaseq_mapping": {
+      "name": "rnaseq_mapping",
+      "displayName": "RNA-Seq Mapping",
+      "displayYIndex": 0,
+      "trackMap": {
+        "RNASeq_Mapping_Sample": {
+          "name": "RNASeq_Mapping_Sample",
+          "displayName": "RNASeq Mapping Sample",
+          "description": "RNASeq Mapping Sample",
+          "displayYIndex": 0,
+          "views": [
+            {
+              "viewName": "RNASeqRawDataView"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

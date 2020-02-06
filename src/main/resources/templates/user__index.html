@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="" />
+    <meta name="author" content="Lei Kong, caesar.kong@outlook.com" />
+
+    <title>ABrowse - Advanced Genome Browser</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css' />
+
+    <!-- Bootstrap select CSS -->
+    <link rel='stylesheet' href="/webjars/bootstrap-select/1.12.0/css/bootstrap-select.min.css" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- JQuery UI CSS -->
+    <!--
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
+    -->
+
+    <!-- Include JQuery and JQuery plugin scripts: -->
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap select JavaScript -->
+    <script src="/webjars/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
+
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+
+        jQuery.validator.addMethod("not_number_start", function(value, element) {
+            return !(/^\d/.test(value.charAt(0)))
+        }, "不能以数字开头，请修改");
+
+        jQuery.validator.addMethod("not_include_space", function(value, element) {
+            return value.indexOf(' ') === -1
+        }, "不能含有空格，请修改");
+
+                $().ready(function() {
+
+                    $("#create_track_group").validate({
+                        rules: {
+                            trackGroupName: {
+                                required: true,
+                                not_number_start: true,
+                                not_include_space: true
+                            },
+                            trackGroupDisplayName: {
+                                required: true
+                            }
+                        },
+                        messages: {
+                            trackGroupName: {
+                                required: "请输入 track group 名称"
+                            },
+                            trackGroupDisplayName: {
+                                required: "请输入 track group 显示名称"
+                            }
+                        },
+                        submitHandler: function() {
+                          document.getElementById('create_track_group').submit()
+                        }
+                    });
+                });
+        /*]]>*/
+
+    </script>
+
+</head>
+
+<body>
+  <div id="wrapper">
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="brand cursor-pointer" onclick="window.location.href='/'">
+      <span class="navbarTitle">User Panel</span>
+    </div>
+    <div class="languageDiv">
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          <span id="languageSpan" th:text="#{language}"></span>
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a href="javascript:void(0)" onclick="changeLang('zh_CN')">中文</a></li>
+          <li><a href="javascript:void(0)" onclick="changeLang('en_US')">English</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- END NAVBAR -->
+  <!-- LEFT SIDEBAR -->
+  <div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+      <nav>
+        <ul class="nav">
+          <li><a href="javascript:void(0)" class="active" onclick="linkChange('/user/create_track_group')"><span th:text="#{create_track_group}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/delete_track_group')"><span th:text="#{delete_track_group}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/delete_track')"><span th:text="#{delete_track}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/load_gencode_gtf_data')"><span th:text="#{load_gencode_gtf_data}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/load_sam_data')"><span th:text="#{load_sam_data}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/load_splicesite_data')"><span th:text="#{load_abrowse_splicesite_data}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/load_splicesite_data_by_sam')"><span th:text="#{load_splicesite_data}"></span></a></li>
+          <li><a href="javascript:void(0)" class="" onclick="linkChange('/user/load_bedgraph_data')"><span th:text="#{load_bedgraph_data}"></span></a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <!-- END LEFT SIDEBAR -->
+  <!-- MAIN -->
+  <div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+    <div class="">
+      <div class="form">
+          <form id="create_track_group" method="post" action="/user/create_track_group">
+              <input type="text" placeholder="Track Group Name" name="trackGroupName" class="required" autocomplete="off"/>
+              <input type="text" placeholder="Track Group Display Name" name="trackGroupDisplayName" id="trackGroupDisplayName" class="required" autocomplete="off"/>
+              <br>
+              <label for="genome">Genome
+              <select name="genome" id="genome" class="selectpicker">
+                  <option th:each="configGenomeEntry : ${configGenomeMap}" th:value="${configGenomeEntry.value.name}"
+                          th:text="${configGenomeEntry.value.displayName}"></option>
+              </select>
+              </label>
+              <button type="submit" th:text="#{create}"></button>
+          </form>
+      </div>
+    </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+  </div>
+</div>
+<!-- END WRAPPER -->
+<!-- Javascript -->
+<script type="text/javascript" src="/js/abrowse/sidebar.js"></script>
+
+</body>
+</html>

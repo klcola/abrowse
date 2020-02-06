@@ -1,0 +1,55 @@
+{
+  "name": "global",
+  "viewMap": {
+
+    "GeneModelLikeView": {
+      "name": "GeneModelLikeView",
+      "dataType": "gtf",
+      "type": "general",
+      "isBasePair": false
+    },
+
+    "GeneModelDenseView": {
+      "name": "GeneModelDenseView",
+      "dataType": "gtf",
+      "type": "dense",
+      "isBasePair": false
+    },
+
+    "WiggleDataView": {
+      "name": "WiggleDataView",
+      "dataType": "wiggle",
+      "viewType": "general",
+      "isBasePair": false
+    },
+
+    "RNASeqRawDataView": {
+      "name": "RNASeqRawDataView",
+      "dataType": "bam",
+      "type": "general",
+      "isBasePair": false
+    },
+
+    "RNASeqSpliceSiteView": {
+      "name": "RNASeqSpliceSiteView",
+      "dataType": "splicesite",
+      "type": "general",
+      "isBasePair": false
+    },
+
+    "BedGraphView": {
+      "name": "BedGraphView",
+      "dataType": "bedgraph",
+      "type": "general",
+      "isBasePair": false
+    },
+
+    "StrandBedGraphView": {
+      "name": "StrandBedGraphView",
+      "dataType": "bedgraph",
+      "type": "general",
+      "isBasePair": false
+    }
+
+  }
+}

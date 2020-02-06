@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="" />
+    <meta name="author" content="Lei Kong, caesar.kong@outlook.com" />
+
+    <title>ABrowse - Advanced Genome Browser</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css' />
+
+    <!-- JQuery UI CSS -->
+    <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
+
+    <!-- Include JQuery and JQuery plugin scripts: -->
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+
+        .form {
+            position: relative;
+            z-index: 1;
+            background: #FFFFFF;
+            max-width: 360px;
+            margin: 0 auto 100px;
+            padding: 45px;
+            text-align: center;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+        }
+
+        .form input {
+            font-family: "Roboto", sans-serif;
+            outline: 0;
+            background: #f2f2f2;
+            width: 100%;
+            border: 0;
+            margin: 0 0 15px;
+            padding: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .form button {
+            font-family: "Roboto", sans-serif;
+            text-transform: uppercase;
+            outline: 0;
+            background: #AD0012;
+            width: 100%;
+            border: 0;
+            padding: 15px;
+            color: #FFFFFF;
+            font-size: 14px;
+            -webkit-transition: all 0.3 ease;
+            transition: all 0.3 ease;
+            cursor: pointer;
+        }
+
+        .form button:hover,.form button:active,.form button:focus {
+            background: #EF3B3A;
+        }
+
+        .form .message {
+            margin: 15px 0 0;
+            color: #b3b3b3;
+            font-size: 12px;
+        }
+
+        .form .message a {
+            color: #AD0012;
+            text-decoration: none;
+        }
+
+        .form .register-form {
+            display: none;
+        }
+
+        body {
+            /*
+            background: -webkit-linear-gradient(right, #76b852, #8DC26F);
+            background: -moz-linear-gradient(right, #76b852, #8DC26F);
+            background: -o-linear-gradient(right, #76b852, #8DC26F);
+            background: linear-gradient(to left, #76b852, #8DC26F);
+            */
+            font-family: "Roboto", sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
+
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+        var toggle = function(){
+            $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+        }
+
+        $().ready(function() {
+
+            $("#register").validate({
+                rules: {
+
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    },
+                    repeat_password: {
+                        required: true,
+                        minlength: 5,
+                        equalTo: "#register-password"
+                    }
+                },
+                messages: {
+                    email: "Please enter a valid email address",
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    repeat_password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long",
+                        equalTo: "Please enter the same password as above"
+                    }
+                }
+            });
+        });
+        /*]]>*/
+
+    </script>
+
+</head>
+
+<body>
+<div class="page-header" style="text-align: center;">
+    <h1><span style="color: darkred; font-weight: bolder;">ABrowse</span> <small style="font-weight: bolder;">-- AJAX Genome Browser</small></h1>
+</div>
+<div sec:authorize="isAnonymous()" class="container">
+
+    <div class="form">
+        <form class="register-form" id="register" method="post" action="/register">
+            <input type="text" placeholder="email" name="username"/>
+            <input type="password" placeholder="password" name="password" id="register-password"/>
+            <input type="password" placeholder="repeat password" name="repeat_password"/>
+            <button onclick="document.getElementById('register-form').submit()">注册</button>
+            <p class="message">已经有账号？<a href="#" onclick="toggle()">直接登录</a></p>
+        </form>
+
+        <form class="login-form" id="login" method="post" action="/login">
+            <input type="text" placeholder="email" name="username"/>
+            <input type="password" placeholder="password" name="password"/>
+            <button onclick="document.getElementById('login-form').submit()">登录</button>
+            <p class="message">还没有账号？<a href="#" onclick="toggle()">注册</a></p>
+        </form>
+    </div>
+</div> <!-- /container -->
+<div sec:authorize="isAuthenticated()" class="container">
+    <p>您已登录</p>
+</div>
+
+</body>
+</html>

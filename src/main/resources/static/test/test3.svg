@@ -1,0 +1,655 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+
+<svg id="browser-canvas" xmlns="http://www.w3.org/2000/svg" width="1200" height="900"
+     style="top: 0px; left: 0px; position: absolute;">
+    <g id="track:Ensembl_Gene_Models">
+        <g id="trackheader:Ensembl_Gene_Models" transform="matrix(1,0,0,1,0,30)">
+            <text font-size="14px" font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                Ensembl Gene Models release 91
+            </text>
+        </g>
+        <g id="trackbody:Ensembl_Gene_Models" transform="matrix(0.065,0,0,1,0,35)">
+            <g id="Ensembl_Gene_Models:11012386-11030886">
+                <g id="Ensembl_Gene_Models:ENSG00000120948">
+                    <a id="Ensembl_Gene_Models:ENST00000473118" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="-42" y="123" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-205
+                        </text>
+                        <polyline
+                                points="-42,11 -42,9 41,9 41,11 1330,11 1330,9 1578,9 1578,11 4458,11 4458,9 4620,9 4620,11 6347,11 6347,9 6486,9 6486,11 8043,11 8043,9 8102,9 8102,11 8102,13 8102,15 8043,15 8043,13 6486,13 6486,15 6347,15 6347,13 4620,13 4620,15 4458,15 4458,13 1578,13 1578,15 1330,15 1330,13 41,13 41,15 -42,15 -42,13 -42,11"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000240185" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="14" y="385" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-201
+                        </text>
+                        <polyline
+                                points="14,28 14,26 356,26 356,28 1330,28 1330,26 1578,26 1578,28 4458,28 4458,26 4620,26 4620,28 6347,28 6347,26 6486,26 6486,28 8043,28 8043,26 8212,26 8212,28 9738,28 9738,26 14033,26 14033,28 14033,30 14033,32 9738,32 9738,30 8212,30 8212,32 8043,32 8043,30 6486,30 6486,32 6347,32 6347,30 4620,30 4620,32 4458,32 4458,30 1578,30 1578,32 1330,32 1330,30 356,30 356,32 14,32 14,30 14,28"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000639083" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="38" y="646" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-230
+                        </text>
+                        <polyline
+                                points="38,45 38,43 93,43 93,45 1330,45 1330,43 1578,43 1578,45 4458,45 4458,43 4620,43 4620,45 6347,45 6347,43 6486,43 6486,45 8043,45 8043,43 8212,43 8212,45 9738,45 9738,43 11222,43 11222,45 11222,47 11222,49 9738,49 9738,47 8212,47 8212,49 8043,49 8043,47 6486,47 6486,49 6347,49 6347,47 4620,47 4620,49 4458,49 4458,47 1578,47 1578,49 1330,49 1330,47 93,47 93,49 38,49 38,47 38,45"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000639599" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="39" y="908" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-231
+                        </text>
+                        <polyline
+                                points="39,62 39,60 219,60 219,62 1330,62 1330,60 1578,60 1578,62 4458,62 4458,60 4620,60 4620,62 6347,62 6347,60 6486,60 6486,62 8043,62 8043,60 8212,60 8212,62 9738,62 9738,60 9854,60 9854,62 10807,62 10807,60 10942,60 10942,62 11678,62 11678,60 11796,60 11796,62 11796,64 11796,66 11678,66 11678,64 10942,64 10942,66 10807,66 10807,64 9854,64 9854,66 9738,66 9738,64 8212,64 8212,66 8043,66 8043,64 6486,64 6486,66 6347,66 6347,64 4620,64 4620,66 4458,66 4458,64 1578,64 1578,66 1330,66 1330,64 219,64 219,66 39,66 39,64 39,62"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000629725" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="236" y="1169" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-228
+                        </text>
+                        <polyline
+                                points="236,79 236,77 356,77 356,79 1330,79 1330,77 1578,77 1578,79 4458,79 4458,77 4620,77 4620,79 6347,79 6347,77 6486,77 6486,79 8043,79 8043,77 8212,77 8212,79 9738,79 9738,77 9863,77 9863,79 10807,79 10807,77 10861,77 10861,79 10861,81 10861,83 10807,83 10807,81 9863,81 9863,83 9738,83 9738,81 8212,81 8212,83 8043,83 8043,81 6486,81 6486,83 6347,83 6347,81 4620,81 4620,83 4458,83 4458,81 1578,81 1578,83 1330,83 1330,81 356,81 356,83 236,83 236,81 236,79"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000439080" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="267" y="1431" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-203
+                        </text>
+                        <polyline
+                                points="267,96 267,94 356,94 356,96 1330,96 1330,94 1578,94 1578,96 6347,96 6347,94 6486,94 6486,96 8043,96 8043,94 8212,94 8212,96 9738,96 9738,94 10471,94 10471,96 10471,98 10471,100 9738,100 9738,98 8212,98 8212,100 8043,100 8043,98 6486,98 6486,100 6347,100 6347,98 1578,98 1578,100 1330,100 1330,98 356,98 356,100 267,100 267,98 267,96"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000613864" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="268" y="1692" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-215
+                        </text>
+                        <polyline
+                                points="268,113 268,111 356,111 356,113 1330,113 1330,111 1578,111 1578,113 4458,113 4458,111 4620,111 4620,113 5988,113 5988,111 6066,111 6066,113 6066,115 6066,117 5988,117 5988,115 4620,115 4620,117 4458,117 4458,115 1578,115 1578,117 1330,117 1330,115 356,115 356,117 268,117 268,115 268,113"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000476201" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="268" y="1954" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-207
+                        </text>
+                        <polyline
+                                points="268,130 268,128 356,128 356,130 1330,130 1330,128 1578,128 1578,130 3138,130 3138,128 3259,128 3259,130 4458,130 4458,128 4620,128 4620,130 6347,130 6347,128 6486,128 6486,130 8043,130 8043,128 8202,128 8202,130 8202,132 8202,134 8043,134 8043,132 6486,132 6486,134 6347,134 6347,132 4620,132 4620,134 4458,134 4458,132 3259,132 3259,134 3138,134 3138,132 1578,132 1578,134 1330,134 1330,132 356,132 356,134 268,134 268,132 268,130"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000472476" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="268" y="2215" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-204
+                        </text>
+                        <polyline
+                                points="268,147 268,145 356,145 356,147 1330,147 1330,145 1578,145 1578,147 3737,147 3737,145 3867,145 3867,147 4458,147 4458,145 4620,145 4620,147 6347,147 6347,145 6486,145 6486,147 8043,147 8043,145 8212,145 8212,147 9738,147 9738,145 9789,145 9789,147 9789,149 9789,151 9738,151 9738,149 8212,149 8212,151 8043,151 8043,149 6486,149 6486,151 6347,151 6347,149 4620,149 4620,151 4458,151 4458,149 3867,149 3867,151 3737,151 3737,149 1578,149 1578,151 1330,151 1330,149 356,149 356,151 268,151 268,149 268,147"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000621715" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="284" y="2477" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-225
+                        </text>
+                        <polyline
+                                points="284,164 284,162 356,162 356,164 1330,164 1330,162 1578,162 1578,164 4458,164 4458,162 4620,162 4620,164 6347,164 6347,162 6486,162 6486,164 9738,164 9738,162 9923,162 9923,164 9923,166 9923,168 9738,168 9738,166 6486,166 6486,168 6347,168 6347,166 4620,166 4620,168 4458,168 4458,166 1578,166 1578,168 1330,168 1330,166 356,166 356,168 284,168 284,166 284,164"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000315091" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="1330" y="2738" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-202
+                        </text>
+                        <polyline
+                                points="1330,181 1330,179 1578,179 1578,181 4458,181 4458,179 4620,179 4620,181 6347,181 6347,179 6486,179 6486,181 8043,181 8043,179 8212,179 8212,181 9738,181 9738,179 9854,179 9854,181 10807,181 10807,179 11796,179 11796,181 11796,183 11796,185 10807,185 10807,183 9854,183 9854,185 9738,185 9738,183 8212,183 8212,185 8043,185 8043,183 6486,183 6486,185 6347,185 6347,183 4620,183 4620,185 4458,185 4458,183 1578,183 1578,185 1330,185 1330,183 1330,181"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000473869" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="1330" y="3000" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-206
+                        </text>
+                        <polyline
+                                points="1330,198 1330,196 1578,196 1578,198 4458,198 4458,196 4620,196 4620,198 6347,198 6347,196 6486,196 6486,198 8043,198 8043,196 8212,196 8212,198 9738,198 9738,196 9863,196 9863,198 10807,198 10807,196 10942,196 10942,198 11678,198 11678,196 12632,196 12632,198 12632,200 12632,202 11678,202 11678,200 10942,200 10942,202 10807,202 10807,200 9863,200 9863,202 9738,202 9738,200 8212,200 8212,202 8043,202 8043,200 6486,200 6486,202 6347,202 6347,200 4620,200 4620,202 4458,202 4458,200 1578,200 1578,202 1330,202 1330,200 1330,198"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000621790" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="1342" y="3262" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-226
+                        </text>
+                        <polyline
+                                points="1342,215 1342,213 1578,213 1578,215 4458,215 4458,213 4620,213 4620,215 6347,215 6347,213 6486,213 6486,215 8043,215 8043,213 8212,213 8212,215 9738,215 9738,213 9881,213 9881,215 10807,215 10807,213 10954,213 10954,215 10954,217 10954,219 10807,219 10807,217 9881,217 9881,219 9738,219 9738,217 8212,217 8212,219 8043,219 8043,217 6486,217 6486,219 6347,219 6347,217 4620,217 4620,219 4458,219 4458,217 1578,217 1578,219 1342,219 1342,217 1342,215"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000616545" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="1342" y="3523" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-217
+                        </text>
+                        <polyline
+                                points="1342,232 1342,230 1578,230 1578,232 4458,232 4458,230 4620,230 4620,232 6347,232 6347,230 6486,230 6486,232 8043,232 8043,230 8212,230 8212,232 9738,232 9738,230 9863,230 9863,232 10877,232 10877,230 10954,230 10954,232 10954,234 10954,236 10877,236 10877,234 9863,234 9863,236 9738,236 9738,234 8212,234 8212,236 8043,236 8043,234 6486,234 6486,236 6347,236 6347,234 4620,234 4620,236 4458,236 4458,234 1578,234 1578,236 1342,236 1342,234 1342,232"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000638264" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="1342" y="3785" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-229
+                        </text>
+                        <polyline
+                                points="1342,249 1342,247 1578,247 1578,249 4458,249 4458,247 4474,247 4474,249 8113,249 8113,247 8212,247 8212,249 9738,249 9738,247 9854,247 9854,249 9967,249 9967,247 10264,247 10264,249 10264,251 10264,253 9967,253 9967,251 9854,251 9854,253 9738,253 9738,251 8212,251 8212,253 8113,253 8113,251 4474,251 4474,253 4458,253 4458,251 1578,251 1578,253 1342,253 1342,251 1342,249"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000622057" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="4473" y="4046" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-227
+                        </text>
+                        <polyline
+                                points="4473,266 4473,264 4620,264 4620,266 6347,266 6347,264 6486,264 6486,266 8043,266 8043,264 8212,264 8212,266 9738,266 9738,264 9854,264 9854,266 10775,266 10775,264 10900,264 10900,266 10900,268 10900,270 10775,270 10775,268 9854,268 9854,270 9738,270 9738,268 8212,268 8212,270 8043,270 8043,268 6486,268 6486,270 6347,270 6347,268 4620,268 4620,270 4473,270 4473,268 4473,266"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000617172" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="4479" y="4308" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-218
+                        </text>
+                        <polyline
+                                points="4479,283 4479,281 4620,281 4620,283 6347,283 6347,281 6486,281 6486,283 8043,283 8043,281 8212,281 8212,283 9738,283 9738,281 9863,281 9863,283 10807,283 10807,281 11203,281 11203,283 11203,285 11203,287 10807,287 10807,285 9863,285 9863,287 9738,287 9738,285 8212,285 8212,287 8043,287 8043,285 6486,285 6486,287 6347,287 6347,285 4620,285 4620,287 4479,287 4479,285 4479,283"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000618606" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="4492" y="4569" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-220
+                        </text>
+                        <polyline
+                                points="4492,300 4492,298 4620,298 4620,300 6347,300 6347,298 6799,298 6799,300 6799,302 6799,304 6347,304 6347,302 4620,302 4620,304 4492,304 4492,302 4492,300"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000611963" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="4580" y="4831" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-213
+                        </text>
+                        <polyline
+                                points="4580,317 4580,315 4620,315 4620,317 6347,317 6347,315 6486,315 6486,317 8043,317 8043,315 8212,315 8212,317 9738,317 9738,315 9854,315 9854,317 10807,317 10807,315 10942,315 10942,317 11678,317 11678,315 11806,315 11806,317 11806,319 11806,321 11678,321 11678,319 10942,319 10942,321 10807,321 10807,319 9854,319 9854,321 9738,321 9738,319 8212,319 8212,321 8043,321 8043,319 6486,319 6486,321 6347,321 6347,319 4620,319 4620,321 4580,321 4580,319 4580,317"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000620632" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="6394" y="5092" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-223
+                        </text>
+                        <polyline
+                                points="6394,334 6394,332 6486,332 6486,334 8043,334 8043,332 8212,332 8212,334 9738,334 9738,332 9863,332 9863,334 10807,334 10807,332 10942,332 10942,334 11481,334 11481,332 11656,332 11656,334 11656,336 11656,338 11481,338 11481,336 10942,336 10942,338 10807,338 10807,336 9863,336 9863,338 9738,338 9738,336 8212,336 8212,338 8043,338 8043,336 6486,336 6486,338 6394,338 6394,336 6394,334"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000619555" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="6394" y="5354" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-221
+                        </text>
+                        <polyline
+                                points="6394,351 6394,349 6486,349 6486,351 8043,351 8043,349 8212,349 8212,351 9738,351 9738,349 9863,349 9863,351 10775,351 10775,349 10942,349 10942,351 11678,351 11678,349 11797,349 11797,351 11797,353 11797,355 11678,355 11678,353 10942,353 10942,355 10775,355 10775,353 9863,353 9863,355 9738,355 9738,353 8212,353 8212,355 8043,355 8043,353 6486,353 6486,355 6394,355 6394,353 6394,351"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000610369" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="6467" y="5615" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-211
+                        </text>
+                        <polyline
+                                points="6467,368 6467,366 6486,366 6486,368 8043,368 8043,366 8212,366 8212,368 9738,368 9738,366 9863,366 9863,368 10877,368 10877,366 10942,366 10942,368 11481,368 11481,366 11656,366 11656,368 11656,370 11656,372 11481,372 11481,370 10942,370 10942,372 10877,372 10877,370 9863,370 9863,372 9738,372 9738,370 8212,370 8212,372 8043,372 8043,370 6486,370 6486,372 6467,372 6467,370 6467,368"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000614494" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="8047" y="5877" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-216
+                        </text>
+                        <polyline
+                                points="8047,385 8047,383 8212,383 8212,385 9738,385 9738,383 9790,383 9790,385 10770,385 10770,383 10942,383 10942,385 11678,385 11678,383 11796,383 11796,385 11796,387 11796,389 11678,389 11678,387 10942,387 10942,389 10770,389 10770,387 9790,387 9790,389 9738,389 9738,387 8212,387 8212,389 8047,389 8047,387 8047,385"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000477447" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="8201" y="6138" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-208
+                        </text>
+                        <polyline
+                                points="8201,402 8201,400 8212,400 8212,402 9738,402 9738,400 9863,400 9863,402 10807,402 10807,400 10942,400 10942,402 11916,402 11916,400 11948,400 11948,402 12724,402 12724,400 12820,400 12820,402 12820,404 12820,406 12724,406 12724,404 11948,404 11948,406 11916,406 11916,404 10942,404 10942,406 10807,406 10807,404 9863,404 9863,406 9738,406 9738,404 8212,404 8212,406 8201,406 8201,404 8201,402"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000620505" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="9922" y="6400" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-222
+                        </text>
+                        <polyline
+                                points="9922,419 9922,417 10328,417 10328,419 10807,419 10807,417 10942,417 10942,419 12724,419 12724,417 12834,417 12834,419 12834,421 12834,423 12724,423 12724,421 10942,421 10942,423 10807,423 10807,421 10328,421 10328,423 9922,423 9922,421 9922,419"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000621573" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="10162" y="6662" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-224
+                        </text>
+                        <polyline
+                                points="10162,436 10162,434 10942,434 10942,436 11678,436 11678,434 11886,434 11886,436 11886,438 11886,440 11678,440 11678,438 10942,438 10942,440 10162,440 10162,438 10162,436"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000611008" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="10432" y="6923" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-212
+                        </text>
+                        <polyline
+                                points="10432,453 10432,451 10942,451 10942,453 11916,453 11916,451 11948,451 11948,453 12724,453 12724,451 13105,451 13105,453 13105,455 13105,457 12724,457 12724,455 11948,455 11948,457 11916,457 11916,455 10942,455 10942,457 10432,457 10432,455 10432,453"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000613177" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="10659" y="7185" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-214
+                        </text>
+                        <polyline
+                                points="10659,470 10659,468 10942,468 10942,470 12724,470 12724,468 12816,468 12816,470 12816,472 12816,474 12724,474 12724,472 10942,472 10942,474 10659,474 10659,472 10659,470"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000496840" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="10812" y="7446" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-210
+                        </text>
+                        <polyline
+                                points="10812,487 10812,485 10942,485 10942,487 11678,487 11678,485 11948,485 11948,487 12724,487 12724,485 12821,485 12821,487 13165,487 13165,485 13352,485 13352,487 13352,489 13352,491 13165,491 13165,489 12821,489 12821,491 12724,491 12724,489 11948,489 11948,491 11678,491 11678,489 10942,489 10942,491 10812,491 10812,489 10812,487"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000617757" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="10937" y="7708" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-219
+                        </text>
+                        <polyline
+                                points="10937,504 10937,502 11280,502 11280,504 11678,504 11678,502 11765,502 11765,504 11765,506 11765,508 11678,508 11678,506 11280,506 11280,508 10937,508 10937,506 10937,504"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000480464" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="11543" y="7969" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            TARDBP-209
+                        </text>
+                        <polyline
+                                points="11543,521 11543,519 11948,519 11948,521 12724,521 12724,519 13105,519 13105,521 13105,523 13105,525 12724,525 12724,523 11948,523 11948,525 11543,525 11543,523 11543,521"
+                                fill="red"></polyline>
+                    </a>
+                </g>
+                <g id="Ensembl_Gene_Models:ENSG00000277726">
+                    <a id="Ensembl_Gene_Models:ENST00000614757" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="276" y="8231" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.4-201
+                        </text>
+                        <polyline
+                                points="276,538 276,536 356,536 356,538 1330,538 1330,536 1578,536 1578,538 4458,538 4458,536 4620,536 4620,538 6347,538 6347,536 6486,536 6486,538 8043,538 8043,536 8212,536 8212,538 9738,538 9738,536 9863,536 9863,538 10807,538 10807,536 10942,536 10942,538 11678,538 11678,536 11948,536 11948,538 12724,538 12724,536 12821,536 12821,538 17793,538 17793,536 18141,536 18141,538 18141,540 18141,542 17793,542 17793,540 12821,540 12821,542 12724,542 12724,540 11948,540 11948,542 11678,542 11678,540 10942,540 10942,542 10807,542 10807,540 9863,540 9863,542 9738,542 9738,540 8212,540 8212,542 8043,542 8043,540 6486,540 6486,542 6347,542 6347,540 4620,540 4620,542 4458,542 4458,540 1578,540 1578,542 1330,542 1330,540 356,540 356,542 276,542 276,540 276,538"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000611136" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="8120" y="8492" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.4-202
+                        </text>
+                        <polyline
+                                points="8120,555 8120,553 8212,553 8212,555 9738,555 9738,553 9854,553 9854,555 10807,555 10807,553 10942,553 10942,555 12724,555 12724,553 12821,553 12821,555 17793,555 17793,553 18043,553 18043,555 18043,557 18043,559 17793,559 17793,557 12821,557 12821,559 12724,559 12724,557 10942,557 10942,559 10807,559 10807,557 9854,557 9854,559 9738,559 9738,557 8212,557 8212,559 8120,559 8120,557 8120,555"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000612542" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="9758" y="8754" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.4-203
+                        </text>
+                        <polyline
+                                points="9758,572 9758,570 9863,570 9863,572 12724,572 12724,570 12821,570 12821,572 17793,572 17793,570 18139,570 18139,572 18139,574 18139,576 17793,576 17793,574 12821,574 12821,576 12724,576 12724,574 9863,574 9863,576 9758,576 9758,574 9758,572"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000622108" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="10812" y="9015" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.4-204
+                        </text>
+                        <polyline
+                                points="10812,589 10812,587 10942,587 10942,589 12724,589 12724,587 12821,587 12821,589 17301,589 17301,587 17394,587 17394,589 17793,589 17793,587 18110,587 18110,589 18110,591 18110,593 17793,593 17793,591 17394,591 17394,593 17301,593 17301,591 12821,591 12821,593 12724,593 12724,591 10942,591 10942,593 10812,593 10812,591 10812,589"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000620028" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="12407" y="9277" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.4-205
+                        </text>
+                        <polyline
+                                points="12407,606 12407,604 12821,604 12821,606 17793,606 17793,604 18138,604 18138,606 18138,608 18138,610 17793,610 17793,608 12821,608 12821,610 12407,610 12407,608 12407,606"
+                                fill="red"></polyline>
+                    </a>
+                </g>
+                <g id="Ensembl_Gene_Models:ENSG00000009724">
+                    <a id="Ensembl_Gene_Models:ENST00000400897" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="14137" y="1431" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            MASP2-201
+                        </text>
+                        <polyline
+                                points="14137,96 14137,94 15261,94 15261,96 17790,96 17790,94 17863,94 17863,96 18362,96 18362,94 18495,94 18495,96 22442,96 22442,94 22519,94 22519,96 25307,96 25307,94 25424,94 25424,96 30489,96 30489,94 30635,94 30635,96 30953,96 30953,94 31148,94 31148,96 33022,96 33022,94 33152,94 33152,96 34170,96 34170,94 34346,94 34346,96 34505,96 34505,94 34732,94 34732,96 34817,96 34817,94 34836,94 34836,96 34836,98 34836,100 34817,100 34817,98 34732,98 34732,100 34505,100 34505,98 34346,98 34346,100 34170,100 34170,98 33152,98 33152,100 33022,100 33022,98 31148,98 31148,100 30953,100 30953,98 30635,98 30635,100 30489,100 30489,98 25424,98 25424,100 25307,100 25307,98 22519,98 22519,100 22442,100 22442,98 18495,98 18495,100 18362,100 18362,98 17863,98 17863,100 17790,100 17790,98 15261,98 15261,100 14137,100 14137,98 14137,96"
+                                fill="blue"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000478645" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="25307" y="1692" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            MASP2-203
+                        </text>
+                        <polyline
+                                points="25307,113 25307,111 25424,111 25424,113 30489,113 30489,111 30811,111 30811,113 30811,115 30811,117 30489,117 30489,115 25424,115 25424,117 25307,117 25307,115 25307,113"
+                                fill="blue"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000480221" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="32412" y="1954" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            MASP2-204
+                        </text>
+                        <polyline
+                                points="32412,130 32412,128 34346,128 34346,130 34505,130 34505,128 34732,128 34732,130 34817,130 34817,128 34840,128 34840,130 34840,132 34840,134 34817,134 34817,132 34732,132 34732,134 34505,134 34505,132 34346,132 34346,134 32412,134 32412,132 32412,130"
+                                fill="blue"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000400898" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="32412" y="2215" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            MASP2-202
+                        </text>
+                        <polyline
+                                points="32412,147 32412,145 32566,145 32566,147 33022,147 33022,145 33152,145 33152,147 34170,147 34170,145 34346,145 34346,147 34505,147 34505,145 34732,145 34732,147 34817,147 34817,145 34846,145 34846,147 34846,149 34846,151 34817,151 34817,149 34732,149 34732,151 34505,151 34505,149 34346,149 34346,151 34170,151 34170,149 33152,149 33152,151 33022,151 33022,149 32566,149 32566,151 32412,151 32412,149 32412,147"
+                                fill="blue"></polyline>
+                    </a>
+                </g>
+                <g id="Ensembl_Gene_Models:ENSG00000271895">
+                    <a id="Ensembl_Gene_Models:ENST00000607145" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="17273" y="2477" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.3-201
+                        </text>
+                        <polyline
+                                points="17273,164 17273,162 18141,162 18141,164 18141,166 18141,168 17273,168 17273,166 17273,164"
+                                fill="red"></polyline>
+                    </a>
+                    <a id="Ensembl_Gene_Models:ENST00000612387" style="cursor:pointer;"
+                       xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                        <text x="17372" y="2738" transform="scale(1,0.065)" font-size="123px"
+                              font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                            AL109811.3-202
+                        </text>
+                        <polyline
+                                points="17372,181 17372,179 17394,179 17394,181 17516,181 17516,179 18141,179 18141,181 18141,183 18141,185 17516,185 17516,183 17394,183 17394,185 17372,185 17372,183 17372,181"
+                                fill="red"></polyline>
+                    </a>
+                </g>
+            </g>
+        </g>
+    </g>
+    <g id="track:RNASeq_SpliceSite_Sample">
+        <g id="trackheader:RNASeq_SpliceSite_Sample" transform="matrix(1,0,0,1,0,678)">
+            <text font-size="14px" font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="black">
+                RNASeq SpliceSite Sample
+            </text>
+        </g>
+        <g id="trackbody:RNASeq_SpliceSite_Sample" transform="matrix(0.065,0,0,1,0,683)">
+            <g id="RNASeq_SpliceSite_Sample:11012386-11030886">
+                <a id="RNASeq_SpliceSite_Sample:11012744:11013716" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 358 0 Q 844 80 1330 0" stroke="#FF9900" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900" x="844"
+                          y="615">1591
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11013825:11013916" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 1439 0 Q 1485 80 1530 0" stroke="#FF9900" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900" x="1485"
+                          y="615">6
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11013966:11015524" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 1580 0 Q 2359 80 3138 0" stroke="#FF9900" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900" x="2359"
+                          y="615">8
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11013966:11016844" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 1580 0 Q 3019 160 4458 0" stroke="#003300" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300" x="3019"
+                          y="1231">404
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11015647:11016844" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 3261 0 Q 3860 160 4458 0" stroke="#003300" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300" x="3860"
+                          y="1231">9
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11017008:11018733" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 4622 0 Q 5485 80 6347 0" stroke="#FF9900" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900" x="5485"
+                          y="615">409
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11018874:11020429" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 6488 0 Q 7266 80 8043 0" stroke="#FF9900" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900" x="7266"
+                          y="615">472
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11018874:11022124" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 6488 0 Q 8113 160 9738 0" stroke="#003300" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300" x="8113"
+                          y="1231">5
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11020600:11022124" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 8214 0 Q 8976 160 9738 0" stroke="#003300" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300" x="8976"
+                          y="1231">481
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11020611:11021427" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 8225 0 Q 8633 240 9041 0" stroke="#990033" fill="none" style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#990033" x="8633"
+                          y="1846">6
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11022178:11023193" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 9792 0 Q 10300 80 10807 0" stroke="#FF9900" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900"
+                          x="10300" y="615">11
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11022242:11023193" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 9856 0 Q 10332 160 10807 0" stroke="#003300" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300"
+                          x="10332" y="1231">18
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11022251:11023193" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 9865 0 Q 10336 240 10807 0" stroke="#990033" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#990033"
+                          x="10336" y="1846">20
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11022251:11023293" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 9865 0 Q 10386 320 10907 0" stroke="#FF9900" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900"
+                          x="10386" y="2462">9
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11023330:11024064" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 10944 0 Q 11311 80 11678 0" stroke="#FF9900" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900"
+                          x="11311" y="615">41
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11024336:11025110" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 11950 0 Q 12337 80 12724 0" stroke="#FF9900" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900"
+                          x="12337" y="615">43
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11025209:11029687" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 12823 0 Q 15062 80 17301 0" stroke="#FF9900" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900"
+                          x="15062" y="615">18
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11025209:11025551" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 12823 0 Q 12994 160 13165 0" stroke="#003300" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300"
+                          x="12994" y="1231">17
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11025666:11029666" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 13280 0 Q 15280 160 17280 0" stroke="#003300" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300"
+                          x="15280" y="1231">6
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11025666:11029687" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 13280 0 Q 15291 240 17301 0" stroke="#990033" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#990033"
+                          x="15291" y="1846">12
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11029255:11029879" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 16869 0 Q 17181 320 17493 0" stroke="#FF9900" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#FF9900"
+                          x="17181" y="2462">5
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11029782:11029902" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 17396 0 Q 17456 160 17516 0" stroke="#003300" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#003300"
+                          x="17456" y="1231">7
+                    </text>
+                </a>
+                <a id="RNASeq_SpliceSite_Sample:11029782:11030179" style="cursor:pointer;"
+                   xmlns:xlink="http://www.w3.org/1999/xlink" xlink:style="cursor:pointer;">
+                    <path d="M 17396 0 Q 17595 240 17793 0" stroke="#990033" fill="none"
+                          style="stroke-width: 2px;"></path>
+                    <text transform="scale(1,0.065)" font-size="154px"
+                          font-family="Calibri, Arial, Helvetica, sans-serif" font-weight="bold" fill="#990033"
+                          x="17595" y="1846">5
+                    </text>
+                </a>
+            </g>
+        </g>
+    </g>
+</svg>

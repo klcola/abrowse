@@ -1,0 +1,14 @@
+
+
+.trackoption {
+    border-bottom: 1px solid #ff8a8a;
+    padding: 5px 0 5px 0;
+}
+
+#browser {
+    user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+}

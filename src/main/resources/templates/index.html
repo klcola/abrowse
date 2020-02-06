@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="ABrowse - AJAX Genome Browser" />
+    <meta name="author" content="Lei Kong, caesar.kong@outlook.com" />
+
+    <title>ABrowse - Advanced Genome Browser</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css' />
+
+    <!-- ABrowse core CSS -->
+    <link rel="stylesheet" href="/css/abrowse.css" />
+
+    <!-- Include JQuery and JQuery plugin scripts: -->
+    <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+    <script src="/webjars/jquery-mousewheel/3.1.12/jquery.mousewheel.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+
+    <!-- PLEASE USE abrowse-all.js in PRODUCTION ENVIRONMENT -->
+    <script type="text/javascript" src="/js/abrowse/namespace.js"></script>
+    <script type="text/javascript" src="/js/abrowse/minutiae.js"></script>
+    <script type="text/javascript" src="/js/abrowse/genomebrowser.js"></script>
+    <script type="text/javascript" src="/js/abrowse/trackoption.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/colorschema.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/gene_model_like_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/gene_model_like_dense_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/bed_graph_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/strand_bed_graph_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/rna_seq_raw_data_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/rna_seq_splice_site_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/gmap.js"></script>
+    <script type="text/javascript" src="/js/abrowse/index.js"></script>
+
+    <script th:inline="javascript">
+
+      //  根据用户登陆权限 点击 icon 进入不同管理界面
+        function enterPanel() {
+          var isAdmins = [[${#authorization.expression('hasRole(''ROLE_ADMIN'')')}]];
+          if (isAdmins) {
+            window.location.href = '/admin/'
+          } else {
+            window.location.href = '/user/'
+          }
+        }
+
+        function getParam(key){
+            var results = new RegExp('[\?&]' + key + '=([^&#]*)').exec(window.location.href);
+            if(results){
+                return results[1];
+            }else{
+                return undefined;
+            }
+        }
+
+        /*<![CDATA[*/
+        $(function () {
+            ABrowse.mainPageInit();
+
+            var pos = getParam("pos");
+            if (pos) {
+
+                if (! pos.match("^chr")) {
+                    pos = "chr" + pos;
+                }
+                document.getElementById(ABrowse.defaultGenomeBrowser.searchInputId).value = pos;
+            }
+
+            ABrowse.defaultGenomeBrowser.submit();
+        });
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+
+<div id="header" style="width:100%; background:#ebebeb; padding: 5px 5px 5px 5px;">
+    <table>
+        <tr>
+            <td><a style="font-weight: bolder; color: darkred; font-size: 130%;" href="http://www.abrowse.org/">ABrowse</a></td>
+            <td style="padding-left:10px; font-size:14px;">
+                <input id="position" type="text" name="position"
+                       value="chrSuper-Scaffold_142:11700000-11720000" size="30" />
+                <!-- value="chr1:11012386-11030886" -->
+            </td>
+            <td style="padding-left:5px;">
+                <select style="font-size:14px; padding-left:5px;" id="species_adv" name="species">
+                    <option value="H1" selected="selected">Stem Cell H1</option>
+                </select>
+            </td>
+            <td style="padding-left:15px;">
+                <button type="button" class="btn btn-danger btn-sm" onclick="ABrowse.defaultGenomeBrowser.submit();">
+                    GO
+                </button>
+            </td>
+            <td style="padding-left:15px;">
+                <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" aria-label="Left Align"
+                        onclick="ABrowse.defaultGenomeBrowser.zoomInSubmit();">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default btn-sm" aria-label="Left Align"
+                        onclick="ABrowse.defaultGenomeBrowser.zoomOutSubmit();">
+                    <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td style="padding-left:15px;">
+                <a sec:authorize="isAnonymous()" href="/login" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                    登录
+                </a>
+                <a type="button" class="btn btn-default btn-sm" aria-label="Left Align"
+                   href="/">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                </a>
+                <a type="button" class="btn btn-default btn-sm" aria-label="Left Align"
+                   onclick="enterPanel()">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                </a>
+                <a sec:authorize="isAuthenticated()" href="/logout" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 退出 <span sec:authentication="name"></span>
+                </a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div id="browser" onselectstart="return false;"></div>
+<div id="progressbar"></div>
+
+<span id="showIcon" class="glyphicon glyphicon-menu-hamburger cursor-pointer" aria-hidden="true" onclick="showTool()" style="font-size: 70%;float:right;top:8px;right:3px;display: none;"></span>
+
+<div id="statuspanel" style="font-size: 70%; overflow:scroll; ">
+
+  <span id="hideIcon" class="glyphicon glyphicon-menu-hamburger cursor-pointer" aria-hidden="true" onclick="hideTool()" style="position:fixed;margin-top:45px;"></span>
+
+    <ul id="statusPanelTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#statuspanel-tracklist" data-toggle="tab">
+                Tracks
+            </a>
+        </li>
+        <li><a href="#statuspanel-info" data-toggle="tab">信息</a></li>
+        <li><a href="#statuspanel-bookmark" data-toggle="tab">书签</a></li>
+    </ul>
+    <div id="statusPanelTabContent" class="tab-content" style="padding: 5px 0 0 0;">
+        <div role="tabpanel" class="tab-pane active" id="statuspanel-tracklist">
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div th:each="trackGroupEntry : ${configGenome.trackGroupMap}" class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h5 class="panel-title" >
+                            <a th:text="${trackGroupEntry.value.displayName}" role="button" data-toggle="collapse" data-parent="#accordion"
+                               th:href="'#' + ${trackGroupEntry.value.name}" aria-expanded="true" th:attr="aria-controls=${trackGroupEntry.value.name}"
+                            style="font-size: 12px;">
+                                Gene
+                            </a>
+                        </h5>
+                    </div>
+                    <div th:id="${trackGroupEntry.value.name}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div th:each="trackEntry : ${trackGroupEntry.value.trackMap}" class="panel-body">
+
+                            <h6 th:text="${trackEntry.value.displayName}">Ensembl Gene</h6>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label th:each="view : ${trackEntry.value.views}" th:title="${trackGroupEntry.value.name}"
+                                       th:class="(${view.viewName} eq ${trackEntry.value.defaultNormalView}) ? 'btn btn-danger active' : 'btn btn-danger'"
+                                       style="padding: 3px 5px 3px 5px;">
+                                    <input th:if="${view.viewName} eq ${trackEntry.value.defaultNormalView}" type="radio" autocomplete="off" checked="checked"
+                                           th:value="${view.viewName}" th:name="${trackEntry.value.name}"
+                                           onchange="ABrowse.defaultGenomeBrowser.trackOption.trackViewOnChecked(this);"
+                                           class="viewtype"/>
+                                    <input th:if="${view.viewName} ne ${trackEntry.value.defaultNormalView}" type="radio" autocomplete="off"
+                                           th:value="${view.viewName}" th:name="${trackEntry.value.name}"
+                                           onchange="ABrowse.defaultGenomeBrowser.trackOption.trackViewOnChecked(this);"
+                                           class="viewtype"/>
+                                    <span th:text="${configGenome.viewMap.get(view.viewName).type}" style=" font-size: 10px;"></span>
+                                </label>
+                                <label class="btn btn-danger" style="padding: 3px 5px 3px 5px;">
+                                    <input type="radio" th:attr="role=${trackGroupEntry.value.name}" th:name="${trackEntry.value.name}" autocomplete="off" value="off"
+                                           onchange="ABrowse.defaultGenomeBrowser.trackOption.trackViewOnChecked(this);"
+                                           class="viewtype"/><span style=" font-size: 10px;">off</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div role="tabpanel"  class="tab-pane" id="statuspanel-info">
+            <p>开发中：基因/转录本/蛋白质等信息页面</p>
+        </div>
+        <div role="tabpanel"  class="tab-pane" id="statuspanel-bookmark">
+            <p>开发中：书签页面</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

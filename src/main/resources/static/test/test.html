@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="ABrowse - AJAX Genome Browser"/>
+    <meta name="author" content="Lei Kong, caesar.kong@outlook.com"/>
+
+    <title>ABrowse - AJAX Genome Browser</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel='stylesheet' href='./css/bootstrap.min.css'/>
+
+    <!-- Include JQuery and JQuery plugin scripts: -->
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery.mousewheel.js"></script>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="./js/bootstrap.min.js"></script>
+
+    <!-- PLEASE USE abrowse-all.js in PRODUCTION ENVIRONMENT -->
+    <script type="text/javascript" src="../js/abrowse/namespace.js"></script>
+    <script type="text/javascript" src="../js/abrowse/minutiae.js"></script>
+    <script type="text/javascript" src="../js/abrowse/genomebrowser.js"></script>
+    <script type="text/javascript" src="../js/abrowse/trackoption.js"></script>
+    <script type="text/javascript" src="../js/abrowse/view/view.js"></script>
+    <script type="text/javascript" src="../js/abrowse/view/colorschema.js"></script>
+    <script type="text/javascript" src="../js/abrowse/view/gene_model_like_view.js"></script>
+    <script type="text/javascript" src="../js/abrowse/view/wiggle_data_view.js"></script>
+    <script type="text/javascript" src="../js/abrowse/view/rna_seq_raw_data_view.js"></script>
+    <script type="text/javascript" src="../js/abrowse/gmap.js"></script>
+
+    <script th:inline="javascript">
+
+        /*<![CDATA[*/
+        $(function () {
+            ABrowse.mainPageInit();
+            //ABrowse.defaultGenomeBrowser.submit();
+        });
+        /*]]>*/
+    </script>
+
+</head>
+<body>
+
+<div id="header" style="width:100%; background:#ebebeb; padding: 5px 5px 5px 5px;">
+    <table>
+        <tr>
+            <td><a style="font-weight: bolder; color: darkred; font-size: 130%;" href="http://www.abrowse.org/">ABrowse</a></td>
+            <td style="padding-left:10px; font-size:14px;">
+                <input id="position" type="text" name="position"
+                       value="1:10,946,000-10,983,000" size="30"/>
+            </td>
+            <td style="padding-left:5px;">
+                <select style="font-size:14px; padding-left:5px;" id="species_adv" name="species">
+                    <option value="human" selected="selected">Homo sapiens</option>
+                </select>
+            </td>
+            <td style="padding-left:15px;">
+                <button type="button" class="btn btn-danger" onclick="ABrowse.defaultGenomeBrowser.submit();">
+                    GO
+                </button>
+            </td>
+            <td style="padding-left:10px;">
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span>
+                </button>
+            </td>
+            <td style="padding-left:50px;">
+                <a href="#" sec:authorize="isAnonymous()" type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                    登录
+                </a>
+                <a sec:authorize="isAuthenticated()" type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span sec:authentication="name"></span>
+                </a>
+                <a sec:authorize="isAuthenticated()" type="button" class="btn btn-default" aria-label="Left Align">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 退出
+                </a>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<div id="browser" class="browser" onselectstart="return false;"></div>
+<div id="progressbar"></div>
+
+<div id="statuspanel" style="font-size: 70%; overflow:scroll; ">
+
+
+    <ul id="statusPanelTab" class="nav nav-tabs">
+        <li class="active">
+            <a href="#statuspanel-tracklist" data-toggle="tab">
+                Tracks
+            </a>
+        </li>
+        <li><a href="#statuspanel-info" data-toggle="tab">信息</a></li>
+        <li><a href="#statuspanel-bookmark" data-toggle="tab">书签</a></li>
+    </ul>
+    <div id="statusPanelTabContent" class="tab-content" style="padding: 5px 0 0 0;">
+        <div role="tabpanel" class="tab-pane active" id="statuspanel-tracklist">
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h5 class="panel-title" style="font-size: 50%;">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Gene
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+
+                            <h6>Ensembl Gene</h6>
+                            <div class="btn-group" data-toggle="buttons">
+                                <label class="btn btn-danger active" style="font-size: 50%; padding: 3px 5px 3px 5px;">
+                                    <input type="radio" name="options" id="option1" autocomplete="off" checked="checked" value="general"/>
+                                    <span>general</span>
+                                </label>
+                                <label class="btn btn-default" style="font-size: 50%; padding: 3px 5px 3px 5px;">
+                                    <input type="radio" name="options" id="option2" autocomplete="off"/>off
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h5 class="panel-title" style="font-size: 50%;">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Regulation
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+
+                            <button type="button" class="btn btn-default" aria-label="Left Align">
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h5 class="panel-title" style="font-size: 50%;">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Variation
+                            </a>
+                        </h5>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div role="tabpanel"  class="tab-pane" id="statuspanel-info">
+            <p>基因/转录本/蛋白质等信息页面</p>
+        </div>
+        <div role="tabpanel"  class="tab-pane" id="statuspanel-bookmark">
+            <p>书签页面</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "genome": "human",
+  "chrName": "chr1",
+  "trackRequests": [
+    {
+      "trackGroupName": "Gene",
+      "trackName": "Ensembl_Gene_Models",
+      "viewName": "GeneModelLikeView",
+      "yIndex": "",
+      "blockRequests": [
+        {
+          "start": 10909000,
+          "end": 10946000
+        },
+        {
+          "start": 10946000,
+          "end": 10983000
+        },
+        {
+          "start": 10983000,
+          "end": 11020000
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+
+server.port=8087
+
+########################################################
+### ColorSeq configure
+########################################################
+colorseq.project-base=/gpfs/user/kongl/colorseq/public/projects
+colorseq.pipeline.rnaseq.hisat2.splicesite-extension=.splicesite
+
+########################################################
+### ABrowse configure
+########################################################
+abrowse.default-genome=human
+abrowse.mongodb-name-prefix=abrowse_
+abrowse.mongodb-uri=mongodb://127.0.0.1:27017
+
+########################################################
+### spring session configure
+### 启动 redis 服务
+### cd /usr/local/redis
+### ./bin/redis-server ./etc/redis.conf
+########################################################
+spring.session.store-type=redis
+spring.redis.host=127.0.0.1
+spring.redis.port=6379
+
+########################################################
+### spring thymeleaf configure
+########################################################
+spring.thymeleaf.prefix=classpath:/templates/
+spring.thymeleaf.suffix=.html
+spring.thymeleaf.mode=HTML
+spring.thymeleaf.encoding=UTF-8
+# ;charset=<encoding> is added
+spring.thymeleaf.content-type=text/html
+# set to false for hot refresh
+spring.thymeleaf.cache=false
+
+########################################################
+### spring data jpa for mariadb
+### 启动 mariadb（MacOS) sudo launchctl start com.mariadb.server
+########################################################
+spring.datasource.url=jdbc:mariadb://127.0.0.1:3306/colorseq?localSocket=/var/lib/mysql/mysql.sock
+spring.datasource.username=colorseq
+spring.datasource.password=xxxxxxxxx
+spring.datasource.driver-class-name=org.mariadb.jdbc.Driver
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.hibernate.naming-strategy=org.hibernate.cfg.ImprovedNamingStrategy
+spring.jpa.show-sql=true
+
+########################################################
+### spring data jpa for mongodb
+### 启动mongodb
+### cd Applications/mongodb-osx-x86_64-3.6.0/
+### bin/mongod --bind_ip 0.0.0.0
+########################################################
+spring.data.mongodb.uri=mongodb://127.0.0.1:27017/abrowse
