@@ -78,9 +78,9 @@ public class BrowserController {
             configGenomeMap = configGenomeMapRetriever.retrieve(userId, configGenomeDao, userConfigGenomeDao);
             session.setAttribute(SessionKeys.CONFIG_GENOME_MAP, configGenomeMap);
         }
-	System.out.print("Genome:" + genome);
+	    System.out.print("Genome:" + genome);
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
-	System.out.print("currentConfigGenome" + currentConfigGenome);
+	    System.out.print("currentConfigGenome" + currentConfigGenome);
         ConfigGenome globalConfigGenome = configGenomeMap.get(global);
         if (null != globalConfigGenome) {
             currentConfigGenome.addViews(globalConfigGenome.getViewMap());
@@ -93,7 +93,7 @@ public class BrowserController {
         }
         modelMap.put("chrLen", chrNameLenMap);
         */
-
+        modelMap.put("configGenomeMap", configGenomeMap);
         modelMap.put("configGenome", currentConfigGenome);
         return "index";
     }

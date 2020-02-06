@@ -87,12 +87,12 @@
             <td><a style="font-weight: bolder; color: darkred; font-size: 130%;" href="http://www.abrowse.org/">ABrowse</a></td>
             <td style="padding-left:10px; font-size:14px;">
                 <input id="position" type="text" name="position"
-                       value="chrSuper-Scaffold_142:11700000-11720000" size="30" />
-                <!-- value="chr1:11012386-11030886" -->
+                       value="chr1:11012386-11030886" size="30" />
             </td>
             <td style="padding-left:5px;">
-                <select style="font-size:14px; padding-left:5px;" id="species_adv" name="species">
-                    <option value="H1" selected="selected">Stem Cell H1</option>
+                <select name="species" id="species_adv" class="selectpicker">
+                    <option th:each="configGenomeEntry : ${configGenomeMap}" th:value="${configGenomeEntry.value.name}"
+                            th:text="${configGenomeEntry.value.displayName}"></option>
                 </select>
             </td>
             <td style="padding-left:15px;">
