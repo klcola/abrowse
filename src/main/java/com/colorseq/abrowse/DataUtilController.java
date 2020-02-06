@@ -120,7 +120,10 @@ public class DataUtilController {
         //localeResolver.setLocale(request,response,Locale.CHINESE);
 
         //model.addAttribute("create",messageSource.getMessage("create",null,locale));
-        modelMap.put("configGenomeMap", configGenomeMap);
+        Map<String, ConfigGenome> configGenomeMap4Html = new HashMap<>();
+        configGenomeMap4Html.putAll(configGenomeMap);
+        configGenomeMap4Html.remove(global);
+        modelMap.put("configGenomeMap", configGenomeMap4Html);
 
         return "admin__index";
     }

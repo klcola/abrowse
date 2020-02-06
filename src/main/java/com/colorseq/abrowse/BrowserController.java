@@ -93,7 +93,10 @@ public class BrowserController {
         }
         modelMap.put("chrLen", chrNameLenMap);
         */
-        modelMap.put("configGenomeMap", configGenomeMap);
+        Map<String, ConfigGenome> configGenomeMap4Html = new HashMap<>();
+        configGenomeMap4Html.putAll(configGenomeMap);
+        configGenomeMap4Html.remove(global);
+        modelMap.put("configGenomeMap", configGenomeMap4Html);
         modelMap.put("configGenome", currentConfigGenome);
         return "index";
     }

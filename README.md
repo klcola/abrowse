@@ -1,6 +1,6 @@
 # ABrowse 基因组浏览器
 
-
+[English Version](README.en.md)
 ## 简介
 
 ABrowse (Advanced Genome Browser，其实取这个名字是为了按字母排序的时候我们能排在前面^^)是一款轻量级的通用基因组浏览器框架，我们开发它的目的是为
@@ -30,7 +30,8 @@ ABrowse 目前按照 GPL 版权发布。
 
 ### 在 MySQL 中创建用户数据库
 
-作为演示版本，以下语句请不要改动（包括密码，否则还需要修改 src/main/resources/application.properties 目录下的相应配置）
+作为演示版本，以下语句请不要改动（如果需要使用其他密码，请修改 
+src/main/resources/application.properties 文件中的 spring.datasource.password 属性）
 ```sql
 # 创建 abrowse 数据库
 create database abrowse;
@@ -56,8 +57,11 @@ mongoimport -d abrowsedemo -c config_genome --file src/main/resources/docs/conf/
 
 ### 编译项目并运行
 ```bash
-cd abrowse2
+git clone https://github.com/klcola/abrowse.git
+cd abrowse
+# 如果是第一次编译，maven 会自动下载很多依赖的 jar 包，所以本步骤可能会花比较长的时间
 mvn clean install
+
 java -jar target/abrowse-2.0-alpha.jar
 ```
 
