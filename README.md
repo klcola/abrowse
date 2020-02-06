@@ -26,7 +26,7 @@ ABrowse 目前按照 GPL 版权发布。
 * Apache Maven 3.6.1 （其他版本应该也可以正常工作，但作者未测试过）
 * MariaDB 10.0 （MySQL 或者 MariaDB 的其他版本应该也可以正常工作，但作者未测试过）
 * MongoDB 2.6.10 （其他版本应该也可以正常工作，但作者未测试过）
-* 一款支持 SVG 和 HTML5 的浏览器（这个谁没有呢～）
+* 一款支持 SVG 和 HTML5 的浏览器（这谁没有呢～ 我们推荐 chrome 或者火狐或者 safari）
 
 ### 在 MySQL 中创建用户数据库
 
@@ -64,19 +64,36 @@ mvn clean install
 
 java -jar target/abrowse-2.0-alpha.jar
 ```
+如果一切正常，这个时候打开浏览器，在地址栏输入 http://127.0.0.1:8383/ ，就可以看到 abrowse 的页面了。当然画布里什么内容也没有，那是
+因为我们还没有导入数据。
 
 ### 向 MySQL 数据库中插入用户信息
-一定要运行完上一步的编译项目再来运行这一步，否则表结构不会自动生成
+现在给 abrowse 系统添加一个管理员用户，请**一定要**运行完上一步的编译项目再来运行这一步，否则表结构不会自动生成。
 ```sql
 use abrowse;
 insert into role values (1, 'ROLE_ADMIN');
 insert into role values (10000000, 'ROLE_USER');
+
+# abrowse_demo 是密码，gly 是用户名，这两个都可以改成你自己的
 insert into user values (1, 'abrowse_demo', 'gly');
 insert into user_roles values (1, 1);
 ```
 
 ### 导入数据
-打开浏览器，
+点击登录输入管理员用户名 **gly**，密码 **abrowse_demo**，登录后，点击 "退出gly" 按钮左边的齿轮按钮，就看到如下界面
+![ABrowse 管理员界面截图](admin_index.png) 
+
+可以先进入 "删除 Track" 页面将旧的空 Track 删除，然后下载 Ensembl gtf 文件
+```bash
+wget ftp://ftp.ensembl.org/pub/release-99/gtf/homo_sapiens/Homo_sapiens.GRCh38.99.gtf.gz
+gzip -d Homo_sapiens.GRCh38.99.gtf.gz
+```
+进入 "导入 GTF 格式文件" 页面，如下图填写信息，注意 TrackName **不能** 有空格，Track Display Name 可以有空格，Track Description
+可以有空格，也可以不填。Homo_sapiens.GRCh38.99.gtf 文件位置根据实际情况填写，填好点击 "导入" 按钮即可。
+![ABrowse 导入 GTF 文件界面截图](import_gtf.png) 
+
+这样，我们的第一个基因组浏览器就完成了。
+![ABrowse Demo 截图](demo.png) 
 
 ## 写给开发者
 
@@ -103,6 +120,9 @@ git 默认对于文件名大小写不敏感，如下命令配置 git 使其对�
 ```bash
 git config core.ignorecase false
 ```
+
+## 多语言支持
+ABrowse 支持多语言，请参考 [src/resources/i18n/](src/resources/i18n/) 目录
 
 ## 联系作者
 kongl@mail.cbi.pku.edu.cn
