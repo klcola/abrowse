@@ -62,9 +62,9 @@ ABrowse.view.GeneModelLikeView.prototype.drawTranscript = function (transcript, 
     var y_dist = this.halfEntryHeight - this.halfIntronHeight;
     var blocks = transcript.blocks;
     //if (transcript.strand == "-") {
-        blocks.sort(function (a, b) {
-            return parseFloat(a.start) - parseFloat(b.start);
-        });
+    blocks.sort(function (a, b) {
+        return parseFloat(a.start) - parseFloat(b.start);
+    });
     //}
     for (var idx = 0; idx < blocks.length; ++idx) {
 

@@ -17,8 +17,6 @@ more visualization methods to the data format.
 This software is browser-server architecture, the back end uses the Spring Boot framework, the front uses HTML5 + JavaScript. 
 The directory src/main/resources/docs/ has more documentation.
 
-ABrowse is currently distributed under the GPL copyright.
-
 ## Quick Start
 
 ### Screenshot
@@ -59,7 +57,7 @@ mongoimport -d abrowsedemo -c config_genome --file src/main/resources/docs/conf/
 mongoimport -d abrowsedemo -c config_genome --file src/main/resources/docs/conf/human.abrowse.json --jsonArray
 ```
 
-### 编译项目并运行
+### Compile and Run
 ```bash
 git clone https://github.com/klcola/abrowse.git
 cd abrowse
@@ -139,9 +137,13 @@ ABrowse supports multiple languages，please refer to [src/resources/i18n/](src/
 kongl@mail.cbi.pku.edu.cn
 
 ## Disclaimer
-This software has not experienced the rigorous test that can be used under any circumstances, 
-so it cannot be guaranteed that the software is completely free of errors. The risk of using this software product
-shall be borne by users themselves. To the maximum extent permitted by applicable laws, for using or not using this 
-software to produce damage and risks, including but not limited to direct or indirect personal damage, 
-in the scientific research data errors, the loss of business profits, trade, interruption, loss of business 
-information, or any other economic or non-economic losses, the author does not undertake any responsibility.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>.
