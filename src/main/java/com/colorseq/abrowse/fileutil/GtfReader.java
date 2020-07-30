@@ -52,7 +52,6 @@ public class GtfReader extends BioDataReader{
         int geneNum = 0;
         int transcriptNum = 0;
         int exonNum = 0;
-
         try {
             if(lastLine == null){//第一次读取GTF文件
                 System.out.println("第一次读取文件");
@@ -65,7 +64,6 @@ public class GtfReader extends BioDataReader{
                     if (fields[2].equals(GtfFeatureType.gene)) {//跳过gene列，直接从transcript中读取gene信息
                         continue;
                     }
-
                     String chrName = fields[0];
                     if (!chrName.startsWith("chr")) {
                         // for Ensembl format gtf
@@ -113,11 +111,12 @@ public class GtfReader extends BioDataReader{
                             geneNum++;
 
                             if(geneNum > 1){//发现新的geneId 标注位置并返回
-
                                 //System.out.println("第一次读取文件发现新的geneId 标注位置并返回 GeneId =" + geneId);
                                 this.setLastLine(line);
                                 return geneDoc;
                             }
+                            transcriptNum ++;
+                            transcriptDocList.add(transcriptDoc);
                             geneDoc = new Document()
                                     .append(GencodeGtfTag.gene_id, attributes.get(GencodeGtfTag.gene_id))
                                     .append(GtfField.seqname, chrName)
@@ -131,11 +130,7 @@ public class GtfReader extends BioDataReader{
                                     .append(GtfField.attributes, attributes)
                                     .append(GtfField.transcripts, transcriptDocList);
 //                            System.out.println("geneDoc=========A:"+geneDoc);
-
                             previousGeneId = geneId;
-
-
-
                         }else {
                             transcriptNum ++;
                             transcriptDocList.add(transcriptDoc);
@@ -214,11 +209,8 @@ public class GtfReader extends BioDataReader{
                                 .append(GtfField.frame, fields[7])
                                 .append(GtfField.attributes, attributes)
                                 .append(GtfField.transcripts, transcriptDocList);
-
                         //geneList.add(geneDoc);
-
                         previousGeneId = geneId;
-
                     }else {
                         throw new Exception("Lastline存储信息有误:"+lastLine);
                     }
