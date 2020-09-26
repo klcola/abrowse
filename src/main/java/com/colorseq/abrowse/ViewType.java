@@ -27,6 +27,11 @@ public class ViewType {
     public static final String RNASeqRawDataView = "RNASeqRawDataView";
 
     /**
+     * view for HIC
+     */
+    public static final String HICView = "HICView";
+
+    /**
      * view for bedgraph
      */
     public static final String BedGraphView = "BedGraphView";

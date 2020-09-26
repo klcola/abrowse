@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,7 +50,7 @@ public class BrowserController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(Map<String, Object> modelMap, String genome, HttpSession session, Authentication authentication) {
+    public String index( Map<String, Object> modelMap, String genome, HttpSession session, Authentication authentication) {
 
         if (null == genome) {
             genome = defaultGenome;
@@ -96,10 +97,13 @@ public class BrowserController {
         Map<String, ConfigGenome> configGenomeMap4Html = new HashMap<>();
         configGenomeMap4Html.putAll(configGenomeMap);
         configGenomeMap4Html.remove(global);
+        modelMap.put("defGemo",genome);
         modelMap.put("configGenomeMap", configGenomeMap4Html);
         modelMap.put("configGenome", currentConfigGenome);
         return "index";
     }
+
+
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login() {

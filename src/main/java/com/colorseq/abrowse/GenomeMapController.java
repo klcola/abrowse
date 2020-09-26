@@ -1,5 +1,10 @@
 package com.colorseq.abrowse;
 
+import com.colorseq.abrowse.dao.AbrowseJobDao;
+import com.colorseq.abrowse.dao.BlatResultPSLDao;
+import com.colorseq.abrowse.entity.AbrowseJob;
+import com.colorseq.abrowse.entity.BlatResultPSL;
+import com.colorseq.abrowse.job.BlatJob;
 import com.colorseq.abrowse.request.BlockRequest;
 import com.colorseq.abrowse.request.BrowseRequest;
 import com.colorseq.abrowse.request.TrackRequest;
@@ -13,15 +18,19 @@ import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.geojson.Polygon;
+import com.mongodb.util.JSON;
 import org.bson.Document;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * @author Lei Kong
@@ -35,8 +44,17 @@ public class GenomeMapController {
     @Value("${abrowse.mongodb-name-prefix}")
     private String mongodbNamePrefix;
 
+    @Value("${abrowse.seqFilePath}")
+    private String seqFilePath;
+
     @Value("${abrowse.mongodb-uri}")
     private String mongodbURI;
+
+    @Autowired
+    private BlatResultPSLDao blatResultPSLDao;
+
+    @Autowired
+    private AbrowseJobDao jobDao;
 
     @RequestMapping(value = "/gmap/browse", method = RequestMethod.POST)
     @ResponseBody
@@ -96,12 +114,16 @@ public class GenomeMapController {
         browseResponse.setRequestIndex(Integer.valueOf(requestIndex));
 
 
+
         List<TrackRequest> trackRequestList = browseRequest.getTrackRequests();
         for(TrackRequest trackRequest : trackRequestList) {
             String trackName = trackRequest.getTrackName();
             System.out.println("DEBUG - Retrieving data from track:" + trackName);
             String trackGroupName = trackRequest.getTrackGroupName();
             ConfigTrackGroup configTrackGroup = currentConfigGenome.getTrackGroupMap().get(trackGroupName);
+            if (configTrackGroup == null){
+                continue;
+            }
             ConfigTrack configTrack = configTrackGroup.getTrackMap().get(trackName);
             MongoCollection<Document> collection = database.getCollection(trackName);
             TrackResponse trackResponse = new TrackResponse();
@@ -150,5 +172,41 @@ public class GenomeMapController {
         coordinates: [ [ 7.914156157016106, 1 ], [ 7.940907826832441, 1 ] ] } } } })
         */
         return browseResponse;
+    }
+
+    @RequestMapping(value = "/gmap/searchSeq", method = RequestMethod.POST)
+    @ResponseBody
+    public SearchResponse searchSeq(String seq,String gendb) throws IOException, InterruptedException {
+        SearchResponse searchResponse = new SearchResponse();
+        File filePath = new File(seqFilePath);
+        if (!filePath.exists()){
+            filePath.mkdirs();
+        }
+        AbrowseJob existjob = jobDao.findAbrowseJobByIdEquals(seq);
+        if (existjob != null){
+            List<BlatResultPSL> allResults = blatResultPSLDao.findAllByJobidEqualsOrderByBmatchDesc(existjob.getId());
+            searchResponse.setHasResult("1");
+            searchResponse.setAllResults(allResults);
+            return searchResponse;
+        }
+        searchResponse.setHasResult("0");
+        String jobId = UUID.randomUUID().toString().replace("-", "");
+        File queryFile = new File(seqFilePath + jobId + ".fa");
+        if (seq == null){
+            seq = "";
+        }
+        seq = seq.trim().toUpperCase();
+        AbrowseJob job = new AbrowseJob();
+        job.setId(jobId);
+        job.setJobName("XLSS");
+        job.setJobStatu("00");
+        job.setJobType("01");
+        job.setCreateTime(new Date());
+        job.setJobDesc(seq);
+        jobDao.saveAndFlush(job);
+        BlatJob blatJob = new BlatJob(jobId, queryFile,seq,blatResultPSLDao,jobDao);
+        blatJob.start();
+        searchResponse.setJobId(jobId);
+        return searchResponse;
     }
 }

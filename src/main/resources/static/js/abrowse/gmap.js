@@ -222,4 +222,7 @@ ABrowse.viewsInit = function (genomeBrowser) {
 
     ABrowse.trackViewsMap["StrandBedGraphView"]
         = new ABrowse.view.StrandBedGraphView(genomeBrowser);
+
+    ABrowse.trackViewsMap["HICView"]
+        = new ABrowse.view.HICView(genomeBrowser);
 };

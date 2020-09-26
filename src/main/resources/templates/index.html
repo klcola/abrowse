@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="ABrowse - Advanced Genome Browser" />
-    <meta name="author" content="Lei Kong, kongl@mail.cbi.pku.edu.cn" />
+    <meta name="description" content="ABrowse - Advanced Genome Browser"/>
+    <meta name="author" content="Lei Kong, kongl@mail.cbi.pku.edu.cn"/>
 
     <title>ABrowse - Advanced Genome Browser</title>
 
     <!-- Bootstrap core CSS -->
-    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css' />
+    <link rel='stylesheet' href='/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css'/>
 
     <!-- ABrowse core CSS -->
-    <link rel="stylesheet" href="/css/abrowse.css" />
+    <link rel="stylesheet" href="/css/abrowse.css"/>
 
     <!-- Include JQuery and JQuery plugin scripts: -->
     <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
@@ -33,6 +33,7 @@
     <script type="text/javascript" src="/js/abrowse/view/gene_model_like_view.js"></script>
     <script type="text/javascript" src="/js/abrowse/view/gene_model_like_dense_view.js"></script>
     <script type="text/javascript" src="/js/abrowse/view/bed_graph_view.js"></script>
+    <script type="text/javascript" src="/js/abrowse/view/hiC_view.js"></script>
     <script type="text/javascript" src="/js/abrowse/view/strand_bed_graph_view.js"></script>
     <script type="text/javascript" src="/js/abrowse/view/rna_seq_raw_data_view.js"></script>
     <script type="text/javascript" src="/js/abrowse/view/rna_seq_splice_site_view.js"></script>
@@ -41,21 +42,21 @@
 
     <script th:inline="javascript">
 
-      //  根据用户登陆权限 点击 icon 进入不同管理界面
+        //  根据用户登陆权限 点击 icon 进入不同管理界面
         function enterPanel() {
-          var isAdmins = [[${#authorization.expression('hasRole(''ROLE_ADMIN'')')}]];
-          if (isAdmins) {
-            window.location.href = '/admin/'
-          } else {
-            window.location.href = '/user/'
-          }
+            var isAdmins = [[${#authorization.expression('hasRole(''ROLE_ADMIN'')')}]];
+            if (isAdmins) {
+                window.location.href = '/admin/'
+            } else {
+                window.location.href = '/user/'
+            }
         }
 
-        function getParam(key){
+        function getParam(key) {
             var results = new RegExp('[\?&]' + key + '=([^&#]*)').exec(window.location.href);
-            if(results){
+            if (results) {
                 return results[1];
-            }else{
+            } else {
                 return undefined;
             }
         }
@@ -63,19 +64,28 @@
         /*<![CDATA[*/
         $(function () {
             ABrowse.mainPageInit();
-
+            ABrowse.defaultGenomeBrowser.changeSpecies();
             var pos = getParam("pos");
             if (pos) {
 
-                if (! pos.match("^chr")) {
+                if (!pos.match("^chr")) {
                     pos = "chr" + pos;
                 }
                 document.getElementById(ABrowse.defaultGenomeBrowser.searchInputId).value = pos;
             }
-
             ABrowse.defaultGenomeBrowser.submit();
+
         });
+        function showImg() {
+            var searchStr = $("#position").get(0).value;
+            var chrLoc = ABrowse.parsePositionStr(searchStr);
+            console.log(chrLoc);
+            window.open("/HiC/init?chrName=" + chrLoc.chr + "&start=" + chrLoc.start + "&end=" + chrLoc.end, "_blank");
+        }
         /*]]>*/
+        function closeSearchDialog() {
+            $("#searchDialog").hide();
+        }
     </script>
 
 </head>
@@ -84,20 +94,30 @@
 <div id="header" style="width:100%; background:#ebebeb; padding: 5px 5px 5px 5px;">
     <table>
         <tr>
-            <td><a style="font-weight: bolder; color: darkred; font-size: 130%;" href="http://www.abrowse.org/">ABrowse</a></td>
+            <td><a style="font-weight: bolder; color: darkred; font-size: 130%;" href="">ABrowse</a></td>
             <td style="padding-left:10px; font-size:14px;">
                 <input id="position" type="text" name="position"
-                       value="chr1:11012386-11030886" size="30" />
+                       value="chr1:11012386-11030886" size="30"/>
             </td>
             <td style="padding-left:5px;">
-                <select name="species" id="species_adv" class="selectpicker">
+                <select name="species" id="species_adv" class="selectpicker"
+                        onchange="ABrowse.defaultGenomeBrowser.changeGene();" th:value="${defGemo}">
                     <option th:each="configGenomeEntry : ${configGenomeMap}" th:value="${configGenomeEntry.value.name}"
+                            th:selected="${configGenomeEntry.value.name == defGemo}"
                             th:text="${configGenomeEntry.value.displayName}"></option>
                 </select>
             </td>
             <td style="padding-left:15px;">
                 <button type="button" class="btn btn-danger btn-sm" onclick="ABrowse.defaultGenomeBrowser.submit();">
                     GO
+                </button>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="ABrowse.defaultGenomeBrowser.searchSeq();">
+                    <span th:text="#{search}"></span>
+                </button>
+                <button type="button" id="HiCBtn" class="btn btn-danger btn-sm" onclick="showImg()"
+                        style="display: none">
+                    HiC
                 </button>
             </td>
             <td style="padding-left:15px;">
@@ -117,7 +137,8 @@
                 </button>
             </td>
             <td style="padding-left:15px;">
-                <a sec:authorize="isAnonymous()" href="/login" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
+                <a sec:authorize="isAnonymous()" href="/login" type="button" class="btn btn-default btn-sm"
+                   aria-label="Left Align">
                     <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
                     登录
                 </a>
@@ -129,8 +150,10 @@
                    onclick="enterPanel()">
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 </a>
-                <a sec:authorize="isAuthenticated()" href="/logout" type="button" class="btn btn-default btn-sm" aria-label="Left Align">
-                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 退出 <span sec:authentication="name"></span>
+                <a sec:authorize="isAuthenticated()" href="/logout" type="button" class="btn btn-default btn-sm"
+                   aria-label="Left Align">
+                    <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span> 退出 <span
+                        sec:authentication="name"></span>
                 </a>
             </td>
         </tr>
@@ -139,11 +162,13 @@
 <div id="browser" onselectstart="return false;"></div>
 <div id="progressbar"></div>
 
-<span id="showIcon" class="glyphicon glyphicon-menu-hamburger cursor-pointer" aria-hidden="true" onclick="showTool()" style="font-size: 70%;float:right;top:8px;right:3px;display: none;"></span>
+<span id="showIcon" class="glyphicon glyphicon-menu-hamburger cursor-pointer" aria-hidden="true" onclick="showTool()"
+      style="font-size: 70%;float:right;top:8px;right:3px;display: none;"></span>
 
 <div id="statuspanel" style="font-size: 70%; overflow:scroll; ">
 
-  <span id="hideIcon" class="glyphicon glyphicon-menu-hamburger cursor-pointer" aria-hidden="true" onclick="hideTool()" style="position:fixed;margin-top:45px;"></span>
+    <span id="hideIcon" class="glyphicon glyphicon-menu-hamburger cursor-pointer" aria-hidden="true"
+          onclick="hideTool()" style="position:fixed;margin-top:45px;"></span>
 
     <ul id="statusPanelTab" class="nav nav-tabs">
         <li class="active">
@@ -152,7 +177,7 @@
             </a>
         </li>
         <li><a href="#statuspanel-info" data-toggle="tab">信息</a></li>
-        <li><a href="#statuspanel-bookmark" data-toggle="tab">书签</a></li>
+        <li><a href="#statuspanel-bookmark" data-toggle="tab">搜索</a></li>
     </ul>
     <div id="statusPanelTabContent" class="tab-content" style="padding: 5px 0 0 0;">
         <div role="tabpanel" class="tab-pane active" id="statuspanel-tracklist">
@@ -161,34 +186,42 @@
 
                 <div th:each="trackGroupEntry : ${configGenome.trackGroupMap}" class="panel panel-default">
                     <div class="panel-heading" role="tab" id="headingOne">
-                        <h5 class="panel-title" >
-                            <a th:text="${trackGroupEntry.value.displayName}" role="button" data-toggle="collapse" data-parent="#accordion"
-                               th:href="'#' + ${trackGroupEntry.value.name}" aria-expanded="true" th:attr="aria-controls=${trackGroupEntry.value.name}"
-                            style="font-size: 12px;">
+                        <h5 class="panel-title">
+                            <a th:text="${trackGroupEntry.value.displayName}" role="button" data-toggle="collapse"
+                               data-parent="#accordion"
+                               th:href="'#' + ${trackGroupEntry.value.name}" aria-expanded="true"
+                               th:attr="aria-controls=${trackGroupEntry.value.name}"
+                               style="font-size: 12px;">
                                 Gene
                             </a>
                         </h5>
                     </div>
-                    <div th:id="${trackGroupEntry.value.name}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                    <div th:id="${trackGroupEntry.value.name}" class="panel-collapse collapse in" role="tabpanel"
+                         aria-labelledby="headingOne">
                         <div th:each="trackEntry : ${trackGroupEntry.value.trackMap}" class="panel-body">
 
                             <h6 th:text="${trackEntry.value.displayName}">Ensembl Gene</h6>
                             <div class="btn-group" data-toggle="buttons">
-                                <label th:each="view : ${trackEntry.value.views}" th:title="${trackGroupEntry.value.name}"
+                                <label th:each="view : ${trackEntry.value.views}"
+                                       th:title="${trackGroupEntry.value.name}"
                                        th:class="(${view.viewName} eq ${trackEntry.value.defaultNormalView}) ? 'btn btn-danger active' : 'btn btn-danger'"
                                        style="padding: 3px 5px 3px 5px;">
-                                    <input th:if="${view.viewName} eq ${trackEntry.value.defaultNormalView}" type="radio" autocomplete="off" checked="checked"
+                                    <input th:if="${view.viewName} eq ${trackEntry.value.defaultNormalView}"
+                                           type="radio" autocomplete="off" checked="checked"
                                            th:value="${view.viewName}" th:name="${trackEntry.value.name}"
                                            onchange="ABrowse.defaultGenomeBrowser.trackOption.trackViewOnChecked(this);"
                                            class="viewtype"/>
-                                    <input th:if="${view.viewName} ne ${trackEntry.value.defaultNormalView}" type="radio" autocomplete="off"
+                                    <input th:if="${view.viewName} ne ${trackEntry.value.defaultNormalView}"
+                                           type="radio" autocomplete="off"
                                            th:value="${view.viewName}" th:name="${trackEntry.value.name}"
                                            onchange="ABrowse.defaultGenomeBrowser.trackOption.trackViewOnChecked(this);"
                                            class="viewtype"/>
-                                    <span th:text="${configGenome.viewMap.get(view.viewName).type}" style=" font-size: 10px;"></span>
+                                    <span th:text="${configGenome.viewMap.get(view.viewName).type}"
+                                          style=" font-size: 10px;"></span>
                                 </label>
                                 <label class="btn btn-danger" style="padding: 3px 5px 3px 5px;">
-                                    <input type="radio" th:attr="role=${trackGroupEntry.value.name}" th:name="${trackEntry.value.name}" autocomplete="off" value="off"
+                                    <input type="radio" th:attr="role=${trackGroupEntry.value.name}"
+                                           th:name="${trackEntry.value.name}" autocomplete="off" value="off"
                                            onchange="ABrowse.defaultGenomeBrowser.trackOption.trackViewOnChecked(this);"
                                            class="viewtype"/><span style=" font-size: 10px;">off</span>
                                 </label>
@@ -196,17 +229,89 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
-        <div role="tabpanel"  class="tab-pane" id="statuspanel-info">
+        <div role="tabpanel" class="tab-pane" id="statuspanel-info">
             <p>开发中：基因/转录本/蛋白质等信息页面</p>
         </div>
-        <div role="tabpanel"  class="tab-pane" id="statuspanel-bookmark">
-            <p>开发中：书签页面</p>
+        <div role="tabpanel" class="tab-pane" id="statuspanel-bookmark">
+            <div>
+                <textarea style="width: 100%;height: 100px"></textarea>
+            </div>
+
         </div>
     </div>
+</div>
 
+<div class="modal" id="searchDialog" role="dialog" style="display: none;" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="close" onclick="closeSearchDialog()">&times;</button>
+                <h4 th:text="#{search}"></h4>
+            </div>
+            <div class="modal-body">
+                <div id="searchContainer">
+                    <div id="searchsubmitting" class="alert alert-warning alert-dismissible" role="alert"
+                         style="display: none">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <span>提交中，请稍等。。。</span>
+                    </div>
+                    <div id="searchsubmitsucc" class="alert alert-success alert-dismissible" role="alert"
+                         style="display: none">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <span>提交成功！务必保存好<strong>搜索ID</strong>《<span id="jobId"></span>》，稍后查询！</span>
+                    </div>
+                    <div id="searchsubmiterr" class="alert alert-danger alert-dismissible" role="alert"
+                         style="display: none">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                        <span>提交失败！请稍后重试！</span>
+                    </div>
+                    <textarea class="form-control" id="searchSeqTxt" rows="10"
+                              th:placeholder="#{please_enter_the_sequence}"></textarea>
+                </div>
+                <div id="resultContainer" style="width: 100%;overflow-x: auto;display: none">
+                    <table class="table table-striped table-hover" id="resultTable" style="text-align: center">
+                        <thead>
+                        <tr>
+                            <th scope="col">match</th>
+                            <th scope="col">mismatch</th>
+                            <th scope="col">rep.match</th>
+                            <th scope="col">N's</th>
+                            <th scope="col">Q gap count</th>
+                            <th scope="col">Q gap bases</th>
+                            <th scope="col">T gap count</th>
+                            <th scope="col">T gap bases</th>
+                            <th scope="col">strand</th>
+                            <th scope="col">Q name</th>
+                            <th scope="col">Q size</th>
+                            <th scope="col">Q start</th>
+                            <th scope="col">Q end</th>
+                            <th scope="col">T name</th>
+                            <th scope="col">T size</th>
+                            <th scope="col">T start</th>
+                            <th scope="col">T end</th>
+                            <th scope="col">block count</th>
+                            <th scope="col">block size</th>
+                            <th scope="col">Q starts</th>
+                            <th scope="col">T starts</th>
+                        </tr>
+                        </thead>
+                        <tbody id="resultList">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" id="searchFooter">
+                <button class="btn btn-primary" onclick="ABrowse.defaultGenomeBrowser.realSearch();"><span
+                        th:text="#{search}"></span></button>
+            </div>
+        </div>
+    </div>
 </div>
 
 </body>

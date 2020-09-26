@@ -172,7 +172,7 @@ ABrowse.browse.GenomeBrowser.prototype.initializeBrowserLayout = function () {
     }
     this.canvasBackgroundSvg.style.top = "0px";
     this.canvasBackgroundSvg.style.left = "0px";
-    this.canvasBackgroundSvg.setAttribute("width", this.canvasWidth);
+    this.canvasBackgroundSvg.setAttribute("width", '100%');
     this.canvasBackgroundSvg.setAttribute("height", this.canvasHeight);
     this.canvasBackgroundSvg.style.position = "absolute";
     //this.canvasBackgroundSvg.style.border = "1px solid grey";
@@ -184,10 +184,11 @@ ABrowse.browse.GenomeBrowser.prototype.initializeBrowserLayout = function () {
         this.canvasSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         this.canvasFrameDiv.appendChild(this.canvasSvg);
     }
-    this.canvasSvg.style.top = "0px";
+    // this.canvasSvg.style.top = "0px";
+    this.canvasSvg.style.top = "20px";
     this.canvasSvg.style.left = "0px";
-    this.canvasSvg.setAttribute("width", this.canvasWidth);
-    this.canvasSvg.setAttribute("height", this.canvasHeight);
+    this.canvasSvg.setAttribute("width", '100%');
+    this.canvasSvg.setAttribute("height", this.canvasHeight - 20);
     this.canvasSvg.style.position = "absolute";
     //this.canvasSvg.style.border = "1px solid grey";
     //this.canvasSvg.style.cursor = "url('/css/hand.cur'), move";
@@ -207,7 +208,7 @@ ABrowse.browse.GenomeBrowser.prototype.initializeBrowserLayout = function () {
         .mouseup({browser: this}, ABrowse.browse.canvasOnMouseUp)
         .mouseleave({browser: this}, ABrowse.browse.canvasOnMouseLeave);
 
-    $("#" + this.canvasFrameId).bind('mousewheel', {browser: this}, function(event) {
+    $("#" + this.canvasFrameId).bind('mousewheel', {browser: this}, function (event) {
         event.preventDefault();
         var deltaX = event.originalEvent.deltaX;
         var deltaY = event.originalEvent.deltaY;
@@ -221,28 +222,28 @@ ABrowse.browse.GenomeBrowser.prototype.initializeBrowserLayout = function () {
 
     //  方向键控制 svg 的移动
     $(window).bind('keydown', {browser: this}, function (event) {
-      if (event.target.nodeName !== 'INPUT') { // 此判断为了使 input 能正常输入
-        var distanceX, distanceY
-        var genomeBrowser = event.data.browser;
-        var keyID = event.keyCode ? event.keyCode :event.which
-        if (keyID === 37) { // left
-          distanceX = -5
-          distanceY = 0
-          genomeBrowser.move(distanceX, distanceY);
-        } else if (keyID === 38) { // top
-          distanceX = 0
-          distanceY = 5
-          genomeBrowser.move(distanceX, distanceY);
-        } else if (keyID === 39) { // right
-          distanceX = 5
-          distanceY = 0
-          genomeBrowser.move(distanceX, distanceY);
-        } else if (keyID === 40) { // down
-          distanceX = 0
-          distanceY = -5
-          genomeBrowser.move(distanceX, distanceY);
+        if (event.target.nodeName !== 'INPUT') { // 此判断为了使 input 能正常输入
+            var distanceX, distanceY
+            var genomeBrowser = event.data.browser;
+            var keyID = event.keyCode ? event.keyCode : event.which
+            if (keyID === 37) { // left
+                distanceX = -5
+                distanceY = 0
+                genomeBrowser.move(distanceX, distanceY);
+            } else if (keyID === 38) { // top
+                distanceX = 0
+                distanceY = 5
+                genomeBrowser.move(distanceX, distanceY);
+            } else if (keyID === 39) { // right
+                distanceX = 5
+                distanceY = 0
+                genomeBrowser.move(distanceX, distanceY);
+            } else if (keyID === 40) { // down
+                distanceX = 0
+                distanceY = -5
+                genomeBrowser.move(distanceX, distanceY);
+            }
         }
-      }
     });
 
     if (this.statusPanelId) {
@@ -361,82 +362,82 @@ ABrowse.browse.GenomeBrowser.prototype.canvasScaleMarkSlide = function (slideSte
 
 ABrowse.browse.GenomeBrowser.prototype.drawCurrentAreaRect = function () {  //  画当前区域占整个染色体的位置 height:30
 
-  var currentAreaSvgGroup = document.getElementById("currentAreaSvgGroup");
-  var currentAreaRect = document.getElementById("currentAreaRect");
+    var currentAreaSvgGroup = document.getElementById("currentAreaSvgGroup");
+    var currentAreaRect = document.getElementById("currentAreaRect");
 
-  var xDist = (this.viewableLoc.start / (this.chrLength / this.chrThumbWidth)).toFixed(0) - 0
+    var xDist = (this.viewableLoc.start / (this.chrLength / this.chrThumbWidth)).toFixed(0) - 0
 
-  var width = ((this.viewableLoc.end - this.viewableLoc.start) / (this.chrLength / this.chrThumbWidth))
+    var width = ((this.viewableLoc.end - this.viewableLoc.start) / (this.chrLength / this.chrThumbWidth))
 
-  if ((xDist + width) >= this.chrThumbWidth - 2) {  //  滑块滑到最右边的时候
-    xDist = this.chrThumbWidth - width - 2
-  }
+    if ((xDist + width) >= this.chrThumbWidth - 2) {  //  滑块滑到最右边的时候
+        xDist = this.chrThumbWidth - width - 2
+    }
 
-  if (!currentAreaSvgGroup) {
+    if (!currentAreaSvgGroup) {
 
-    var currentAreaSvgGroup = document.createElementNS(ABrowse.SVG_NS, "g");  //  brush rect svg group
-    currentAreaSvgGroup.id = "currentAreaSvgGroup";
-    // currentAreaSvgGroup.style.cursor = "n-resize";
+        var currentAreaSvgGroup = document.createElementNS(ABrowse.SVG_NS, "g");  //  brush rect svg group
+        currentAreaSvgGroup.id = "currentAreaSvgGroup";
+        // currentAreaSvgGroup.style.cursor = "n-resize";
 
-    currentAreaSvgGroup.setAttribute("transform", ABrowse.view.createTransformMatrix(1, 0, 0, 1, xDist, 0));
+        currentAreaSvgGroup.setAttribute("transform", ABrowse.view.createTransformMatrix(1, 0, 0, 1, xDist, 0));
 
 
-    currentAreaRect = document.createElementNS(ABrowse.SVG_NS, "rect");
-    currentAreaRect.id = "currentAreaRect";
-    currentAreaRect.setAttribute("width", width);
-    currentAreaRect.setAttribute("height", "30");
-    currentAreaRect.setAttribute("fill", "#ffb092");
-    currentAreaRect.setAttribute("stroke", "#ff4b13");
+        currentAreaRect = document.createElementNS(ABrowse.SVG_NS, "rect");
+        currentAreaRect.id = "currentAreaRect";
+        currentAreaRect.setAttribute("width", width);
+        currentAreaRect.setAttribute("height", "30");
+        currentAreaRect.setAttribute("fill", "#ffb092");
+        currentAreaRect.setAttribute("stroke", "#ff4b13");
 
-    currentAreaSvgGroup.appendChild(currentAreaRect)
+        currentAreaSvgGroup.appendChild(currentAreaRect)
 
-    this.chrThumbSvg.appendChild(currentAreaSvgGroup);
+        this.chrThumbSvg.appendChild(currentAreaSvgGroup);
 
-  } else {
+    } else {
 
-    currentAreaRect.setAttribute("width", width);
+        currentAreaRect.setAttribute("width", width);
 
-    currentAreaSvgGroup.setAttribute("transform", ABrowse.view.createTransformMatrix(1, 0, 0, 1, xDist, 0));
-  }
+        currentAreaSvgGroup.setAttribute("transform", ABrowse.view.createTransformMatrix(1, 0, 0, 1, xDist, 0));
+    }
 
-  this.currentAreaSvgGroup = currentAreaSvgGroup
-  this.currentAreaSvgGroup._brush_matrix_e = xDist
-  this.currentAreaSvgGroup._brush_width = width
+    this.currentAreaSvgGroup = currentAreaSvgGroup
+    this.currentAreaSvgGroup._brush_matrix_e = xDist
+    this.currentAreaSvgGroup._brush_width = width
 
 }
 
 ABrowse.browse.GenomeBrowser.prototype.brushMove = function (xDist) {
 
-  var x = this.currentAreaSvgGroup._brush_matrix_e - xDist
+    var x = this.currentAreaSvgGroup._brush_matrix_e - xDist
 
-  if (x <= 0) {  //  滑块滑到最左边的时候
-    x = 0
-  }
-  if ((x + this.currentAreaSvgGroup._brush_width) >= this.chrThumbWidth - 2) {  //  滑块滑到最右边的时候
-    x = this.chrThumbWidth - this.currentAreaSvgGroup._brush_width - 2
-  }
+    if (x <= 0) {  //  滑块滑到最左边的时候
+        x = 0
+    }
+    if ((x + this.currentAreaSvgGroup._brush_width) >= this.chrThumbWidth - 2) {  //  滑块滑到最右边的时候
+        x = this.chrThumbWidth - this.currentAreaSvgGroup._brush_width - 2
+    }
 
-  this.currentAreaSvgGroup._brush_matrix_e = x
+    this.currentAreaSvgGroup._brush_matrix_e = x
 
-  this.currentAreaSvgGroup.setAttribute("transform", ABrowse.view.createTransformMatrix(1, 0, 0, 1, this.currentAreaSvgGroup._brush_matrix_e, 0));
+    this.currentAreaSvgGroup.setAttribute("transform", ABrowse.view.createTransformMatrix(1, 0, 0, 1, this.currentAreaSvgGroup._brush_matrix_e, 0));
 }
 
 ABrowse.browse.GenomeBrowser.prototype.brushMoveEnd = function () {
 
-  window.clearTimeout(this.timer)
+    window.clearTimeout(this.timer)
 
-  var scale = this.chrThumbWidth / this.chrLength
+    var scale = this.chrThumbWidth / this.chrLength
 
-  var start = (this.currentAreaSvgGroup._brush_matrix_e / scale).toFixed(0)
-  var end = ((this.currentAreaSvgGroup._brush_matrix_e + this.currentAreaSvgGroup._brush_width) / scale).toFixed(0)
+    var start = (this.currentAreaSvgGroup._brush_matrix_e / scale).toFixed(0)
+    var end = ((this.currentAreaSvgGroup._brush_matrix_e + this.currentAreaSvgGroup._brush_width) / scale).toFixed(0)
 
-  var value = [this.chrName, [start, end].join("-")].join(":");
+    var value = [this.chrName, [start, end].join("-")].join(":");
 
-  $("#" + this.searchInputId).val(value)
+    $("#" + this.searchInputId).val(value)
 
-  this.timer = setTimeout(() => {
-    this.submit()
-  }, 1000)
+    this.timer = setTimeout(() => {
+        this.submit()
+    }, 1000)
 
 }
 
@@ -455,25 +456,23 @@ ABrowse.browse.GenomeBrowser.prototype.changeTrackView = function (trackName, ne
                 this.setTop(trackSvgGroup, top);
                 top += trackSvgGroup.__abrowse__height;
                 ++n;
-            }
-            else {
-              this.canvasSvg.removeChild(trackSvgGroup);
+            } else {
+                this.canvasSvg.removeChild(trackSvgGroup);
                 // trackAlreadyOpened = true;
                 trackView = ABrowse.trackViewsMap[newViewName];
                 if (trackView) {
-                  // console.log(2);
-                  //   var trackResponse = JSON.parse(localStorage.trackData)[trackName];
-                  //   this.canvasSvg.removeChild(trackSvgGroup);
-                  //
-                  //   var trackSvgGroupComplexus = trackView.render(trackResponse, top);
-                  //
-                  //   this.canvasSvg.insertBefore(trackSvgGroupComplexus.trackSvgGroup, this.canvasSvg.childNodes[n]);
-                  //
-                  //   // this.canvasSvg.replaceChild(trackSvgGroupComplexus.trackSvgGroup, trackSvgGroup);
-                  //   top += trackSvgGroupComplexus.trackSvgGroup.__abrowse__height + this.trackSpacing;
-                  //   ++n;
-                }
-                else {
+                    // console.log(2);
+                    //   var trackResponse = JSON.parse(localStorage.trackData)[trackName];
+                    //   this.canvasSvg.removeChild(trackSvgGroup);
+                    //
+                    //   var trackSvgGroupComplexus = trackView.render(trackResponse, top);
+                    //
+                    //   this.canvasSvg.insertBefore(trackSvgGroupComplexus.trackSvgGroup, this.canvasSvg.childNodes[n]);
+                    //
+                    //   // this.canvasSvg.replaceChild(trackSvgGroupComplexus.trackSvgGroup, trackSvgGroup);
+                    //   top += trackSvgGroupComplexus.trackSvgGroup.__abrowse__height + this.trackSpacing;
+                    //   ++n;
+                } else {
                     // this.canvasSvg.removeChild(trackSvgGroup);
                     let trackData = JSON.parse(localStorage.trackData)
                     trackData[trackName] = undefined
@@ -543,7 +542,7 @@ ABrowse.browse.GenomeBrowser.prototype.setTop = function (trackSvgGroup, top) {
 ABrowse.browse.GenomeBrowser.prototype.simpleRequestSuccess = function (response, textStatus, jqXHR) {
 
     if (response.requestIndex < this.requestIndex) {
-      return
+        return
     }
 
     /*
@@ -626,17 +625,132 @@ ABrowse.browse.GenomeBrowser.prototype.simpleRequestFailure = function (response
     ABrowse.showErrorInfo("Sorry, there are errors detected, which maybe caused by the network transport. Please resubmit your request or reload the page.");
 };
 
+ABrowse.browse.GenomeBrowser.prototype.changeGene = function () {
+    //获取当前网址，如： http://localhost:8083/uimcardprj/share/meun.jsp
+    var curWwwPath = window.document.location.href;
+    //获取主机地址之后的目录，如： uimcardprj/share/meun.jsp
+    var pathName = window.document.location.pathname;
+    var pos = curWwwPath.indexOf(pathName);
+    //获取主机地址，如： http://localhost:8083
+    var localhostPaht = curWwwPath.substring(0, pos);
+    this.changeSpecies();
+    window.location = localhostPaht + "?genome=" + $("#" + this.speciesSelectId).val();
+}
+
+ABrowse.browse.GenomeBrowser.prototype.changeSpecies = function () {
+    $("#HiCBtn").hide();
+    if ($("#" + this.speciesSelectId).val() == "H1") {
+        $("#" + this.searchInputId).val("chrSuper-Scaffold_142:11700000-11720000");
+        this.chrName = "chrSuper-Scaffold_142";
+    } else if ("Mus_musculus" == $("#" + this.speciesSelectId).val()) {
+        $("#" + this.searchInputId).val("chr1:4776378-4785712");
+        this.chrName = "chr1";
+    } else if ("human" == $("#" + this.speciesSelectId).val()) {
+        $("#" + this.searchInputId).val("chr1:11012386-11030886");
+        this.chrName = "chr1";
+        $("#HiCBtn").show();
+    }
+}
+
 ABrowse.browse.GenomeBrowser.prototype.submit = function () {
-
     this.initializeCanvas();
-
     var searchStr = $("#" + this.searchInputId).get(0).value; // input 的 value eg:chr1:12166808-12210688
     var genomeDB = $("#" + this.speciesSelectId + " option:selected").attr("value"); // select 的 value eg: human
     console.log("DEBUG: searchStr: " + searchStr);
     var chrLoc = ABrowse.parsePositionStr(searchStr); // 将 searchStr 格式化成 json
     this.realSubmit(genomeDB, chrLoc);
-
 };
+
+ABrowse.browse.GenomeBrowser.prototype.searchSeq = function () {
+    $("#searchDialog").show();
+    $("#searchsubmitting").hide();
+    $("#searchsubmiterr").hide();
+    $("#searchsubmitsucc").hide();
+    $("#searchContainer").show();
+    $("#resultContainer").hide();
+    $("#searchFooter").show();
+}
+
+ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
+    $("#searchContainer").hide();
+    $("#searchFooter").hide();
+    $("#resultContainer").show();
+    $("#resultList").html("");
+
+    if (list == undefined || list == null || list.length == 0) {
+        $("#resultList").append("<tr><td colspan='21'>没有查询到符合条件的序列！</td></tr>");
+        return;
+    }
+
+    for (var i = 0; i < list.length; i++) {
+        var result = list[i];
+        var tr = "<tr style='cursor: pointer' resultId='" + result.id + "'>"
+            + "<td>" + result.bmatch + "</td>"
+            + "<td>" + result.mismatch + "</td>"
+            + "<td>" + result.repmatch + "</td>"
+            + "<td>" + result.ns + "</td>"
+            + "<td>" + result.qgapcount + "</td>"
+            + "<td>" + result.qgapbases + "</td>"
+            + "<td>" + result.tgapcount + "</td>"
+            + "<td>" + result.tgapbases + "</td>"
+            + "<td>" + result.strand + "</td>"
+            + "<td>" + result.qname + "</td>"
+            + "<td>" + result.qsize + "</td>"
+            + "<td>" + result.qstart + "</td>"
+            + "<td>" + result.qend + "</td>"
+            + "<td>" + result.tname + "</td>"
+            + "<td>" + result.tsize + "</td>"
+            + "<td>" + result.tstart + "</td>"
+            + "<td>" + result.tend + "</td>"
+            + "<td>" + result.blockcount + "</td>"
+            + "<td>" + result.blocksize + "</td>"
+            + "<td>" + result.qstarts + "</td>"
+            + "<td>" + result.tstarts + "</td>"
+            + "</tr>";
+        $("#resultList").append(tr);
+    }
+    $("#resultTable").on("click","tr",function (){
+        let resultId = $(this).attr("resultId");
+        console.log(resultId);
+
+    });
+}
+
+ABrowse.browse.GenomeBrowser.prototype.realSearch = function () {
+    var genomeDB = $("#" + this.speciesSelectId + " option:selected").attr("value");
+    var searchSeqTxt = $("#searchSeqTxt").val();
+    console.log(genomeDB, searchSeqTxt);
+    $("#searchsubmitting").show();
+    $("#searchsubmiterr").hide();
+    $("#searchsubmitsucc").hide();
+    $.ajax({
+        type: "POST",
+        url: "/gmap/searchSeq",
+        data: {
+            seq: searchSeqTxt,
+            genomeDB: genomeDB
+        },
+        success: function (res) {
+            console.log(res);
+            if (res.hasResult == "0") {
+                $("#searchsubmitting").hide();
+                $("#searchsubmiterr").hide();
+                $("#searchsubmitsucc").show();
+                $("#jobId").text(res.jobId);
+            } else {
+                this.showResultList(res.allResults);
+            }
+        },
+        error: function (res) {
+            console.log(res);
+            $("#searchsubmitting").hide();
+            $("#searchsubmiterr").show();
+            $("#searchsubmitsucc").hide();
+        },
+        dataType: "json",
+        context: this
+    });
+}
 
 ABrowse.browse.GenomeBrowser.prototype.zoomInSubmit = function () {
     this.initializeCanvas();
@@ -886,13 +1000,13 @@ ABrowse.browse.GenomeBrowser.prototype.move = function (xDist, yDist) {
     var slideDistanceInBasePair = Math.round(xDist / this.svgDisplayScale); //  input start 变化的差值
 
     if (xDist <= 0 && this.viewableLoc.start + slideDistanceInBasePair <= 0) {  //  滑倒最左边时 (min)
-      slideDistanceInBasePair = - this.viewableLoc.start  //  当 start <= 0 时，input 不再变化
-      xDist = slideDistanceInBasePair * this.svgDisplayScale
+        slideDistanceInBasePair = -this.viewableLoc.start  //  当 start <= 0 时，input 不再变化
+        xDist = slideDistanceInBasePair * this.svgDisplayScale
     }
 
     if (xDist >= 0 && this.viewableLoc.end + slideDistanceInBasePair >= this.chrLength) {  //  滑倒最右边时 (max)
-      slideDistanceInBasePair = (this.chrLength - (this.viewableLoc.end - this.viewableLoc.start)) - this.viewableLoc.start  //  当 start >= chrLength 时，input 不再变化
-      xDist = slideDistanceInBasePair * this.svgDisplayScale
+        slideDistanceInBasePair = (this.chrLength - (this.viewableLoc.end - this.viewableLoc.start)) - this.viewableLoc.start  //  当 start >= chrLength 时，input 不再变化
+        xDist = slideDistanceInBasePair * this.svgDisplayScale
     }
 
     this.abrowseMatrixE -= xDist;
@@ -908,32 +1022,32 @@ ABrowse.browse.GenomeBrowser.prototype.move = function (xDist, yDist) {
     for (var i = 0; i < this.canvasSvg.childNodes.length; ++i) {
         var trackSvgGroup = this.canvasSvg.childNodes[i]
         if (trackSvgGroup.__abrowse__is_track) {
-          allHeight += trackSvgGroup.__abrowse__height
+            allHeight += trackSvgGroup.__abrowse__height
         }
     }
 
     if (top < 0) { // 向上拖动 判断最后一个 track 的高度是否大于 canvasSvg 的高度
-      if (this.canvasSvg.childNodes[this.canvasSvg.childNodes.length - 1].__abrowse__height <= canvasHeight) {
-        if (Math.abs(top) > allHeight - 30 - this.canvasSvg.childNodes[this.canvasSvg.childNodes.length - 1].__abrowse__height) {
-          top = - (allHeight - 30 - this.canvasSvg.childNodes[this.canvasSvg.childNodes.length - 1].__abrowse__height)
+        if (this.canvasSvg.childNodes[this.canvasSvg.childNodes.length - 1].__abrowse__height <= canvasHeight) {
+            if (Math.abs(top) > allHeight - 30 - this.canvasSvg.childNodes[this.canvasSvg.childNodes.length - 1].__abrowse__height) {
+                top = -(allHeight - 30 - this.canvasSvg.childNodes[this.canvasSvg.childNodes.length - 1].__abrowse__height)
+            }
+        } else {
+            if (Math.abs(top) > allHeight - 30 - canvasHeight) {
+                top = -(allHeight - 30 - canvasHeight) - 50
+            }
         }
-      } else {
-        if (Math.abs(top) > allHeight - 30 - canvasHeight) {
-          top = - (allHeight - 30 - canvasHeight) - 50
-        }
-      }
     }
 
     if (top > 0) { // 向下拖动 判断第一个 track 的高度是否大于 canvasSvg 的高度
-      if (this.canvasSvg.childNodes[0].__abrowse__height <= canvasHeight) {
-        if (top >= canvasHeight - this.canvasSvg.childNodes[0].__abrowse__height + 30) {
-          top = canvasHeight - this.canvasSvg.childNodes[0].__abrowse__height + 30
+        if (this.canvasSvg.childNodes[0].__abrowse__height <= canvasHeight) {
+            if (top >= canvasHeight - this.canvasSvg.childNodes[0].__abrowse__height + 30) {
+                top = canvasHeight - this.canvasSvg.childNodes[0].__abrowse__height + 30
+            }
+        } else {
+            if (top >= canvasHeight - 50) {
+                top = canvasHeight - 50
+            }
         }
-      } else {
-        if (top >= canvasHeight - 50) {
-          top = canvasHeight - 50
-        }
-      }
     }
 
     this.abrowseMatrixF = top;
@@ -1002,9 +1116,9 @@ ABrowse.browse.brushOnMouseMove = function (event) {
 ABrowse.browse.brushOnMouseUp = function (event) {
     var genomeBrowser = event.data.browser;
     if (genomeBrowser.brush_dragable) {
-      genomeBrowser.brush_dragable = false;
-      genomeBrowser.brushMoveEnd()
-      genomeBrowser.chrThumbSvg.style.cursor = "default";
+        genomeBrowser.brush_dragable = false;
+        genomeBrowser.brushMoveEnd()
+        genomeBrowser.chrThumbSvg.style.cursor = "default";
     }
 };
 
@@ -1035,15 +1149,15 @@ ABrowse.browse.canvasOnMouseUp = function (event) {
 };
 
 ABrowse.browse.canvasWidthChange = function (event) {
-  var genomeBrowser = event.data.browser;
-  let width = $("#browser-canvas").width();  // 侧边栏展开或收起时，画布的 width
-  genomeBrowser.chrThumbWidth = width
-  genomeBrowser.drawCurrentAreaRect()
+    var genomeBrowser = event.data.browser;
+    let width = $("#browser-canvas").width();  // 侧边栏展开或收起时，画布的 width
+    genomeBrowser.chrThumbWidth = width
+    genomeBrowser.drawCurrentAreaRect()
 };
 
 ABrowse.browse.canvasOnMouseLeave = function (event) {  // 拖动画布过程中 鼠标离开了画布触发的事件
     var genomeBrowser = event.data.browser;
     if (genomeBrowser.dragable) {
-      genomeBrowser.dragable = false;
+        genomeBrowser.dragable = false;
     }
 };

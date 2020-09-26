@@ -145,7 +145,6 @@ ABrowse.view.BedGraphView.prototype.drawBlock = function (blockResponse, trackNa
     */
 
     return blockSvgGroup;
-
 };
 
 ABrowse.view.BedGraphView.prototype.render = function (trackResponse, top) {

@@ -61,7 +61,8 @@ public class GtfReader extends BioDataReader{
                     if (line.startsWith("#")) {
                         continue;
                     }
-                    if (fields[2].equals(GtfFeatureType.gene)) {//跳过gene列，直接从transcript中读取gene信息
+                    if (fields[2].equals(GtfFeatureType.gene)) {
+                        //跳过gene列，直接从transcript中读取gene信息
                         continue;
                     }
                     String chrName = fields[0];
@@ -69,16 +70,13 @@ public class GtfReader extends BioDataReader{
                         // for Ensembl format gtf
                         chrName = new StringBuilder("chr").append(chrName).toString();
                     }
-
                     int start = Integer.valueOf(fields[3]);
                     int end = Integer.valueOf(fields[4]);
-
                     String scoreStr = fields[5];
                     float score = 0;
                     if (!scoreStr.equals(".")) {
                         score = Float.valueOf(scoreStr);
                     }
-
                     if (fields[2].equals(GtfFeatureType.transcript)){
                         Map<String,String> attributes = new HashMap<>();
                         String attributeStr = fields[8].trim().replaceAll("\"", "");
@@ -109,7 +107,6 @@ public class GtfReader extends BioDataReader{
                         String geneId = attributes.get(GencodeGtfTag.gene_id);
                         if(!geneId.equals(previousGeneId)){//发现新的geneId
                             geneNum++;
-
                             if(geneNum > 1){//发现新的geneId 标注位置并返回
                                 //System.out.println("第一次读取文件发现新的geneId 标注位置并返回 GeneId =" + geneId);
                                 this.setLastLine(line);
@@ -135,7 +132,32 @@ public class GtfReader extends BioDataReader{
                             transcriptNum ++;
                             transcriptDocList.add(transcriptDoc);
                         }
-                    }else {
+                    } else if (fields[2].equals(GtfFeatureType.regulatory_region)){
+                        Map<String,String> attributes = new HashMap<>();
+                        String attributeStr = fields[8].trim().replaceAll("\"", "");
+                        if (attributeStr.charAt(attributeStr.length() - 1) == ';') {
+                            attributeStr = attributeStr.substring(0, attributeStr.length() - 1);
+                        }
+                        String[] attrPairStrArray = attributeStr.split(";");
+                        for (String attrPairStr : attrPairStrArray) {
+                            attrPairStr = attrPairStr.trim();
+                            String[] attrPair = attrPairStr.split("=");
+                            //System.err.println("AAA3:[" + attrPair[0] + "],[" + attrPair[1] + "]" );
+                            attributes.put(attrPair[0], attrPair[1]);
+                        }
+                        geneDoc = new Document()
+                                .append(GencodeGtfTag.ID, attributes.get(GencodeGtfTag.ID))
+                                .append(GtfField.seqname, chrName)
+                                .append(GtfField.source, fields[1])
+                                .append(GtfField.feature, fields[2])
+                                .append(GtfField.start, start)
+                                .append(GtfField.end, end)
+                                .append(GtfField.score, score)
+                                .append(GtfField.strand, fields[6])
+                                .append(GtfField.frame, fields[7])
+                                .append(GtfField.attributes, attributes);
+                        return geneDoc;
+                    } else {
                         Document blockDocument = new Document()
                                 .append(GtfField.seqname, chrName)
                                 .append(GtfField.source, fields[1])
@@ -214,6 +236,31 @@ public class GtfReader extends BioDataReader{
                     }else {
                         throw new Exception("Lastline存储信息有误:"+lastLine);
                     }
+                }else if (fields[2].equals(GtfFeatureType.regulatory_region)){
+                    Map<String,String> attributes = new HashMap<>();
+                    String attributeStr = fields[8].trim().replaceAll("\"", "");
+                    if (attributeStr.charAt(attributeStr.length() - 1) == ';') {
+                        attributeStr = attributeStr.substring(0, attributeStr.length() - 1);
+                    }
+                    String[] attrPairStrArray = attributeStr.split(";");
+                    for (String attrPairStr : attrPairStrArray) {
+                        attrPairStr = attrPairStr.trim();
+                        String[] attrPair = attrPairStr.split("=");
+                        //System.err.println("AAA3:[" + attrPair[0] + "],[" + attrPair[1] + "]" );
+                        attributes.put(attrPair[0], attrPair[1]);
+                    }
+                    geneDoc = new Document()
+                            .append(GencodeGtfTag.ID, attributes.get(GencodeGtfTag.ID))
+                            .append(GtfField.seqname, chrName)
+                            .append(GtfField.source, fields[1])
+                            .append(GtfField.feature, fields[2])
+                            .append(GtfField.start, start)
+                            .append(GtfField.end, end)
+                            .append(GtfField.score, score)
+                            .append(GtfField.strand, fields[6])
+                            .append(GtfField.frame, fields[7])
+                            .append(GtfField.attributes, attributes);
+                    return geneDoc;
                 }else {
                     throw new Exception("Lastline存储信息有误:"+lastLine);
                 }

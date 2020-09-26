@@ -32,9 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/webjars/**", "/css/**",
-                        "/images/**", "/js/**", "**/favicon.ico",
+                        "/images/**", "/js/**", "**/favicon.ico", "/image/**",
                         "/gmap/**",
-                        "/register", "/about").permitAll()
+                        "/register", "/about","/HiC/*").permitAll()
                 .antMatchers("/config/**", "/admin/**").hasRole(RoleFlagType.ADMIN)
                 .anyRequest().authenticated() // 除上述例外之外所有请求必须登陆后访问
                 .and()

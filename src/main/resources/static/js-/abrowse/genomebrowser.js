@@ -172,7 +172,8 @@ ABrowse.browse.GenomeBrowser.prototype.initializeBrowserLayout = function () {
     }
     this.canvasBackgroundSvg.style.top = "0px";
     this.canvasBackgroundSvg.style.left = "0px";
-    this.canvasBackgroundSvg.setAttribute("width", this.canvasWidth);
+    // this.canvasBackgroundSvg.setAttribute("width", this.canvasWidth);
+    this.canvasBackgroundSvg.setAttribute("width", '100%');
     this.canvasBackgroundSvg.setAttribute("height", this.canvasHeight);
     this.canvasBackgroundSvg.style.position = "absolute";
     //this.canvasBackgroundSvg.style.border = "1px solid grey";
@@ -184,9 +185,11 @@ ABrowse.browse.GenomeBrowser.prototype.initializeBrowserLayout = function () {
         this.canvasSvg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
         this.canvasFrameDiv.appendChild(this.canvasSvg);
     }
-    this.canvasSvg.style.top = "0px";
+    // this.canvasSvg.style.top = "0px";
+    this.canvasSvg.style.top = "20px";
     this.canvasSvg.style.left = "0px";
-    this.canvasSvg.setAttribute("width", this.canvasWidth);
+    // this.canvasSvg.setAttribute("width", this.canvasWidth);
+    this.canvasSvg.setAttribute("width", '100%');
     this.canvasSvg.setAttribute("height", this.canvasHeight);
     this.canvasSvg.style.position = "absolute";
     //this.canvasSvg.style.border = "1px solid grey";

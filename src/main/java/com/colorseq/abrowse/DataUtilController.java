@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.LocaleResolver;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -200,7 +201,6 @@ public class DataUtilController {
         session.removeAttribute(SessionKeys.CONFIG_GENOME_MAP);
         modelMap.put("configGenome", currentConfigGenome);
         return "redirect:/";
-
     }
 
     @RequestMapping(value = "/admin/delete_track", method = RequestMethod.GET )
@@ -223,7 +223,6 @@ public class DataUtilController {
         }
 
         if (null == configGenomeMap) {
-
             ConfigGenomeMapRetriever configGenomeMapRetriever = new ConfigGenomeMapRetriever();
             configGenomeMap = configGenomeMapRetriever.retrieve(userId, configGenomeDao, userConfigGenomeDao);
             session.setAttribute(SessionKeys.CONFIG_GENOME_MAP, configGenomeMap);
@@ -232,8 +231,6 @@ public class DataUtilController {
             genome = this.defaultGenome;
         }
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
-
-
         modelMap.put("configGenome", currentConfigGenome);
         return "admin__delete_track";
 
@@ -390,13 +387,211 @@ public class DataUtilController {
         }else{
             System.out.println("group下面有track信息，无法删除trackGroup!");
         }
-
-
         session.removeAttribute(SessionKeys.CONFIG_GENOME_MAP);
         return "redirect:/";
     }
 
 
+
+    @RequestMapping(value = "/admin/load_hic_data", method = RequestMethod.GET)
+    public String adminLoadHiCGit(String genome, Map<String, Object> modelMap,
+                                  HttpSession session,
+                                  Authentication authentication){
+        int userId = 0;
+        if (null != authentication) {
+            UserEntity userEntity = (UserEntity) authentication.getPrincipal();
+            userId = userEntity.getId();
+        }
+
+        Map<String, ConfigGenome> configGenomeMap = null;
+        try {
+            configGenomeMap = (Map<String, ConfigGenome>) session.getAttribute(SessionKeys.CONFIG_GENOME_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (null == configGenomeMap) {
+            ConfigGenomeMapRetriever configGenomeMapRetriever = new ConfigGenomeMapRetriever();
+            configGenomeMap = configGenomeMapRetriever.retrieve(userId, configGenomeDao, userConfigGenomeDao);
+            session.setAttribute(SessionKeys.CONFIG_GENOME_MAP, configGenomeMap);
+        }
+        if (null == genome) {
+            genome = this.defaultGenome;
+        }
+        ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
+
+        List<String> genomeList = new ArrayList<String>();
+        for (String geno : configGenomeMap.keySet()){
+            if("global".equals(geno)){
+                continue;
+            }
+            genomeList.add(geno);
+        }
+        modelMap.put("defaultGenome",genome);
+        modelMap.put("genomeList",genomeList);
+        modelMap.put("configGenome", currentConfigGenome);
+        return "admin__load_hic_data";
+    }
+
+    @RequestMapping(value = "/admin/load_hic_data", method = RequestMethod.POST)
+    public String adminLoadHiCPost(String genome,
+                                   String hicPath,
+                                   String trackGroupName,
+                                   String trackName,
+                                   String trackDisplayName,
+                                   String trackDescription,
+                                   Map<String, Object> modelMap,
+                                   HttpSession session,
+                                   Authentication authentication) throws IOException {
+        int userId = 0;
+        if (null != authentication) {
+            UserEntity userEntity = (UserEntity) authentication.getPrincipal();
+            userId = userEntity.getId();
+        }
+
+        Map<String, ConfigGenome> configGenomeMap = null;
+        try {
+            configGenomeMap = (Map<String, ConfigGenome>) session.getAttribute(SessionKeys.CONFIG_GENOME_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (null == configGenomeMap) {
+
+            ConfigGenomeMapRetriever configGenomeMapRetriever = new ConfigGenomeMapRetriever();
+            configGenomeMap = configGenomeMapRetriever.retrieve(userId, configGenomeDao, userConfigGenomeDao);
+            session.setAttribute(SessionKeys.CONFIG_GENOME_MAP, configGenomeMap);
+        }
+        ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
+        ConfigGenome globalConfigGenome = configGenomeMap.get(global);
+        if (null != globalConfigGenome) {
+            currentConfigGenome.addViews(globalConfigGenome.getViewMap());
+        }
+
+        Map<String, Integer> chrCodeMap = new HashMap<>();
+        for (ConfigChromosome chr : currentConfigGenome.getChromosomeMap().values()) {
+            chrCodeMap.put(chr.getName(), chr.getCode());
+        }
+
+        Map<String, Integer> chrLenMap = new HashMap<>();
+        for (ConfigChromosome chr : currentConfigGenome.getChromosomeMap().values()) {
+            chrLenMap.put(chr.getName(), chr.getLength());
+        }
+
+
+        MongoClientURI mongoClientURI = new MongoClientURI(mongodbURI);
+        MongoClient mongoClient = new MongoClient(mongoClientURI);
+
+        String dbName = new StringBuilder(mongodbNamePrefix).append(genome).toString();
+        MongoDatabase database = mongoClient.getDatabase(dbName);
+        MongoCollection<Document> collection = database.getCollection(trackName);
+
+        //drop the old before load data
+        collection.drop();
+
+        System.out.println("LOADING SPLICE SITES FROM SAM DATA - BEGIN. Track NAME: " + trackName);
+
+        try{
+            Document pair = null;
+            BufferedReader reader = new BufferedReader(new FileReader(hicPath));
+            String line = null;
+            int preBinIndex = -1;
+            List<Document> binList = new ArrayList<>();
+            Document document = new Document();
+            int insertMultiDocsNum = 5000;
+            ArrayList<Document> documentList = new ArrayList<>(insertMultiDocsNum);
+            int size = 0;
+            while ((line = reader.readLine()) != null){
+                if (line.contains("chr_x") || line.trim().length() == 0){
+                    continue;
+                }
+                String[] fields = line.trim().split("\\t");
+                String chrName = fields[3];
+                int start = Integer.parseInt(fields[4]);
+                int end = Integer.parseInt(fields[5]);
+                int binIndex = Integer.parseInt(fields[0]);
+                String targetChr = fields[7];
+                if (!targetChr.startsWith("chr")){
+                    targetChr = "chr" + targetChr;
+                }
+                Integer chrCode = chrCodeMap.get(chrName);
+                if (null == chrCode) {
+
+                    chrName = "chr" + chrName;
+                    chrCode = chrCodeMap.get(chrName);
+
+                    if (null == chrCode) {
+                        // 忽略不支持的染色体
+                        continue;
+                    }
+                }
+                int chrLen = chrLenMap.get(chrName);
+                LineString location = GeoSpatialUtils.getLineString(start, end, chrLen, chrCode);
+                if (binIndex != preBinIndex){
+                    if (preBinIndex != -1){
+                        document.append(HiCField.binList,binList);
+                        documentList.add(document);
+                        if (documentList.size() >= insertMultiDocsNum) {
+                            collection.insertMany(documentList);
+                            documentList.clear();
+                            documentList.ensureCapacity(insertMultiDocsNum);
+                            size += insertMultiDocsNum;
+                            System.out.println("LOADED RECORDS:" + size);
+                        }
+                    }
+                    preBinIndex = binIndex;
+                    document = new Document()
+                            .append(HiCField.chr,chrName)
+                            .append(HiCField.start,start)
+                            .append(HiCField.end,end)
+                            .append(HiCField.location,location)
+                            .append(HiCField.binIndex,binIndex);
+                    binList = new ArrayList<>();
+                    Document bin = new Document().append(HiCField.targetBinIndex,fields[1])
+                            .append(HiCField.value,fields[2])
+                            .append(HiCField.targetChr, targetChr)
+                            .append(HiCField.targetStart,Integer.parseInt(fields[8]))
+                            .append(HiCField.targetend,Integer.parseInt(fields[9]));
+                    binList.add(bin);
+                }else {
+                    Document bin = new Document().append(HiCField.targetBinIndex,fields[1])
+                            .append(HiCField.value,fields[2])
+                            .append(HiCField.targetChr, targetChr)
+                            .append(HiCField.targetStart,Integer.parseInt(fields[8]))
+                            .append(HiCField.targetend,Integer.parseInt(fields[9]));
+                    binList.add(bin);
+                }
+            }
+            if (documentList.size() > 0) {
+                System.out.println("最后一次=====" + documentList.size());
+                System.out.println("最后一个=====" + documentList.get(documentList.size()-1));
+                collection.insertMany(documentList);
+                documentList.clear();
+            }
+            collection.createIndex(Indexes.geo2dsphere(BedGraphField.location));
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+
+        ConfigTrack configTrack = new ConfigTrack();
+        configTrack.setName(trackName);
+        configTrack.setDisplayName(trackDisplayName);
+        configTrack.setDescription(trackDescription);
+        ConfigTrackView generalTrackView = new ConfigTrackView(ViewType.HICView, null);
+        configTrack.addView(generalTrackView);
+
+        ConfigTrackGroup trackGroup = currentConfigGenome.getTrackGroupMap().get(trackGroupName);
+        trackGroup.addTrack(configTrack);
+
+        this.configGenomeDao.save(currentConfigGenome);
+        session.removeAttribute(SessionKeys.CONFIG_GENOME_MAP);
+        System.out.println("LOADING SPLICE SITES FROM SAM DATA - FINISHED. Track NAME: " + trackName);
+        //modelMap.put("chrLen", chrLenMap);
+        //modelMap.put("configGenome", currentConfigGenome);
+
+        return "redirect:/";
+    }
 
 
     @RequestMapping(value = "/admin/load_bedgraph_data", method = RequestMethod.GET)
@@ -428,6 +623,15 @@ public class DataUtilController {
         }
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
 
+        List<String> genomeList = new ArrayList<String>();
+        for (String geno : configGenomeMap.keySet()){
+            if("global".equals(geno)){
+                continue;
+            }
+            genomeList.add(geno);
+        }
+        modelMap.put("defaultGenome",genome);
+        modelMap.put("genomeList",genomeList);
         modelMap.put("configGenome", currentConfigGenome);
         return "admin__load_bedgraph_data";
     }
@@ -633,6 +837,16 @@ public class DataUtilController {
         }
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
 
+        List<String> genomeList = new ArrayList<String>();
+        for (String geno : configGenomeMap.keySet()){
+            if("global".equals(geno)){
+                continue;
+            }
+            genomeList.add(geno);
+        }
+        modelMap.put("defaultGenome",genome);
+        modelMap.put("genomeList",genomeList);
+
         modelMap.put("configGenome", currentConfigGenome);
         return "admin__load_abrowse_splicesite_data";
     }
@@ -701,9 +915,6 @@ public class DataUtilController {
             BufferedReader reader = new BufferedReader(new FileReader(ssPath));
             //List<Document> siteDocumentList = new ArrayList<>(5000);
             Map<String, Document> siteDocumentMap = new HashMap<>();
-
-
-
             String line = null;
             int entryNum = 0;
             int batchSize = 5000;
@@ -753,8 +964,6 @@ public class DataUtilController {
                 collection.insertMany(documentArrayList);
                 documentArrayList.clear();
             }
-
-
 
             System.out.println("DEBUG - CREATING LOCATION INDEX ...");
             collection.createIndex(Indexes.geo2dsphere(SpliceSiteField.location));
@@ -813,7 +1022,15 @@ public class DataUtilController {
             genome = this.defaultGenome;
         }
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
-
+        List<String> genomeList = new ArrayList<String>();
+        for (String geno : configGenomeMap.keySet()){
+            if("global".equals(geno)){
+                continue;
+            }
+            genomeList.add(geno);
+        }
+        modelMap.put("defaultGenome",genome);
+        modelMap.put("genomeList",genomeList);
         modelMap.put("configGenome", currentConfigGenome);
         return "admin__load_splicesite_data";
     }
@@ -1094,6 +1311,17 @@ public class DataUtilController {
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
 
         modelMap.put("configGenome", currentConfigGenome);
+
+        List<String> genomeList = new ArrayList<String>();
+        for (String geno : configGenomeMap.keySet()){
+            if("global".equals(geno)){
+                continue;
+            }
+            genomeList.add(geno);
+        }
+        modelMap.put("defaultGenome",genome);
+        modelMap.put("genomeList",genomeList);
+
         return "admin__load_sam_data";
     }
 
@@ -1340,6 +1568,33 @@ public class DataUtilController {
         return "redirect:/";
     }
 
+    @RequestMapping(path = "/admin/getCurrentConfigGenome", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String,Object> getCurrentConfigGenome(String genome,Authentication authentication,HttpSession session){
+        Map<String,Object> resultMap = new HashMap<>();
+        int userId = 0;
+        if (null != authentication) {
+            UserEntity userEntity = (UserEntity) authentication.getPrincipal();
+            userId = userEntity.getId();
+        }
+        Map<String, ConfigGenome> configGenomeMap = null;
+        try {
+            configGenomeMap = (Map<String, ConfigGenome>) session.getAttribute(SessionKeys.CONFIG_GENOME_MAP);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (null == configGenomeMap) {
+            ConfigGenomeMapRetriever configGenomeMapRetriever = new ConfigGenomeMapRetriever();
+            configGenomeMap = configGenomeMapRetriever.retrieve(userId, configGenomeDao, userConfigGenomeDao);
+            session.setAttribute(SessionKeys.CONFIG_GENOME_MAP, configGenomeMap);
+        }
+        if (null == genome) {
+            genome = this.defaultGenome;
+        }
+        ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
+        resultMap.put("currenConfgGenome",currentConfigGenome);
+        return resultMap;
+    }
 
     @RequestMapping(value = "/admin/load_gencode_gtf_data", method = RequestMethod.GET)
     public String admin_load_gencode_gtf_data_GET(String genome, Map<String, Object> modelMap,
@@ -1351,16 +1606,13 @@ public class DataUtilController {
             UserEntity userEntity = (UserEntity) authentication.getPrincipal();
             userId = userEntity.getId();
         }
-
         Map<String, ConfigGenome> configGenomeMap = null;
         try {
             configGenomeMap = (Map<String, ConfigGenome>) session.getAttribute(SessionKeys.CONFIG_GENOME_MAP);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         if (null == configGenomeMap) {
-
             ConfigGenomeMapRetriever configGenomeMapRetriever = new ConfigGenomeMapRetriever();
             configGenomeMap = configGenomeMapRetriever.retrieve(userId, configGenomeDao, userConfigGenomeDao);
             session.setAttribute(SessionKeys.CONFIG_GENOME_MAP, configGenomeMap);
@@ -1369,11 +1621,19 @@ public class DataUtilController {
             genome = this.defaultGenome;
         }
         ConfigGenome currentConfigGenome = configGenomeMap.get(genome);
+        List<String> genomeList = new ArrayList<String>();
+        for (String geno : configGenomeMap.keySet()){
+            if("global".equals(geno)){
+                continue;
+            }
+            genomeList.add(geno);
+        }
+        modelMap.put("defaultGenome",genome);
+        modelMap.put("genomeList",genomeList);
 
         modelMap.put("configGenome", currentConfigGenome);
         return "admin__load_gencode_gtf_data";
     }
-
 
     @RequestMapping(value = "/admin/load_gencode_gtf_data", method = RequestMethod.POST)
     public String admin_load_gencode_gtf_data(String genome,

@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="/css/main.css">
 
+    <script type="text/javascript" src="/js/abrowse/adminUtil.js"></script>
     <!-- Include JQuery and JQuery plugin scripts: -->
     <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
     <script src="/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
@@ -67,6 +68,7 @@
                   document.getElementById('load_bedgraph').submit()
                 }
             });
+            changeTrackGroup();
         });
         /*]]>*/
 
@@ -74,7 +76,6 @@
           $(show).show()
           $(hide).hide()
         }
-
     </script>
 
 </head>
@@ -113,6 +114,7 @@
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_abrowse_splicesite_data')"><span th:text="#{load_abrowse_splicesite_data}"></span></a></li>
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_splicesite_data')"><span th:text="#{load_splicesite_data}"></span></a></li>
           <li><a href="javascript:void(0)" class="active" onclick="linkChange('/admin/load_bedgraph_data')"><span th:text="#{load_bedgraph_data}"></span></a></li>
+            <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_hic_data')"><span th:text="#{load_HiC_data}"></span></a></li>
         </ul>
       </nav>
     </div>
@@ -129,10 +131,10 @@
               <input type="text" placeholder="Track Display Name" name="trackDisplayName" id="trackDisplayName" autocomplete="off"/>
               <input type="text" placeholder="Track Description" name="trackDescription" autocomplete="off"/>
               <div class="radio">
-              	<label>
+              	<label for="singleRadio">
               		<input class="margin-top-4" type="radio" name="fileType" id="singleRadio" value="1" checked onchange="radioChange('#singlePath', '#multiPath')"> <span th:text="#{single_file}"></span>
               	</label>
-                <label>
+                <label for="multiRadio">
               		<input class="margin-top-4" type="radio" name="fileType" id="multiRadio" value="2" onchange="radioChange('#multiPath', '#singlePath')"> <span th:text="#{multiple_files}"></span>
               	</label>
               </div>
@@ -141,7 +143,12 @@
                 <input type="text" placeholder="/bedgraph/file/path/on/abrowse/server (plus)" name="plusPath" autocomplete="off"/>
                 <input type="text" placeholder="/bedgraph/file/path/on/abrowse/server (minus)" name="minusPath" autocomplete="off"/>
               </div>
-              <input type="text" th:value="${configGenome.name}" name="genome" id="genome" contenteditable="false" autocomplete="off"/>
+              <label for="genome">genome name
+                  <select id="genome" name="genome" class="selectpicker" th:value="${defaultGenome}" onchange="changeTrackGroup()">
+                      <option th:each="genomeName : ${genomeList}" th:value="${genomeName}"
+                              th:text="${genomeName}"></option>
+                  </select>
+              </label>
               <label for="trackGroupName">Track Group
               <select name="trackGroupName" id="trackGroupName" class="selectpicker">
                   <option th:each="trackGroupEntry : ${configGenome.trackGroupMap}" th:value="${trackGroupEntry.value.name}"
