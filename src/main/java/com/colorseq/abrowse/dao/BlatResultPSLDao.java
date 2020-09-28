@@ -14,4 +14,6 @@ public interface BlatResultPSLDao extends JpaRepository<BlatResultPSL, Integer> 
      */
     List<BlatResultPSL> findAllByJobidEqualsOrderByBmatchDesc(String id);
 
+    BlatResultPSL findBlatResultPSLByIdEquals(String id);
+
 }

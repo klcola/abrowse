@@ -25,6 +25,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jackson.JsonObjectDeserializer;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -165,6 +166,40 @@ public class GenomeMapController {
             browseResponse.addTrackResponse(trackResponse);
         }
 
+        if (!StringUtils.isEmpty(browseRequest.getBlatSearchId())){
+            BlatResultPSL result = blatResultPSLDao.findBlatResultPSLByIdEquals(browseRequest.getBlatSearchId());
+            if (result != null){
+                TrackResponse trackResponse = new TrackResponse();
+                trackResponse.setTrackName("your seq");
+                trackResponse.setTrackDisplayName("your seq");
+                trackResponse.setViewName("GeneModelLikeView");
+                trackResponse.setyIndex(browseResponse.getTrackResponses().size());
+                int blockCount = Integer.parseInt(result.getBlockcount());
+                String[] blockSizes = result.getBlocksize().split(",");
+                String[] blockStarts = result.getTstarts().split(",");
+                int start = Integer.parseInt(result.getTstart());
+                int end = Integer.parseInt(result.getTend());
+
+                BlockResponse blockResponse = new BlockResponse(start, end);
+                for (int i = 0;i<blockCount;i++){
+                    int blockSize = Integer.parseInt(blockSizes[i]);
+                    int blockStart = Integer.parseInt(blockStarts[i]);
+                    int blockEnd = blockStart + blockSize - 1;
+                    Map<String,String> attributes = new HashMap<>();
+                    attributes.put("description","your seq");
+                    Document document = new Document()
+                            .append("start",blockStart)
+                            .append("end",blockEnd)
+                            .append("ID",UUID.randomUUID().toString().replace("-",""))
+                            .append("source","Regulatory_Build")
+                            .append("attributes",attributes)
+                            .append("strand",result.getStrand());
+                    blockResponse.addEntry(document);
+                }
+                trackResponse.addBlockResponse(blockResponse);
+                browseResponse.addTrackResponse(trackResponse);
+            }
+        }
         /*
         //7.914156157016106
         //7.940907826832441

@@ -1,5 +1,4 @@
 ABrowse.browse.TrackRequest = function (locations, trackConfig) {
-
     this.blockRequests = locations;
     this.trackGroupName = trackConfig.trackGroupName;
     this.trackName = trackConfig.trackName;
@@ -44,6 +43,7 @@ ABrowse.browse.StatusPanel.prototype.initializePanel = function () {
 ABrowse.browse.GenomeBrowser = function (config) {
 
     this.genomeDB = null;
+    this.blatSearchId = null;
 
     this.id = config.id ? config.id : "browser";
     this.searchInputId = config.searchInputId ? config.searchInputId : "position";
@@ -684,7 +684,8 @@ ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
 
     for (var i = 0; i < list.length; i++) {
         var result = list[i];
-        var tr = "<tr style='cursor: pointer' resultId='" + result.id + "'>"
+        var tr = "<tr style='cursor: pointer' resultId='" + result.id + "' chrName='" + result.tname + "' tstart='" +
+            result.tstart + "' tend='" + result.tend + "' strand='" + result.strand + "'>"
             + "<td>" + result.bmatch + "</td>"
             + "<td>" + result.mismatch + "</td>"
             + "<td>" + result.repmatch + "</td>"
@@ -709,10 +710,22 @@ ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
             + "</tr>";
         $("#resultList").append(tr);
     }
+
+    var _this = this;
     $("#resultTable").on("click","tr",function (){
         let resultId = $(this).attr("resultId");
-        console.log(resultId);
-
+        let tname = $(this).attr("chrName");
+        let tstart = $(this).attr("tstart");
+        let tend = $(this).attr("tend");
+        let strand = $(this).attr("strand");
+        _this.blatSearchId = resultId;
+        var searchText = "chr" + tname + ":" + tstart + "-" + tend;
+        // if ("-" == strand){
+        //     searchText = "chr" + tname + ":" + tend + "-" + tstart;
+        // }
+        $("#" + _this.searchInputId).eq(0).val(searchText);
+        _this.submit();
+        $("#searchDialog").hide();
     });
 }
 
@@ -845,9 +858,11 @@ ABrowse.browse.GenomeBrowser.prototype.realSubmit = function (genomeDB, chromoso
     var browseRequest = {
         genome: genomeDB,
         chrName: this.chrName,
-        trackRequests: trackRequests
+        trackRequests: trackRequests,
+        blatSearchId : this.blatSearchId
     };
 
+    // this.blatSearchId = null;
     // console.log("DEBUG: browseRequest: " + JSON.stringify(browseRequest));
 
     $.ajax({
@@ -871,8 +886,6 @@ ABrowse.browse.GenomeBrowser.prototype.getTrackSwitchedOnBrowseRequest = functio
 
     var searchStr = $("#" + this.searchInputId).get(0).value;
     var chrLoc = ABrowse.parsePositionStr(searchStr);
-
-
     var requestedLocs = [];
     var location;
 
