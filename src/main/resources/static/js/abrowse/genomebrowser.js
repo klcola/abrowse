@@ -685,7 +685,7 @@ ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
     for (var i = 0; i < list.length; i++) {
         var result = list[i];
         var tr = "<tr style='cursor: pointer' resultId='" + result.id + "' chrName='" + result.tname + "' tstart='" +
-            result.tstart + "' tend='" + result.tend + "' strand='" + result.strand + "'>"
+            result.tstart + "' tend='" + result.tend + "' strand='" + result.strand + "' gene='" + result.gene + "'>"
             + "<td>" + result.bmatch + "</td>"
             + "<td>" + result.mismatch + "</td>"
             + "<td>" + result.repmatch + "</td>"
@@ -717,8 +717,10 @@ ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
         let tname = $(this).attr("chrName");
         let tstart = $(this).attr("tstart");
         let tend = $(this).attr("tend");
+        let gene = $(this).attr("gene");
         let strand = $(this).attr("strand");
         _this.blatSearchId = resultId;
+        $("#" + _this.speciesSelectId ).val(gene);
         var searchText = "chr" + tname + ":" + tstart + "-" + tend;
         // if ("-" == strand){
         //     searchText = "chr" + tname + ":" + tend + "-" + tstart;
@@ -730,9 +732,10 @@ ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
 }
 
 ABrowse.browse.GenomeBrowser.prototype.realSearch = function () {
-    var genomeDB = $("#" + this.speciesSelectId + " option:selected").attr("value");
-    var searchSeqTxt = $("#searchSeqTxt").val();
-    console.log(genomeDB, searchSeqTxt);
+    // var genomeDB = $("#" + this.speciesSelectId + " option:selected").attr("value");
+    var gene = $("#searchGene").val();
+    var searchSeqTxt = $.trim($("#searchSeqTxt").val());
+    console.log(gene, searchSeqTxt);
     $("#searchsubmitting").show();
     $("#searchsubmiterr").hide();
     $("#searchsubmitsucc").hide();
@@ -741,7 +744,7 @@ ABrowse.browse.GenomeBrowser.prototype.realSearch = function () {
         url: "/gmap/searchSeq",
         data: {
             seq: searchSeqTxt,
-            genomeDB: genomeDB
+            gene: gene
         },
         success: function (res) {
             console.log(res);
@@ -751,6 +754,12 @@ ABrowse.browse.GenomeBrowser.prototype.realSearch = function () {
                 $("#searchsubmitsucc").show();
                 $("#jobId").text(res.jobId);
             } else {
+                if (res.abrowseJob.jobStatu == "01"){
+                    $("#searchsubmitting").show();
+                    $("#searchsubmiterr").hide();
+                    $("#searchsubmitsucc").hide();
+                    return ;
+                }
                 this.showResultList(res.allResults);
             }
         },
@@ -779,7 +788,6 @@ ABrowse.browse.GenomeBrowser.prototype.zoomInSubmit = function () {
 };
 
 ABrowse.browse.GenomeBrowser.prototype.zoomOutSubmit = function () {
-
     this.initializeCanvas();
     var searchStr = $("#" + this.searchInputId).get(0).value;
     var genomeDB = $("#" + this.speciesSelectId + " option:selected").attr("value");
@@ -797,11 +805,8 @@ ABrowse.browse.GenomeBrowser.prototype.realSubmit = function (genomeDB, chromoso
     if (this.inserting) {
         return;
     }
-
     this.requestIndex++
-
     this.inserting = true;
-
     var s2 = chromosomeLoc.start;
     var e2 = chromosomeLoc.end;
 

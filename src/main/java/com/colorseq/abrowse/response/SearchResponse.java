@@ -1,5 +1,6 @@
 package com.colorseq.abrowse.response;
 
+import com.colorseq.abrowse.entity.AbrowseJob;
 import com.colorseq.abrowse.entity.BlatResultPSL;
 
 import java.io.Serializable;
@@ -16,6 +17,8 @@ public class SearchResponse implements Serializable {
      * 0-没有，1-有
      */
     private String hasResult;
+
+    private AbrowseJob abrowseJob;
 
     /**
      * jobId
@@ -44,5 +47,13 @@ public class SearchResponse implements Serializable {
 
     public void setJobId(String jobId) {
         this.jobId = jobId;
+    }
+
+    public AbrowseJob getAbrowseJob() {
+        return abrowseJob;
+    }
+
+    public void setAbrowseJob(AbrowseJob abrowseJob) {
+        this.abrowseJob = abrowseJob;
     }
 }

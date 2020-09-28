@@ -1,6 +1,9 @@
 package com.colorseq.abrowse;
 
 //import com.colorseq.cscore.dao.user.*;
+import com.colorseq.abrowse.dao.BlatDatabaseDao;
+import com.colorseq.abrowse.entity.BlatDatabase;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -25,6 +28,8 @@ public class BrowserController {
     private UserEntityDao userEntityDao;
     private ConfigGenomeDao configGenomeDao;
     private UserConfigGenomeDao userConfigGenomeDao;
+    @Autowired
+    private BlatDatabaseDao blatDatabaseDao;
 
     public BrowserController() {
     }
@@ -94,10 +99,12 @@ public class BrowserController {
         }
         modelMap.put("chrLen", chrNameLenMap);
         */
+        List<BlatDatabase> all = blatDatabaseDao.findAll();
         Map<String, ConfigGenome> configGenomeMap4Html = new HashMap<>();
         configGenomeMap4Html.putAll(configGenomeMap);
         configGenomeMap4Html.remove(global);
         modelMap.put("defGemo",genome);
+        modelMap.put("blatDatabases",all);
         modelMap.put("configGenomeMap", configGenomeMap4Html);
         modelMap.put("configGenome", currentConfigGenome);
         return "index";

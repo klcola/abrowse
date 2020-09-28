@@ -3,6 +3,7 @@ package com.colorseq.abrowse.job;
 import com.colorseq.abrowse.dao.AbrowseJobDao;
 import com.colorseq.abrowse.dao.BlatResultPSLDao;
 import com.colorseq.abrowse.entity.AbrowseJob;
+import com.colorseq.abrowse.entity.BlatDatabase;
 import com.colorseq.abrowse.entity.BlatResultPSL;
 
 import java.io.*;
@@ -21,12 +22,18 @@ public class BlatJob extends Thread{
 
     private AbrowseJobDao jobDao;
 
-    public BlatJob(String jobId, File queryFile, String seq, BlatResultPSLDao blatResultPSLDao, AbrowseJobDao jobDao){
+    private String seqFilePath;
+
+    private BlatDatabase blatDatabase;
+
+    public BlatJob(String jobId, File queryFile, String seq, BlatResultPSLDao blatResultPSLDao, AbrowseJobDao jobDao, String seqFilePath, BlatDatabase blatDatabase){
         this.jobId = jobId;
         this.queryFile = queryFile;
         this.seq = seq;
         this.blatResultPSLDao = blatResultPSLDao;
         this.jobDao = jobDao;
+        this.seqFilePath = seqFilePath;
+        this.blatDatabase = blatDatabase;
     }
 
     @Override
@@ -35,23 +42,24 @@ public class BlatJob extends Thread{
             return;
         }
         try {
-//            FileOutputStream fos = new FileOutputStream(queryFile);
-//            fos.write(seq.getBytes());
-//            fos.flush();
-//            fos.close();
-//            String cmd = "/root/bin/x86_64/blat /project/user/zhouhan/data/Homo_sapiens.GRCh38.dna.chromosome.fa " + queryFile.getCanonicalPath() + " /project/user/zhouhan/data/output.psl";
-//            System.out.println(cmd);
-//            Process proc = Runtime.getRuntime().exec(cmd);
-//            int i = proc.waitFor();
-//            System.out.println(i);
-//            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-//            String line = null;
-//            while ((line = in.readLine()) != null) {
-//                System.out.println(line);
-//            }
-//            in.close();
-//            File output = new File("/project/user/zhouhan/data/output.psl");
-            File output = new File("D:\\data\\abrowse\\output.psl");
+            FileOutputStream fos = new FileOutputStream(queryFile);
+            fos.write(seq.getBytes());
+            fos.flush();
+            fos.close();
+            String outFile = blatDatabase.getOutputPath() + jobId + ".psl";
+            String cmd = blatDatabase.getShellName() + " " + blatDatabase.getDatabasePathAndName() + " " + queryFile.getCanonicalPath() + " " + outFile;
+            System.out.println(cmd);
+            Process proc = Runtime.getRuntime().exec(cmd);
+            int i = proc.waitFor();
+            System.out.println(i);
+            BufferedReader in = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                System.out.println(line);
+            }
+            in.close();
+            File output = new File(outFile);
+//            File output = new File("D:\\data\\abrowse\\output.psl");
             if (!output.exists()){
                 return;
             }
@@ -60,7 +68,6 @@ public class BlatJob extends Thread{
             boolean isData = false;
             Pattern p = Pattern.compile("\\s+");
             List<BlatResultPSL> retList = new ArrayList<>();
-
             while ((outLine = outReader.readLine()) != null){
                 if (outLine.startsWith("------------------")){
                     isData = true;
@@ -96,9 +103,13 @@ public class BlatJob extends Thread{
                     blatResultPSL.setCreateTime(new Date());
                     blatResultPSL.setCompleteTime(new Date());
                     blatResultPSL.setCurStatu("02");
+                    blatResultPSL.setGene(blatDatabase.getGenome());
                     blatResultPSLDao.saveAndFlush(blatResultPSL);
                 }
             }
+            AbrowseJob abrowseJobByIdEquals = jobDao.findAbrowseJobByIdEquals(jobId);
+            abrowseJobByIdEquals.setJobStatu("02");
+            jobDao.saveAndFlush(abrowseJobByIdEquals);
         }catch (Exception e){
             e.printStackTrace();
         }

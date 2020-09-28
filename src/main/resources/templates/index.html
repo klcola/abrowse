@@ -86,6 +86,14 @@
         function closeSearchDialog() {
             $("#searchDialog").hide();
         }
+        function seqChange(){
+            let val = $.trim($("#searchSeqTxt").val());
+            if (val.length > 0){
+                $("#searchBtn").attr("disabled",false)
+            }else {
+                $("#searchBtn").attr("disabled",true);
+            }
+        }
     </script>
 
 </head>
@@ -256,7 +264,7 @@
                          style="display: none">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <span>提交中，请稍等。。。</span>
+                        <span>查询中，请稍等。。。</span>
                     </div>
                     <div id="searchsubmitsucc" class="alert alert-success alert-dismissible" role="alert"
                          style="display: none">
@@ -270,7 +278,17 @@
                                 aria-hidden="true">&times;</span></button>
                         <span>提交失败！请稍后重试！</span>
                     </div>
-                    <textarea class="form-control" id="searchSeqTxt" rows="10" onchange=""
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-12 col-lg-4">
+                            <label for="searchGene">Genome</label>
+                            <select id="searchGene" class="form-control">
+                                <option th:each="blatDatabase : ${blatDatabases}" th:value="${blatDatabase.id}"
+                                        th:selected="${blatDatabase.Genome == defGemo}"
+                                        th:text="${blatDatabase.Genome}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <textarea class="form-control" id="searchSeqTxt" rows="10" onchange="seqChange()" onkeyup="seqChange();"
                               th:placeholder="#{please_enter_the_sequence}"></textarea>
                 </div>
                 <div id="resultContainer" style="width: 100%;overflow-x: auto;display: none">
@@ -307,7 +325,7 @@
                 </div>
             </div>
             <div class="modal-footer" id="searchFooter">
-                <button class="btn btn-primary" onclick="ABrowse.defaultGenomeBrowser.realSearch();"><span
+                <button class="btn btn-primary" id="searchBtn" onclick="ABrowse.defaultGenomeBrowser.realSearch();" disabled="true"><span
                         th:text="#{search}"></span></button>
             </div>
         </div>

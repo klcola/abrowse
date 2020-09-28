@@ -1,8 +1,10 @@
 package com.colorseq.abrowse;
 
 import com.colorseq.abrowse.dao.AbrowseJobDao;
+import com.colorseq.abrowse.dao.BlatDatabaseDao;
 import com.colorseq.abrowse.dao.BlatResultPSLDao;
 import com.colorseq.abrowse.entity.AbrowseJob;
+import com.colorseq.abrowse.entity.BlatDatabase;
 import com.colorseq.abrowse.entity.BlatResultPSL;
 import com.colorseq.abrowse.job.BlatJob;
 import com.colorseq.abrowse.request.BlockRequest;
@@ -56,6 +58,9 @@ public class GenomeMapController {
 
     @Autowired
     private AbrowseJobDao jobDao;
+
+    @Autowired
+    private BlatDatabaseDao databaseDao;
 
     @RequestMapping(value = "/gmap/browse", method = RequestMethod.POST)
     @ResponseBody
@@ -211,22 +216,25 @@ public class GenomeMapController {
 
     @RequestMapping(value = "/gmap/searchSeq", method = RequestMethod.POST)
     @ResponseBody
-    public SearchResponse searchSeq(String seq,String gendb) throws IOException, InterruptedException {
+    public SearchResponse searchSeq(String seq,String gene) throws IOException, InterruptedException {
         SearchResponse searchResponse = new SearchResponse();
-        File filePath = new File(seqFilePath);
-        if (!filePath.exists()){
-            filePath.mkdirs();
-        }
+//        File filePath = new File(seqFilePath);
+//        if (!filePath.exists()){
+//            filePath.mkdirs();
+//        }
         AbrowseJob existjob = jobDao.findAbrowseJobByIdEquals(seq);
         if (existjob != null){
             List<BlatResultPSL> allResults = blatResultPSLDao.findAllByJobidEqualsOrderByBmatchDesc(existjob.getId());
             searchResponse.setHasResult("1");
+            searchResponse.setAbrowseJob(existjob);
             searchResponse.setAllResults(allResults);
             return searchResponse;
         }
         searchResponse.setHasResult("0");
+        BlatDatabase blatDatabase = databaseDao.findBlatDatabaseByIdEquals(gene);
         String jobId = UUID.randomUUID().toString().replace("-", "");
-        File queryFile = new File(seqFilePath + jobId + ".fa");
+        File queryFile = new File(blatDatabase.getSeqPath() + jobId + ".fa");
+//        File queryFile = new File("D:\\data\\blatquery\\" + jobId + ".fa");
         if (seq == null){
             seq = "";
         }
@@ -239,7 +247,7 @@ public class GenomeMapController {
         job.setCreateTime(new Date());
         job.setJobDesc(seq);
         jobDao.saveAndFlush(job);
-        BlatJob blatJob = new BlatJob(jobId, queryFile,seq,blatResultPSLDao,jobDao);
+        BlatJob blatJob = new BlatJob(jobId, queryFile,seq,blatResultPSLDao,jobDao,seqFilePath,blatDatabase);
         blatJob.start();
         searchResponse.setJobId(jobId);
         return searchResponse;

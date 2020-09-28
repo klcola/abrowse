@@ -36,6 +36,7 @@ public class BlatResultPSL {
     private Date createTime;
     private Date completeTime;
     private String curStatu;
+    private String gene;
 
     public String getId() {
         return id;
@@ -243,5 +244,13 @@ public class BlatResultPSL {
 
     public void setCurStatu(String curStatu) {
         this.curStatu = curStatu;
+    }
+
+    public String getGene() {
+        return gene;
+    }
+
+    public void setGene(String gene) {
+        this.gene = gene;
     }
 }
