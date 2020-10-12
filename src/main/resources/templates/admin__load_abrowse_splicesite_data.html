@@ -20,7 +20,7 @@
 
     <!-- JQuery UI CSS -->
     <!-- <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" /> -->
-
+    <script type="text/javascript" src="/js/abrowse/adminUtil.js"></script>
     <!-- Include JQuery and JQuery plugin scripts: -->
     <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
     <script src="/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
@@ -68,6 +68,7 @@
                 document.getElementById('load_splicesite').submit()
               }
             });
+            changeTrackGroup();
         });
         /*]]>*/
 
@@ -109,6 +110,7 @@
           <li><a href="javascript:void(0)" class="active" onclick="linkChange('/admin/load_abrowse_splicesite_data')"><span th:text="#{load_abrowse_splicesite_data}"></span></a></li>
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_splicesite_data')"><span th:text="#{load_splicesite_data}"></span></a></li>
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_bedgraph_data')"><span th:text="#{load_bedgraph_data}"></span></a></li>
+            <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_hic_data')"><span th:text="#{load_HiC_data}"></span></a></li>
         </ul>
       </nav>
     </div>
@@ -124,8 +126,13 @@
               <input type="text" placeholder="Track Name" name="trackName" autocomplete="off"/>
               <input type="text" placeholder="Track Display Name" name="trackDisplayName" id="trackDisplayName" autocomplete="off"/>
               <input type="text" placeholder="Track Description" name="trackDescription" autocomplete="off"/>
-              <input type="text" placeholder="/splicesite/file/path/on/abrowse/server" name="samPath" autocomplete="off"/>
-              <input type="text" th:value="${configGenome.name}" name="genome" id="genome" contenteditable="false" autocomplete="off"/>
+              <input type="text" placeholder="/splicesite/file/path/on/abrowse/server" name="ssPath" autocomplete="off"/>
+              <label for="genome">genome name
+                  <select id="genome" name="genome" class="selectpicker" th:value="${defaultGenome}" onchange="changeTrackGroup()">
+                      <option th:each="genomeName : ${genomeList}" th:value="${genomeName}"
+                              th:text="${genomeName}"></option>
+                  </select>
+              </label>
               <label for="trackGroupName">Track Group
               <select name="trackGroupName" id="trackGroupName" class="selectpicker">
                   <option th:each="trackGroupEntry : ${configGenome.trackGroupMap}" th:value="${trackGroupEntry.value.name}"

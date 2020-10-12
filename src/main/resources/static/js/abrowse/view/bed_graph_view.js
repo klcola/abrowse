@@ -39,14 +39,11 @@ ABrowse.view.BedGraphView.prototype.drawVerticalScaleMark = function (blockSvgGr
         text.setAttribute("fill", "black");
         scaleMarkSvgGroup.appendChild(text);
     }
-
     return scaleMarkSvgGroup;
 };
 
 ABrowse.view.BedGraphView.prototype.drawBlock = function (blockResponse, trackName, trackSvgGroup) {
-
     var ORIGINAL_POINT_X = this.genomeBrowser.originalPointX;
-
     var blockSvgGroupId = ABrowse.view.createBlockSvgGroupId(trackName, blockResponse.start, blockResponse.end);
     var blockSvgGroup = document.getElementById(blockSvgGroupId);
     if (!blockSvgGroup) {
@@ -57,9 +54,7 @@ ABrowse.view.BedGraphView.prototype.drawBlock = function (blockResponse, trackNa
     } else {
         return null;
     }
-
     var entries = blockResponse.entryList;
-
     /*
     entries.sort(function (a, b) {
         return parseFloat(a.value) - parseFloat(b.value);
@@ -68,17 +63,13 @@ ABrowse.view.BedGraphView.prototype.drawBlock = function (blockResponse, trackNa
     entries.sort(function (a, b) {
         return parseFloat(a.start) - parseFloat(b.start);
     });
-
     blockSvgGroup.__abrowse__entries = entries;
-
     var valueMean = 0;
     entries.forEach(function (item, index, array) { valueMean += item.value });
-
     valueMean = valueMean / entries.length;
     if (valueMean < 10) {
         valueMean = 10;
     }
-
     blockSvgGroup.__abrowse__value_mean_in_block = valueMean;
 
     // if (valueMean > trackSvgGroup.__abrowse__value_mean) {
@@ -86,37 +77,26 @@ ABrowse.view.BedGraphView.prototype.drawBlock = function (blockResponse, trackNa
     // } else {
     //     valueMean = trackSvgGroup.__abrowse__value_mean;
     // }
-
     var maxVal = valueMean * 3;
-
     var scaleMarkSvgGroup = this.drawVerticalScaleMark(blockSvgGroup, maxVal);
     blockSvgGroup.appendChild(scaleMarkSvgGroup);
-
     var pointsArray = [];
-
     var x2, y2;
     for (var idx = 0; idx < entries.length; ++idx) {
         var entry = entries[idx];
         var start = entry.start;
         var length = entry.end - entry.start;
         var value = entry.value;
-
-
         var x1 = start - ORIGINAL_POINT_X;
-
         pointsArray.push([x1, this.trackBodyHeight ].join(" "));
-
         var y1 = (this.trackBodyHeight ) - ((value / maxVal ) * this.trackBodyHeight).toFixed(0);
-
         pointsArray.push([x1, y1].join(" "));
-
         if (length > 1) {
             x2 = x1 + length - 1;
-            y2 = y1;
+            y2 = this.trackBodyHeight;
             pointsArray.push([x2, y2].join(" "));
         }
     }
-
     pointsArray.push([x2, this.trackBodyHeight ].join(" "));
     pointsArray.push([x1, this.trackBodyHeight ].join(" "));
 
@@ -165,7 +145,6 @@ ABrowse.view.BedGraphView.prototype.render = function (trackResponse, top) {
             this.insertBlockSvgGroup(trackBodySvgGroup, blockSvgGroup);
         }
     }
-
     trackBodySvgGroup.__abrowse__height = this.trackBodyHeight;
     trackHeaderSvgGroup.__abrowse__height = this.headerFontSize;
     trackSvgGroup.__abrowse__height = trackBodySvgGroup.__abrowse__height + trackHeaderSvgGroup.__abrowse__height

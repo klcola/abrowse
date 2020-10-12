@@ -36,7 +36,6 @@ public class ConfigGenomeMapRetriever {
                 configGenome.getTrackGroupMap().putAll(userTrackGroupMap);
             }
         }
-
         return configGenomeMap;
     }
 }

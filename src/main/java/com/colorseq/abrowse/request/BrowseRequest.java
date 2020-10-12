@@ -8,6 +8,7 @@ public class BrowseRequest implements Serializable {
     private String genome;
     private String chrName;
     private List<TrackRequest> trackRequests;
+    private String blatSearchId;
 
     public BrowseRequest() {
     }
@@ -34,5 +35,13 @@ public class BrowseRequest implements Serializable {
 
     public void setTrackRequests(List<TrackRequest> trackRequests) {
         this.trackRequests = trackRequests;
+    }
+
+    public String getBlatSearchId() {
+        return blatSearchId;
+    }
+
+    public void setBlatSearchId(String blatSearchId) {
+        this.blatSearchId = blatSearchId;
     }
 }

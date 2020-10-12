@@ -22,7 +22,7 @@
     <!--
     <link rel="stylesheet" href="/webjars/jquery-ui/1.12.1/jquery-ui.min.css" />
     -->
-
+    <script type="text/javascript" src="/js/abrowse/adminUtil.js"></script>
     <!-- Include JQuery and JQuery plugin scripts: -->
     <script src="/webjars/jquery/3.2.1/jquery.min.js"></script>
     <script src="/webjars/jquery-validation/1.17.0/jquery.validate.min.js"></script>
@@ -45,7 +45,6 @@
         }, "不能含有空格，请修改");
 
         $().ready(function() {
-
             $("#load_gtf").validate({
                 rules: {
 
@@ -70,11 +69,10 @@
                   document.getElementById('load_gtf').submit()
                 }
             });
+            changeTrackGroup();
         });
         /*]]>*/
-
     </script>
-
 </head>
 
 <body>
@@ -111,6 +109,7 @@
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_abrowse_splicesite_data')"><span th:text="#{load_abrowse_splicesite_data}"></span></a></li>
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_splicesite_data')"><span th:text="#{load_splicesite_data}"></span></a></li>
           <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_bedgraph_data')"><span th:text="#{load_bedgraph_data}"></span></a></li>
+            <li><a href="javascript:void(0)" class="" onclick="linkChange('/admin/load_hic_data')"><span th:text="#{load_HiC_data}"></span></a></li>
         </ul>
       </nav>
     </div>
@@ -129,7 +128,13 @@
               <input type="text" placeholder="http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={id}"
                      name="entryLink" value="http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={id}" contenteditable="false" autocomplete="off"/>
               <input type="text" placeholder="/gtf/file/path/on/abrowse/server" name="gtfPath" autocomplete="off"/>
-              <input type="text" th:value="${configGenome.name}" name="genome" id="genome" contenteditable="false" autocomplete="off"/>
+              <label for="genome">genome name
+                  <select id="genome" name="genome" class="selectpicker" th:value="${defaultGenome}" onchange="changeTrackGroup()">
+                      <option th:each="genomeName : ${genomeList}" th:value="${genomeName}"
+                              th:text="${genomeName}"></option>
+                  </select>
+              </label>
+              <br>
               <label for="trackGroupName">Track Group
               <select name="trackGroupName" id="trackGroupName" class="selectpicker">
                   <option th:each="trackGroupEntry : ${configGenome.trackGroupMap}" th:value="${trackGroupEntry.value.name}"

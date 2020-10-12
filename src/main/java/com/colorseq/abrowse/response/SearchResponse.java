@@ -1,0 +1,69 @@
+package com.colorseq.abrowse.response;
+
+import com.colorseq.abrowse.entity.AbrowseJob;
+import com.colorseq.abrowse.entity.BlatResultPSL;
+
+import java.io.Serializable;
+import java.util.List;
+
+public class SearchResponse implements Serializable {
+
+    /**
+     * 搜索结果集
+     */
+    private List<BlatResultPSL> allResults;
+
+    /**
+     * 0-没有，1-有
+     */
+    private String hasResult;
+
+    private AbrowseJob abrowseJob;
+
+    private List<AbrowseJob> jobs;
+
+    /**
+     * jobId
+     */
+    private String jobId;
+
+    public List<BlatResultPSL> getAllResults() {
+        return allResults;
+    }
+
+    public void setAllResults(List<BlatResultPSL> allResults) {
+        this.allResults = allResults;
+    }
+
+    public String getHasResult() {
+        return hasResult;
+    }
+
+    public void setHasResult(String hasResult) {
+        this.hasResult = hasResult;
+    }
+
+    public String getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(String jobId) {
+        this.jobId = jobId;
+    }
+
+    public AbrowseJob getAbrowseJob() {
+        return abrowseJob;
+    }
+
+    public void setAbrowseJob(AbrowseJob abrowseJob) {
+        this.abrowseJob = abrowseJob;
+    }
+
+    public List<AbrowseJob> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<AbrowseJob> jobs) {
+        this.jobs = jobs;
+    }
+}

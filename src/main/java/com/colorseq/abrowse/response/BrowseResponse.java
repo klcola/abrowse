@@ -1,5 +1,7 @@
 package com.colorseq.abrowse.response;
 
+import com.colorseq.abrowse.entity.AbrowseJob;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +13,7 @@ public class BrowseResponse implements ServerResponse {
     private int chrLength;
     private List<TrackResponse> trackResponses;
     private int requestIndex;
+    private List<AbrowseJob> jobs;
 
     public BrowseResponse() {
         this.trackResponses = new ArrayList<>();
@@ -58,6 +61,14 @@ public class BrowseResponse implements ServerResponse {
 
     public void setRequestIndex(int requestIndex) {
         this.requestIndex = requestIndex;
+    }
+
+    public List<AbrowseJob> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<AbrowseJob> jobs) {
+        this.jobs = jobs;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class GeoSpatialUtils {
 
     public static double getLongitude(int coordinate, int chrLen) {
 
-        return ((double) coordinate * 180) / (double) chrLen;
+        return (((double) coordinate * 180) / (double) chrLen) - 90;
     }
 
     public static LineString getLineString(int start, int end, int chrLen, int chrCode) {
@@ -26,8 +26,8 @@ public class GeoSpatialUtils {
 
         //Position startP = new Position(longitudeStart, (double) chrCode);
         //Position endP = new Position(longitudeEnd, (double) chrCode);
-        Position startP = new Position(longitudeStart, ((double) chrCode) * 180 / chrNum);
-        Position endP = new Position(longitudeEnd, ((double) chrCode) * 180 / chrNum);
+        Position startP = new Position(longitudeStart, (((double) chrCode) * 180 / chrNum) - 90);
+        Position endP = new Position(longitudeEnd, (((double) chrCode) * 180 / chrNum) - 90);
         List<Position> posList = new ArrayList<Position>();
         posList.add(startP);
         posList.add(endP);
@@ -39,7 +39,13 @@ public class GeoSpatialUtils {
     public static Polygon getQueryRectangle(int start, int end, int chrLen, int chrCode) {
 
         double longitudeStart = GeoSpatialUtils.getLongitude(start, chrLen);
+//        BigDecimal longitudeStartBig = new BigDecimal(longitudeStart).setScale(19);
+//        longitudeStart = longitudeStartBig.doubleValue();
+
         double longitudeEnd = GeoSpatialUtils.getLongitude(end, chrLen);
+//        BigDecimal longitudeEndBig = new BigDecimal(longitudeEnd).setScale(19);
+//        longitudeEnd = longitudeEndBig.doubleValue();
+
         if(longitudeStart>180){
             System.out.println("start====="+start+"     len===="+chrLen);
             longitudeStart = 180;
@@ -49,8 +55,10 @@ public class GeoSpatialUtils {
             longitudeEnd = 180;
         }
 
-        double latitudeTop = chrCode * 180 / chrNum - half_rectangle_height_latitude;
-        double latitudeBottom = chrCode * 180 / chrNum + half_rectangle_height_latitude;
+        double latitudeTop = (chrCode * 180 / chrNum) - 90 - half_rectangle_height_latitude;
+        double latitudeBottom = (chrCode * 180 / chrNum) - 90 + half_rectangle_height_latitude;
+
+
 
         Position topLeft = new Position(longitudeStart, latitudeTop);
         Position topRight = new Position(longitudeEnd, latitudeTop);
