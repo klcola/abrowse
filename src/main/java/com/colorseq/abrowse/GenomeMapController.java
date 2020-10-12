@@ -30,6 +30,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.*;
@@ -175,8 +176,8 @@ public class GenomeMapController {
             BlatResultPSL result = blatResultPSLDao.findBlatResultPSLByIdEquals(browseRequest.getBlatSearchId());
             if (result != null){
                 TrackResponse trackResponse = new TrackResponse();
-                trackResponse.setTrackName("your seq");
-                trackResponse.setTrackDisplayName("your seq");
+                trackResponse.setTrackName(result.getQname());
+                trackResponse.setTrackDisplayName("your seq:" + result.getQname());
                 trackResponse.setViewName("GeneModelLikeView");
                 trackResponse.setyIndex(browseResponse.getTrackResponses().size());
                 int blockCount = Integer.parseInt(result.getBlockcount());
@@ -186,25 +187,47 @@ public class GenomeMapController {
                 int end = Integer.parseInt(result.getTend());
 
                 BlockResponse blockResponse = new BlockResponse(start, end);
+                Document entry = new Document();
+                entry.append("start",start).append("end",end).append("feature","").append("gene_id","your seq:" + result.getQname())
+                        .append("score" ,0).append("strand",result.getStrand());
+                List<Map<String,Object>> transcripts = new ArrayList<>();
+                Map<String,Object> transcript = new HashMap<>();
+                transcript.put("end",end);
+                transcript.put("feature","transcript");
+                transcript.put("frame",".");
+                transcript.put("score",0);
+                transcript.put("transcript_id","your seq:" + result.getQname());
+                transcript.put("start",start);
+                transcript.put("strand",result.getStrand());
+                Map<String,String> attributes = new HashMap<>();
+                attributes.put("transcript_name","your seq:" + result.getQname());
+                transcript.put("attributes",attributes);
+                List<Document> blocks = new ArrayList<>();
                 for (int i = 0;i<blockCount;i++){
                     int blockSize = Integer.parseInt(blockSizes[i]);
                     int blockStart = Integer.parseInt(blockStarts[i]);
                     int blockEnd = blockStart + blockSize - 1;
-                    Map<String,String> attributes = new HashMap<>();
-                    attributes.put("description","your seq");
                     Document document = new Document()
                             .append("start",blockStart)
+                            .append("feature","exon")
                             .append("end",blockEnd)
                             .append("ID",UUID.randomUUID().toString().replace("-",""))
-                            .append("source","Regulatory_Build")
-                            .append("attributes",attributes)
+                            .append("source","your seq:" + result.getQname())
                             .append("strand",result.getStrand());
-                    blockResponse.addEntry(document);
+                    blocks.add(document);
                 }
+                transcript.put("blocks",blocks);
+                transcripts.add(transcript);
+                entry.append("transcripts",transcripts);
+                blockResponse.addEntry(entry);
                 trackResponse.addBlockResponse(blockResponse);
                 browseResponse.addTrackResponse(trackResponse);
             }
         }
+
+        /*搜索任务历史记录*/
+        List<AbrowseJob> jobs = jobDao.findAllBySessionIdEqualsOrderByCreateTimeDesc(session.getId());
+        browseResponse.setJobs(jobs);
         /*
         //7.914156157016106
         //7.940907826832441
@@ -216,13 +239,16 @@ public class GenomeMapController {
 
     @RequestMapping(value = "/gmap/searchSeq", method = RequestMethod.POST)
     @ResponseBody
-    public SearchResponse searchSeq(String seq,String gene) throws IOException, InterruptedException {
+    public SearchResponse searchSeq(String seq,String gene,HttpSession session) throws IOException, InterruptedException {
         SearchResponse searchResponse = new SearchResponse();
 //        File filePath = new File(seqFilePath);
 //        if (!filePath.exists()){
 //            filePath.mkdirs();
 //        }
-        AbrowseJob existjob = jobDao.findAbrowseJobByIdEquals(seq);
+        AbrowseJob existjob = null;
+        if (!seq.trim().startsWith(">") || seq.trim().length()<=32){
+            existjob = jobDao.findAbrowseJobByIdEquals(seq.trim());
+        }
         if (existjob != null){
             List<BlatResultPSL> allResults = blatResultPSLDao.findAllByJobidEqualsOrderByBmatchDesc(existjob.getId());
             searchResponse.setHasResult("1");
@@ -239,17 +265,23 @@ public class GenomeMapController {
             seq = "";
         }
         seq = seq.trim().toUpperCase();
+        if (!seq.startsWith(">")){
+            seq = ">search\n" + seq;
+        }
         AbrowseJob job = new AbrowseJob();
         job.setId(jobId);
         job.setJobName("XLSS");
         job.setJobStatu("00");
         job.setJobType("01");
         job.setCreateTime(new Date());
-        job.setJobDesc(seq);
+        job.setSessionId(session.getId());
+//        job.setJobDesc(seq);
         jobDao.saveAndFlush(job);
         BlatJob blatJob = new BlatJob(jobId, queryFile,seq,blatResultPSLDao,jobDao,seqFilePath,blatDatabase);
         blatJob.start();
         searchResponse.setJobId(jobId);
+        List<AbrowseJob> jobs = jobDao.findAllBySessionIdEqualsOrderByCreateTimeDesc(session.getId());
+        searchResponse.setJobs(jobs);
         return searchResponse;
     }
 }

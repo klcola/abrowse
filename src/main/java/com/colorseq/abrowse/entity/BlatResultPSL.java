@@ -1,6 +1,7 @@
 package com.colorseq.abrowse.entity;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -30,8 +31,11 @@ public class BlatResultPSL {
     private String tstart;
     private String tend;
     private String blockcount;
+    @Column(columnDefinition = "TEXT")
     private String blocksize;
+    @Column(columnDefinition = "TEXT")
     private String qstarts;
+    @Column(columnDefinition = "TEXT")
     private String tstarts;
     private Date createTime;
     private Date completeTime;

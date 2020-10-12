@@ -616,8 +616,29 @@ ABrowse.browse.GenomeBrowser.prototype.simpleRequestSuccess = function (response
         top += trackSvgGroupComplexus.trackSvgGroup.__abrowse__height + this.trackSpacing;
     }
 
+    if (browseResponse.jobs != undefined && browseResponse.jobs != null && browseResponse.jobs.length>0){
+        this.showHistorys(browseResponse.jobs);
+    }
     this.inserting = false;
 };
+
+ABrowse.browse.GenomeBrowser.prototype.showHistorys = function (jobs){
+    $("#historyDiv").show();
+    $("#history").html("");
+    var historyHtml = "";
+    for (var i=0;i<jobs.length;i++){
+        var job = jobs[i];
+        historyHtml += "<span class='label label-success' style='display: inline-block;cursor: pointer' jobId='" + job.id + "'>" + job.id + "</span>&nbsp;";
+    }
+    $("#history").append(historyHtml);
+    var _this = this;
+    $("#history").on("click","span",function (){
+        console.log($(this));
+        var jobId = $(this).attr("jobId");
+        $("#searchSeqTxt").val(jobId);
+        _this.realSearch();
+    });
+}
 
 ABrowse.browse.GenomeBrowser.prototype.simpleRequestFailure = function (response, textStatus, jqXHR) {
     this.inserting = false;
@@ -680,55 +701,55 @@ ABrowse.browse.GenomeBrowser.prototype.showResultList = function (list) {
     if (list == undefined || list == null || list.length == 0) {
         $("#resultList").append("<tr><td colspan='21'>没有查询到符合条件的序列！</td></tr>");
         return;
-    }
+    }else {
+        for (var i = 0; i < list.length; i++) {
+            var result = list[i];
+            var tr = "<tr style='cursor: pointer' resultId='" + result.id + "' chrName='" + result.tname + "' tstart='" +
+                result.tstart + "' tend='" + result.tend + "' strand='" + result.strand + "' gene='" + result.gene + "'>"
+                + "<td>" + result.bmatch + "</td>"
+                + "<td>" + result.mismatch + "</td>"
+                + "<td>" + result.repmatch + "</td>"
+                + "<td>" + result.ns + "</td>"
+                + "<td>" + result.qgapcount + "</td>"
+                + "<td>" + result.qgapbases + "</td>"
+                + "<td>" + result.tgapcount + "</td>"
+                + "<td>" + result.tgapbases + "</td>"
+                + "<td>" + result.strand + "</td>"
+                + "<td>" + result.qname + "</td>"
+                + "<td>" + result.qsize + "</td>"
+                + "<td>" + result.qstart + "</td>"
+                + "<td>" + result.qend + "</td>"
+                + "<td>" + result.tname + "</td>"
+                + "<td>" + result.tsize + "</td>"
+                + "<td>" + result.tstart + "</td>"
+                + "<td>" + result.tend + "</td>"
+                + "<td>" + result.blockcount + "</td>"
+                + "<td>" + result.blocksize + "</td>"
+                + "<td>" + result.qstarts + "</td>"
+                + "<td>" + result.tstarts + "</td>"
+                + "</tr>";
+            $("#resultList").append(tr);
+        }
 
-    for (var i = 0; i < list.length; i++) {
-        var result = list[i];
-        var tr = "<tr style='cursor: pointer' resultId='" + result.id + "' chrName='" + result.tname + "' tstart='" +
-            result.tstart + "' tend='" + result.tend + "' strand='" + result.strand + "' gene='" + result.gene + "'>"
-            + "<td>" + result.bmatch + "</td>"
-            + "<td>" + result.mismatch + "</td>"
-            + "<td>" + result.repmatch + "</td>"
-            + "<td>" + result.ns + "</td>"
-            + "<td>" + result.qgapcount + "</td>"
-            + "<td>" + result.qgapbases + "</td>"
-            + "<td>" + result.tgapcount + "</td>"
-            + "<td>" + result.tgapbases + "</td>"
-            + "<td>" + result.strand + "</td>"
-            + "<td>" + result.qname + "</td>"
-            + "<td>" + result.qsize + "</td>"
-            + "<td>" + result.qstart + "</td>"
-            + "<td>" + result.qend + "</td>"
-            + "<td>" + result.tname + "</td>"
-            + "<td>" + result.tsize + "</td>"
-            + "<td>" + result.tstart + "</td>"
-            + "<td>" + result.tend + "</td>"
-            + "<td>" + result.blockcount + "</td>"
-            + "<td>" + result.blocksize + "</td>"
-            + "<td>" + result.qstarts + "</td>"
-            + "<td>" + result.tstarts + "</td>"
-            + "</tr>";
-        $("#resultList").append(tr);
+        var _this = this;
+        $("#resultTable").on("click","tr",function (){
+            let resultId = $(this).attr("resultId");
+            let tname = $(this).attr("chrName");
+            let tstart = $(this).attr("tstart");
+            let tend = $(this).attr("tend");
+            let gene = $(this).attr("gene");
+            let strand = $(this).attr("strand");
+            _this.blatSearchId = resultId;
+            $("#" + _this.speciesSelectId ).val(gene);
+            var searchText = "chr" + tname + ":" + tstart + "-" + tend;
+            // if ("-" == strand){
+            //     searchText = "chr" + tname + ":" + tend + "-" + tstart;
+            // }
+            $("#" + _this.searchInputId).eq(0).val(searchText);
+            _this.submit();
+            $("#searchDialog").hide();
+        });
     }
-
-    var _this = this;
-    $("#resultTable").on("click","tr",function (){
-        let resultId = $(this).attr("resultId");
-        let tname = $(this).attr("chrName");
-        let tstart = $(this).attr("tstart");
-        let tend = $(this).attr("tend");
-        let gene = $(this).attr("gene");
-        let strand = $(this).attr("strand");
-        _this.blatSearchId = resultId;
-        $("#" + _this.speciesSelectId ).val(gene);
-        var searchText = "chr" + tname + ":" + tstart + "-" + tend;
-        // if ("-" == strand){
-        //     searchText = "chr" + tname + ":" + tend + "-" + tstart;
-        // }
-        $("#" + _this.searchInputId).eq(0).val(searchText);
-        _this.submit();
-        $("#searchDialog").hide();
-    });
 }
 
 ABrowse.browse.GenomeBrowser.prototype.realSearch = function () {
@@ -748,16 +769,22 @@ ABrowse.browse.GenomeBrowser.prototype.realSearch = function () {
         },
         success: function (res) {
             console.log(res);
+            if (res.jobs != undefined && res.jobs != null && res.jobs.length > 0){
+                this.showHistorys(res.jobs);
+            }
             if (res.hasResult == "0") {
                 $("#searchsubmitting").hide();
                 $("#searchsubmiterr").hide();
                 $("#searchsubmitsucc").show();
                 $("#jobId").text(res.jobId);
             } else {
-                if (res.abrowseJob.jobStatu == "01"){
+                if (res.abrowseJob.jobStatu == "00"){
                     $("#searchsubmitting").show();
                     $("#searchsubmiterr").hide();
                     $("#searchsubmitsucc").hide();
+                    return ;
+                }else if (res.abrowseJob.jobStatu == "03"){
+                    alert("搜索异常！请联系管理员。");
                     return ;
                 }
                 this.showResultList(res.allResults);

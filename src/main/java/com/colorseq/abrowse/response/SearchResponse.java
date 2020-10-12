@@ -20,6 +20,8 @@ public class SearchResponse implements Serializable {
 
     private AbrowseJob abrowseJob;
 
+    private List<AbrowseJob> jobs;
+
     /**
      * jobId
      */
@@ -55,5 +57,13 @@ public class SearchResponse implements Serializable {
 
     public void setAbrowseJob(AbrowseJob abrowseJob) {
         this.abrowseJob = abrowseJob;
+    }
+
+    public List<AbrowseJob> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<AbrowseJob> jobs) {
+        this.jobs = jobs;
     }
 }

@@ -67,14 +67,12 @@
             ABrowse.defaultGenomeBrowser.changeSpecies();
             var pos = getParam("pos");
             if (pos) {
-
                 if (!pos.match("^chr")) {
                     pos = "chr" + pos;
                 }
                 document.getElementById(ABrowse.defaultGenomeBrowser.searchInputId).value = pos;
             }
             ABrowse.defaultGenomeBrowser.submit();
-
         });
         function showImg() {
             var searchStr = $("#position").get(0).value;
@@ -258,7 +256,7 @@
                 <button class="close" onclick="closeSearchDialog()">&times;</button>
                 <h4 th:text="#{search}"></h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 500px;overflow: auto">
                 <div id="searchContainer">
                     <div id="searchsubmitting" class="alert alert-warning alert-dismissible" role="alert"
                          style="display: none">
@@ -286,6 +284,13 @@
                                         th:selected="${blatDatabase.Genome == defGemo}"
                                         th:text="${blatDatabase.Genome}"></option>
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-row" id="historyDiv" style="display: none">
+                        <div class="form-group col-md-12 col-sm-12 col-lg-12">
+                            <label for="history">history：</label>
+                            <div id="history" style="width: 100%;word-break: break-all;white-space: normal;">
+                            </div>
                         </div>
                     </div>
                     <textarea class="form-control" id="searchSeqTxt" rows="10" onchange="seqChange()" onkeyup="seqChange();"

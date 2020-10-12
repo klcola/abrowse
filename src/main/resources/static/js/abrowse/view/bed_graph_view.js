@@ -39,7 +39,6 @@ ABrowse.view.BedGraphView.prototype.drawVerticalScaleMark = function (blockSvgGr
         text.setAttribute("fill", "black");
         scaleMarkSvgGroup.appendChild(text);
     }
-
     return scaleMarkSvgGroup;
 };
 
@@ -94,13 +93,9 @@ ABrowse.view.BedGraphView.prototype.drawBlock = function (blockResponse, trackNa
         pointsArray.push([x1, y1].join(" "));
         if (length > 1) {
             x2 = x1 + length - 1;
-            y2 = y1;
+            y2 = this.trackBodyHeight;
             pointsArray.push([x2, y2].join(" "));
-        }else {
-            x2 = x1;
-            y2 = y1;
         }
-        console.log(pointsArray[pointsArray.length - 1])
     }
     pointsArray.push([x2, this.trackBodyHeight ].join(" "));
     pointsArray.push([x1, this.trackBodyHeight ].join(" "));

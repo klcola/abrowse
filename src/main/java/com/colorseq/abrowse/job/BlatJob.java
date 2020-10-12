@@ -112,6 +112,9 @@ public class BlatJob extends Thread{
             jobDao.saveAndFlush(abrowseJobByIdEquals);
         }catch (Exception e){
             e.printStackTrace();
+            AbrowseJob abrowseJobByIdEquals = jobDao.findAbrowseJobByIdEquals(jobId);
+            abrowseJobByIdEquals.setJobStatu("03");
+            jobDao.saveAndFlush(abrowseJobByIdEquals);
         }
     }
 

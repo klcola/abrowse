@@ -11,15 +11,16 @@ import java.util.Date;
 public class AbrowseJob {
 
     @Id
-    private String id                   ;
-    private String jobName              ;
-    private String jobType              ;
-    private String jobStatu             ;
-    private Date createTime           ;
-    private Date completeTime         ;
-    private String jobDesc              ;
+    private String id;
+    private String jobName;
+    private String jobType;
+    private String jobStatu;
+    private Date createTime;
+    private Date completeTime;
+    private String jobDesc;
+    private String sessionId;
 
-    public AbrowseJob(){
+    public AbrowseJob() {
         this.id = "";
         this.jobName = "";
         this.jobType = "";
@@ -27,6 +28,7 @@ public class AbrowseJob {
         this.createTime = new Date();
         this.completeTime = new Date();
         this.jobDesc = "";
+        this.sessionId = "";
     }
 
     public String getId() {
@@ -85,4 +87,11 @@ public class AbrowseJob {
         this.jobDesc = jobDesc;
     }
 
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
+    }
 }
