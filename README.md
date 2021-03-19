@@ -1,6 +1,10 @@
 # ABrowse 基因组浏览器
 
 [English Version](README.en.md)
+
+## live demo
+[abrowse.net](http://abrowse.net/)
+
 ## 简介
 
 ABrowse (Advanced Genome Browser，其实取这个名字是为了按字母排序的时候我们能排在前面^^)是一款轻量级的通用基因组浏览器框架，我们开发它的目的是为
